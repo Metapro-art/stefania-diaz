@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Paleta de pintor con pincel">
+  <rect width="64" height="64" rx="14" fill="#14171a"/>
+  <!-- cuerpo de la paleta -->
+  <ellipse cx="29" cy="36" rx="20" ry="16" fill="#ece8de"/>
+  <!-- agujero del pulgar -->
+  <ellipse cx="34" cy="43" rx="3.6" ry="4.2" fill="#14171a"/>
+  <!-- pinceladas de color -->
+  <circle cx="19.5" cy="30" r="2.9" fill="#39576a"/>
+  <circle cx="28" cy="27" r="2.9" fill="#9a5440"/>
+  <circle cx="36.5" cy="29.5" r="2.9" fill="#b6904f"/>
+  <circle cx="20.5" cy="40" r="2.9" fill="#5e7d5a"/>
+  <!-- pincel -->
+  <g transform="rotate(40 46 18)">
+    <rect x="43" y="2" width="5.2" height="20" rx="2.6" fill="#b6904f"/>
+    <rect x="42.6" y="21.5" width="6" height="4" rx="1" fill="#c7ccd0"/>
+    <path d="M42.6 25.5 h6 l-1.3 7.2 a2 2 0 0 1 -3.4 0 z" fill="#2b2f33"/>
+  </g>
+</svg>
