@@ -345,24 +345,43 @@
     });
   }
 
-  /* --- Contact form (Web3Forms AJAX) ------------------------------------- */
+  /* --- Contact form (Web3Forms AJAX + hCaptcha) --------------------------- */
   function wireContactForm() {
     var form = document.getElementById("contact-form");
     var statusEl = document.getElementById("cf-status");
     if (!form || !statusEl) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      // hCaptcha token must travel in the POST body for Web3Forms to verify it.
+      var token = "";
+      try { if (window.hcaptcha && window.hcaptcha.getResponse) token = window.hcaptcha.getResponse(); } catch (err) {}
+      if (!token) {
+        var ta = form.querySelector('textarea[name="h-captcha-response"]');
+        token = ta ? ta.value : "";
+      }
+      if (!token) {
+        statusEl.className = "cform__status is-err";
+        statusEl.textContent = t("con.formCaptcha");
+        return;
+      }
+
       statusEl.className = "cform__status";
       statusEl.textContent = t("con.formSending");
+
+      var formData = new FormData(form);
+      formData.set("h-captcha-response", token); // ensure the token is included
+      formData.delete("g-recaptcha-response");   // avoid Web3Forms treating it as reCaptcha (Pro feature)
 
       var httpStatus = 0;
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Accept": "application/json" }, // no Content-Type: the browser sets the multipart boundary
-        body: new FormData(form)                   // includes the honeypot (botcheck); no captcha token needed
+        body: formData
       }).then(function (r) { httpStatus = r.status; return r.json(); }).then(function (data) {
         if (data && data.success) {
           form.reset();
+          if (window.hcaptcha && window.hcaptcha.reset) { try { window.hcaptcha.reset(); } catch (err) {} }
           statusEl.className = "cform__status is-ok";
           statusEl.textContent = t("con.formOk");
         } else {

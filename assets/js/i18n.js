@@ -146,6 +146,7 @@ window.I18N = {
     "con.formSending": "Enviando…",
     "con.formOk": "¡Gracias! Tu mensaje fue enviado. Stefania te responderá pronto.",
     "con.formErr": "Hubo un problema al enviar. Intenta de nuevo o escríbele por Instagram.",
+    "con.formCaptcha": "Por favor completa el captcha.",
 
     "foot.tag": "Conservación · Restauración · Mercado del arte",
 
@@ -292,6 +293,7 @@ window.I18N = {
     "con.formSending": "Sending…",
     "con.formOk": "Thank you! Your message has been sent. Stefania will get back to you soon.",
     "con.formErr": "Something went wrong. Please try again, or reach out via Instagram.",
+    "con.formCaptcha": "Please complete the captcha.",
 
     "foot.tag": "Conservation · Restoration · Art market",
 

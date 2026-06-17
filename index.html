@@ -229,6 +229,7 @@
   .cform__status{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted-d);min-height:1.2em;line-height:1.5}
   .cform__status.is-ok{color:var(--gilt)}
   .cform__status.is-err{color:var(--oxide)}
+  .h-captcha{margin:.1rem 0;min-height:78px}
 
   /* METODOLOGÍA */
   .method__head{max-width:46rem}
@@ -542,6 +543,7 @@
         <label for="cf-message" data-i18n="con.formMessage">Mensaje</label>
         <textarea id="cf-message" name="message" rows="5" required></textarea>
       </div>
+      <div class="h-captcha" data-theme="dark" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
       <button type="submit" class="cform__send" data-i18n="con.formSend">Enviar mensaje</button>
       <p id="cf-status" class="cform__status" role="status" aria-live="polite"></p>
     </form>
@@ -558,6 +560,8 @@
 <script src="assets/data/before-after.js"></script>
 <script src="assets/data/gallery.js"></script>
 <script src="assets/js/main.js"></script>
+<!-- hCaptcha loaded statically so the widget always renders (incl. mobile). recaptchacompat=off avoids the Web3Forms reCaptcha/Pro error. -->
+<script src="https://js.hcaptcha.com/1/api.js?recaptchacompat=off" async defer></script>
 <script>/* Failsafe: lift the EN paint-gate even if a script above failed to load. */
 document.documentElement.classList.remove('lang-loading');</script>
 </body>
