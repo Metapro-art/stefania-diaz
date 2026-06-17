@@ -370,6 +370,7 @@
 
       var formData = new FormData(form);
       formData.set("h-captcha-response", token); // ensure the token is included
+      formData.delete("g-recaptcha-response");   // avoid Web3Forms treating it as reCaptcha (Pro feature)
 
       var httpStatus = 0;
       fetch("https://api.web3forms.com/submit", {
