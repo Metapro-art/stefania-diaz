@@ -398,6 +398,29 @@
     });
   }
 
+  /* --- Lazy-load hCaptcha (only as the visitor nears the contact form) ----- */
+  function wireHcaptchaLazy() {
+    var section = document.getElementById("contacto");
+    var form = document.getElementById("contact-form");
+    var loaded = false;
+    function load() {
+      if (loaded) return; loaded = true;
+      var s = document.createElement("script");
+      s.src = "https://js.hcaptcha.com/1/api.js?recaptchacompat=off"; // keep recaptchacompat off
+      s.async = true; s.defer = true;
+      document.body.appendChild(s);
+    }
+    if (section && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { load(); io.disconnect(); } });
+      }, { rootMargin: "500px" });
+      io.observe(section);
+    } else {
+      load();
+    }
+    if (form) form.addEventListener("focusin", load, { once: true });
+  }
+
   /* --- Reveal on scroll --------------------------------------------------- */
   function wireReveal() {
     var els = document.querySelectorAll(".reveal");
@@ -420,6 +443,7 @@
   renderSliders();
   renderGallery();
   wireContactForm();
+  wireHcaptchaLazy();
   setLang(lang);   // first paint already translated (script runs at end of body)
   wireReveal();
 })();
