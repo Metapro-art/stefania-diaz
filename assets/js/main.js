@@ -350,23 +350,45 @@
     if (!form || !statusEl) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      // The hCaptcha token must travel inside the POST body for Web3Forms to
+      // verify it (Manual Setup). Read it explicitly and inject it into FormData.
+      var token = "";
+      try { if (window.hcaptcha && window.hcaptcha.getResponse) token = window.hcaptcha.getResponse(); } catch (err) {}
+      if (!token) {
+        var ta = form.querySelector('textarea[name="h-captcha-response"]');
+        token = ta ? ta.value : "";
+      }
+      if (!token) {
+        statusEl.className = "cform__status is-err";
+        statusEl.textContent = t("con.formCaptcha");
+        return;
+      }
+
       statusEl.className = "cform__status";
       statusEl.textContent = t("con.formSending");
+
+      var formData = new FormData(form);
+      formData.set("h-captcha-response", token); // ensure the token is included
+
+      var httpStatus = 0;
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Accept": "application/json" },
-        body: new FormData(form)
-      }).then(function (r) { return r.json(); }).then(function (data) {
+        headers: { "Accept": "application/json" }, // no Content-Type: the browser sets the multipart boundary
+        body: formData
+      }).then(function (r) { httpStatus = r.status; return r.json(); }).then(function (data) {
         if (data && data.success) {
           form.reset();
           if (window.hcaptcha && window.hcaptcha.reset) { try { window.hcaptcha.reset(); } catch (err) {} }
           statusEl.className = "cform__status is-ok";
           statusEl.textContent = t("con.formOk");
         } else {
+          if (window.console) console.error("Web3Forms error:", data);
           statusEl.className = "cform__status is-err";
-          statusEl.textContent = t("con.formErr");
+          statusEl.textContent = t("con.formErr") + " — " + ((data && data.message) || ("HTTP " + httpStatus));
         }
-      }).catch(function () {
+      }).catch(function (err) {
+        if (window.console) console.error(err);
         statusEl.className = "cform__status is-err";
         statusEl.textContent = t("con.formErr");
       });
