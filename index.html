@@ -71,7 +71,7 @@
   .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
     padding:0 var(--mx) clamp(3rem,7vw,6rem);overflow:hidden;
     background:radial-gradient(120% 90% at 18% 8%, #2a2722 0%, #1a1c1d 42%, var(--shadow-3) 100%)}
-  .hero__surface{position:absolute;inset:0;z-index:0;mix-blend-mode:soft-light;opacity:.32;pointer-events:none}
+  .svg-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
   .hero__warm{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.5;
     background:radial-gradient(140% 120% at 22% 18%, rgba(182,144,79,.45), transparent 55%),radial-gradient(120% 130% at 85% 95%, rgba(57,87,106,.40), transparent 60%)}
   .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
@@ -171,21 +171,46 @@
   .work__t{font-family:var(--display);font-size:1.3rem;font-weight:380;line-height:1.2}
   .work__d{font-size:.92rem;color:var(--muted-d);line-height:1.55}
 
-  /* INTERVENCIONES — carrusel de altura fija */
-  .carousel{margin-top:3rem;max-width:60rem}
-  .carousel__viewport{position:relative;height:clamp(320px,38vh,440px);overflow:hidden;background:var(--shadow-2);border:1px solid var(--line-l);border-radius:2px}
-  .carousel__track{display:flex;height:100%;margin:0;padding:0;list-style:none;transition:transform .55s cubic-bezier(.16,.84,.3,1);will-change:transform}
-  .carousel__slide{flex:0 0 100%;width:100%;height:100%;display:grid;place-items:center;padding:clamp(.5rem,2vw,1.25rem)}
-  .carousel__slide img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:1px}
-  .carousel__arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer;font-size:1.55rem;line-height:1;color:var(--gilt);background:rgba(15,17,19,.6);border:1px solid var(--gilt);backdrop-filter:blur(3px);transition:background .25s}
-  .carousel__arrow:hover{background:rgba(15,17,19,.92)}
-  .carousel__arrow:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-2),0 0 0 4px var(--lapis)}
-  .carousel__prev{left:.6rem} .carousel__next{right:.6rem}
-  .carousel__caption{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--muted-l);margin-top:1rem;min-height:1.4em;text-align:center;line-height:1.5}
-  .carousel__dots{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:1rem}
-  .carousel__dot{width:9px;height:9px;border-radius:50%;padding:0;border:1px solid var(--muted-l);background:transparent;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
-  .carousel__dot[aria-current="true"]{background:var(--gilt);border-color:var(--gilt);transform:scale(1.25)}
-  .carousel__dot:focus-visible{outline:none;box-shadow:0 0 0 2px var(--putty),0 0 0 4px var(--lapis)}
+  /* INTERVENCIONES — cuadrícula cuadrada + lightbox */
+  .gallery{margin-top:3rem}
+  .gallery__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.6rem,1.6vw,1rem)}
+  .gtile{position:relative;display:block;width:100%;aspect-ratio:1/1;padding:0;margin:0;border:1px solid var(--line-l);background:var(--shadow-2);border-radius:2px;overflow:hidden;cursor:pointer}
+  .gtile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
+  .gtile::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 100%, rgba(182,144,79,.18), transparent 62%);opacity:0;transition:opacity .35s;pointer-events:none}
+  .gtile:hover img{transform:scale(1.05)}
+  .gtile:hover::after{opacity:1}
+  .gtile:focus-visible{outline:none;box-shadow:0 0 0 2px var(--putty),0 0 0 4px var(--lapis)}
+  /* LIGHTBOX */
+  body.lb-open{overflow:hidden}
+  .lightbox{position:fixed;inset:0;z-index:100;display:grid;place-items:center}
+  .lightbox[hidden]{display:none}
+  .lightbox__backdrop{position:absolute;inset:0;background:rgba(15,17,19,.93);backdrop-filter:blur(4px)}
+  .lightbox__dialog{position:relative;z-index:1;margin:0;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:90vw}
+  .lightbox__img{max-width:90vw;max-height:85vh;width:auto;height:auto;object-fit:contain;border-radius:2px;box-shadow:0 40px 120px -40px rgba(0,0,0,.85)}
+  .lightbox__cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--putty);text-align:center;max-width:60ch;line-height:1.5}
+  .lightbox__btn{position:fixed;z-index:2;color:var(--gilt);background:rgba(15,17,19,.6);border:1px solid var(--gilt);cursor:pointer;border-radius:50%;display:grid;place-items:center;line-height:1;backdrop-filter:blur(3px);transition:background .25s}
+  .lightbox__btn:hover{background:rgba(15,17,19,.92)}
+  .lightbox__btn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
+  .lightbox__close{top:1rem;right:1rem;width:42px;height:42px;font-size:1.5rem}
+  .lightbox__nav{top:50%;transform:translateY(-50%);width:46px;height:46px;font-size:1.6rem}
+  .lightbox__prev{left:1rem} .lightbox__next{right:1rem}
+
+  /* CONTACTO — formulario */
+  .contact__intro{display:grid;gap:1.6rem;align-content:start}
+  .cform{display:grid;gap:1.05rem}
+  .cform__hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .cform__row{display:grid;gap:.4rem}
+  .cform label{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d)}
+  .cform input,.cform textarea{font-family:var(--serif);font-size:1rem;color:var(--bone);background:rgba(236,232,222,.04);border:1px solid var(--line-d);border-radius:2px;padding:.7rem .85rem;width:100%;transition:border-color .25s,background .25s}
+  .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gilt);background:rgba(236,232,222,.07)}
+  .cform textarea{resize:vertical;min-height:7rem;line-height:1.55}
+  .cform__send{justify-self:start;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--shadow-3);background:var(--gilt);border:1px solid var(--gilt);border-radius:2px;padding:.75rem 1.5rem;cursor:pointer;transition:background .25s,color .25s}
+  .cform__send:hover{background:transparent;color:var(--gilt)}
+  .cform__send:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
+  .cform__status{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted-d);min-height:1.2em;line-height:1.5}
+  .cform__status.is-ok{color:var(--gilt)}
+  .cform__status.is-err{color:var(--oxide)}
+  .h-captcha{margin:.1rem 0}
 
   /* METODOLOGÍA */
   .method__head{max-width:46rem}
@@ -208,7 +233,7 @@
   .cv__note{font-size:.92rem;color:var(--muted-l);max-width:60ch}
 
   /* CONTACTO */
-  .contact{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:end}
+  .contact{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:start}
   .contact h2{font-family:var(--display);font-weight:330;font-size:clamp(2.4rem,7vw,5rem);line-height:.98;letter-spacing:-.02em;font-variation-settings:"opsz" 120}
   .contact__side{display:grid;gap:1.5rem;align-content:end}
   .contact__item .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt);display:block;margin-bottom:.4rem}
@@ -220,15 +245,18 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.3,1)}
   .reveal.in{opacity:1;transform:none}
 
-  @media(max-width:700px){
-    .carousel__viewport{height:clamp(220px,34vh,300px)}
+  @media(min-width:600px){
+    .gallery__grid{grid-template-columns:repeat(3,1fr)}
   }
   @media(min-width:720px){
     .perfil__intro{grid-template-columns:.85fr 1.15fr}
     .tenets--row{grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,3vw,2.4rem)}
     .works{grid-template-columns:repeat(3,1fr)}
     .cv__row{grid-template-columns:.5fr 1.2fr 1.3fr;align-items:baseline}
-    .contact{grid-template-columns:1.4fr .8fr}
+    .contact{grid-template-columns:1fr 1fr}
+  }
+  @media(min-width:960px){
+    .gallery__grid{grid-template-columns:repeat(4,1fr)}
   }
   @media(min-width:860px){
     .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
@@ -262,7 +290,7 @@
     *{animation:none!important;scroll-behavior:auto}
     .hero__rake{transform:translateX(-30%)}
     .reveal{opacity:1;transform:none;transition:none}
-    .carousel__track,.carousel__dot,.carousel__arrow{transition:none}
+    .gtile img,.lightbox__btn{transition:none}
   }
 </style>
 </head>
@@ -297,16 +325,15 @@
 
 <!-- HERO -->
 <header class="hero" id="hero">
-  <svg class="hero__surface" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <filter id="raking">
+  <!-- Hidden defs: the #raking filter is still used by the before/after demo slider.
+       The painted hero surface was removed (it produced an uneven corner patch). -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false"><filter id="raking">
       <feTurbulence type="fractalNoise" baseFrequency="0.85 0.85" numOctaves="2" seed="7" result="n"/>
       <feDiffuseLighting in="n" surfaceScale="1.4" diffuseConstant="1.1" lighting-color="#f3ecdc" result="l">
         <feDistantLight azimuth="248" elevation="13"/>
       </feDiffuseLighting>
       <feColorMatrix in="l" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#raking)"/>
-  </svg>
+  </filter></svg>
   <div class="hero__warm" aria-hidden="true"></div>
   <div class="hero__rake" id="rake" aria-hidden="true"></div>
   <div class="hero__vignette" aria-hidden="true"></div>
@@ -417,14 +444,8 @@
   <p class="lede reveal" data-i18n="gal.lede">06 — Intervenciones</p>
   <h2 class="h-sec reveal" data-i18n="gal.h">Trabajo en obra.</h2>
   <p class="philo__body reveal" style="max-width:52ch;color:#33373b" data-i18n="gal.sub">Una selección de procesos de conservación y restauración.</p>
-  <div class="carousel reveal" id="gallery" role="region" aria-roledescription="carrusel" data-i18n-attr="aria-label:gal.h" aria-label="Trabajo en obra.">
-    <div class="carousel__viewport" id="galleryViewport">
-      <ul class="carousel__track" id="galleryTrack"><!-- slides rendered by main.js (data-driven) --></ul>
-      <button class="carousel__arrow carousel__prev" type="button" data-i18n-attr="aria-label:ui.prev" aria-label="Anterior">&#8249;</button>
-      <button class="carousel__arrow carousel__next" type="button" data-i18n-attr="aria-label:ui.next" aria-label="Siguiente">&#8250;</button>
-    </div>
-    <p class="carousel__caption" id="galleryCaption" aria-live="polite"></p>
-    <div class="carousel__dots" id="galleryDots"></div>
+  <div class="gallery reveal">
+    <div class="gallery__grid" id="galleryGrid"><!-- square thumbnails rendered by main.js; click opens lightbox --></div>
   </div>
 </section>
 
@@ -478,16 +499,42 @@
 <!-- CONTACTO -->
 <section class="section section--deep" id="contacto">
   <div class="contact">
-    <div class="reveal">
-      <p class="lede" data-i18n="con.lede">09 — Contacto</p>
-      <h2 data-i18n-html="con.h">Conversemos<br>sobre tu obra.</h2>
+    <div class="contact__intro reveal">
+      <div>
+        <p class="lede" data-i18n="con.lede">09 — Contacto</p>
+        <h2 data-i18n-html="con.h">Conversemos<br>sobre tu obra.</h2>
+      </div>
+      <div class="contact__side">
+        <div class="contact__item"><span class="k" data-i18n="con.k2">Instagram</span><a class="v" href="https://instagram.com/ella_restaura_arte" target="_blank" rel="noopener">@ella_restaura_arte</a></div>
+        <div class="contact__item"><span class="k" data-i18n="con.k3">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/stefania-diaz2611/" target="_blank" rel="noopener">/stefania-diaz</a></div>
+        <div class="contact__item"><span class="k" data-i18n="con.k4">Estudio</span><span class="v" data-i18n="con.v4">Bogotá, Colombia</span></div>
+      </div>
     </div>
-    <div class="contact__side reveal">
-      <div class="contact__item"><span class="k" data-i18n="con.k1">Correo</span><a class="v" href="mailto:hola@stefaniadiaz.art">hola@stefaniadiaz.art</a></div>
-      <div class="contact__item"><span class="k" data-i18n="con.k2">Instagram</span><a class="v" href="https://instagram.com/ella_restaura_arte" target="_blank" rel="noopener">@ella_restaura_arte</a></div>
-      <div class="contact__item"><span class="k" data-i18n="con.k3">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/stefania-diaz2611/" target="_blank" rel="noopener">/stefania-diaz</a></div>
-      <div class="contact__item"><span class="k" data-i18n="con.k4">Estudio</span><span class="v" data-i18n="con.v4">Bogotá, Colombia</span></div>
-    </div>
+    <form id="contact-form" class="cform reveal" novalidate>
+      <!-- Web3Forms: el correo destino se configura en su panel; NO va en el código. -->
+      <input type="hidden" name="access_key" value="REEMPLAZAR_ACCESS_KEY_WEB3FORMS">
+      <input type="hidden" name="from_name" value="Sitio web · stefaniadiaz.art">
+      <input type="checkbox" name="botcheck" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="cform__row">
+        <label for="cf-name" data-i18n="con.formName">Nombre</label>
+        <input id="cf-name" type="text" name="name" autocomplete="name" required>
+      </div>
+      <div class="cform__row">
+        <label for="cf-email" data-i18n="con.formEmail">Correo</label>
+        <input id="cf-email" type="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="cform__row">
+        <label for="cf-subject" data-i18n="con.formSubject">Asunto</label>
+        <input id="cf-subject" type="text" name="subject">
+      </div>
+      <div class="cform__row">
+        <label for="cf-message" data-i18n="con.formMessage">Mensaje</label>
+        <textarea id="cf-message" name="message" rows="5" required></textarea>
+      </div>
+      <div class="h-captcha" data-theme="dark" data-sitekey="REEMPLAZAR_HCAPTCHA_SITEKEY"></div>
+      <button type="submit" class="cform__send" data-i18n="con.formSend">Enviar mensaje</button>
+      <p id="cf-status" class="cform__status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
@@ -501,6 +548,7 @@
 <script src="assets/data/before-after.js"></script>
 <script src="assets/data/gallery.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <script>/* Failsafe: lift the EN paint-gate even if a script above failed to load. */
 document.documentElement.classList.remove('lang-loading');</script>
 </body>

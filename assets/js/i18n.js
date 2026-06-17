@@ -138,6 +138,14 @@ window.I18N = {
     "con.k3": "LinkedIn",
     "con.k4": "Estudio",
     "con.v4": "Bogotá, Colombia",
+    "con.formName": "Nombre",
+    "con.formEmail": "Correo",
+    "con.formSubject": "Asunto",
+    "con.formMessage": "Mensaje",
+    "con.formSend": "Enviar mensaje",
+    "con.formSending": "Enviando…",
+    "con.formOk": "¡Gracias! Tu mensaje fue enviado. Stefania te responderá pronto.",
+    "con.formErr": "Hubo un problema al enviar. Intenta de nuevo o escríbele por Instagram.",
 
     "foot.tag": "Conservación · Restauración · Mercado del arte",
 
@@ -276,6 +284,14 @@ window.I18N = {
     "con.k3": "LinkedIn",
     "con.k4": "Studio",
     "con.v4": "Bogotá, Colombia",
+    "con.formName": "Name",
+    "con.formEmail": "Email",
+    "con.formSubject": "Subject",
+    "con.formMessage": "Message",
+    "con.formSend": "Send message",
+    "con.formSending": "Sending…",
+    "con.formOk": "Thank you! Your message has been sent. Stefania will get back to you soon.",
+    "con.formErr": "Something went wrong. Please try again, or reach out via Instagram.",
 
     "foot.tag": "Conservation · Restoration · Art market",
 
