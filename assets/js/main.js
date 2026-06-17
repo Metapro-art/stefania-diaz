@@ -230,131 +230,97 @@
     shown.forEach(function (entry) { list.appendChild(buildSlider(entry)); });
   }
 
-  /* --- Gallery + accessible lightbox -------------------------------------- */
-  var lightbox = null;
-  var lbState = { items: [], index: 0, lastFocus: null };
+  /* --- Interventions carousel (fixed-height, data-driven) ----------------- */
+  var carousel = { index: 0, count: 0, els: null };
 
-  function buildLightbox() {
-    lightbox = document.createElement("div");
-    lightbox.className = "lightbox";
-    lightbox.setAttribute("role", "dialog");
-    lightbox.setAttribute("aria-modal", "true");
-    lightbox.setAttribute("aria-labelledby", "sd-lightbox-cap"); // named by the per-image caption
-    lightbox.hidden = true;
-    lightbox.innerHTML =
-      '<div class="lightbox__backdrop" data-lb-close></div>' +
-      '<div class="lightbox__dialog">' +
-        '<button class="lightbox__btn lightbox__close" type="button" data-lb-close>&#215;</button>' +
-        '<button class="lightbox__btn lightbox__nav lightbox__prev" type="button" data-lb-prev>&#8249;</button>' +
-        '<figure class="lightbox__figure">' +
-          '<img class="lightbox__img" alt="">' +
-          '<figcaption class="lightbox__cap" id="sd-lightbox-cap"></figcaption>' +
-        '</figure>' +
-        '<button class="lightbox__btn lightbox__nav lightbox__next" type="button" data-lb-next>&#8250;</button>' +
-      '</div>';
-    document.body.appendChild(lightbox);
-
-    lightbox.querySelectorAll("[data-lb-close]").forEach(function (el) {
-      el.addEventListener("click", closeLightbox);
-    });
-    lightbox.querySelector("[data-lb-prev]").addEventListener("click", function () { step(-1); });
-    lightbox.querySelector("[data-lb-next]").addEventListener("click", function () { step(1); });
-    lightbox.addEventListener("keydown", onLightboxKey);
-  }
-
-  function lbApplyLabels(l) {
-    if (!lightbox) return;
-    var d = dict(l);
-    lightbox.querySelector(".lightbox__close").setAttribute("aria-label", d["ui.close"] || "Close");
-    lightbox.querySelector(".lightbox__prev").setAttribute("aria-label", d["ui.prev"] || "Previous");
-    lightbox.querySelector(".lightbox__next").setAttribute("aria-label", d["ui.next"] || "Next");
-    if (!lightbox.hidden) renderLightbox();
-  }
-
-  function renderLightbox() {
-    var item = lbState.items[lbState.index];
-    if (!item) return;
-    var img = lightbox.querySelector(".lightbox__img");
-    img.src = item.src;
-    img.setAttribute("alt", item["alt_" + lang] || "");
-    img.setAttribute("width", item.w);
-    img.setAttribute("height", item.h);
-    lightbox.querySelector(".lightbox__cap").textContent = item["caption_" + lang] || "";
-    var many = lbState.items.length > 1;
-    lightbox.querySelector(".lightbox__prev").style.display = many ? "" : "none";
-    lightbox.querySelector(".lightbox__next").style.display = many ? "" : "none";
-  }
-
-  function openLightbox(index, trigger) {
-    if (!lightbox) buildLightbox();
-    lbApplyLabels(lang);
-    lbState.index = index;
-    lbState.lastFocus = trigger || document.activeElement;
-    renderLightbox();
-    lightbox.hidden = false;
-    document.body.classList.add("lb-open");
-    lightbox.querySelector(".lightbox__close").focus();
-  }
-  function closeLightbox() {
-    if (!lightbox || lightbox.hidden) return;
-    lightbox.hidden = true;
-    document.body.classList.remove("lb-open");
-    if (lbState.lastFocus && lbState.lastFocus.focus) lbState.lastFocus.focus();
-  }
-  function step(dir) {
-    var n = lbState.items.length;
-    if (!n) return;
-    lbState.index = (lbState.index + dir + n) % n;
-    renderLightbox();
-  }
-  function onLightboxKey(e) {
-    if (e.key === "Escape") { closeLightbox(); }
-    else if (e.key === "ArrowLeft") { step(-1); }
-    else if (e.key === "ArrowRight") { step(1); }
-    else if (e.key === "Tab") {
-      // Focus trap within the dialog
-      var focusables = lightbox.querySelectorAll("button:not([style*='display: none'])");
-      var visible = Array.prototype.filter.call(focusables, function (b) { return b.offsetParent !== null; });
-      if (!visible.length) return;
-      var first = visible[0], last = visible[visible.length - 1];
-      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+  function carouselUpdate() {
+    if (!carousel.els) return;
+    var idx = carousel.index, items = carousel.els.items, d = dict(lang);
+    carousel.els.track.style.transform = "translateX(-" + (idx * 100) + "%)";
+    var dots = carousel.els.dotsWrap.querySelectorAll(".carousel__dot");
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].setAttribute("aria-current", i === idx ? "true" : "false");
+      dots[i].setAttribute("aria-label", (d["ui.goImage"] || "") + " " + (i + 1));
     }
+    var slides = carousel.els.track.querySelectorAll(".carousel__slide");
+    for (var j = 0; j < slides.length; j++) {
+      slides[j].setAttribute("aria-hidden", j === idx ? "false" : "true");
+      slides[j].setAttribute("aria-label", (j + 1) + " / " + items.length);
+    }
+    carousel.els.caption.textContent = items[idx] ? (items[idx]["caption_" + lang] || "") : "";
   }
 
-  function renderGallery() {
-    var grid = document.getElementById("galleryGrid");
-    if (!grid || !window.GALLERY) return;
-    lbState.items = window.GALLERY;
-    grid.innerHTML = "";
-    window.GALLERY.forEach(function (item, i) {
-      var tile = document.createElement("button");
-      tile.type = "button";
-      tile.className = "gtile";
+  function carouselGo(i) {
+    if (!carousel.count) return;
+    carousel.index = ((i % carousel.count) + carousel.count) % carousel.count;
+    carouselUpdate();
+  }
+
+  function renderCarousel() {
+    var root = document.getElementById("gallery");
+    var track = document.getElementById("galleryTrack");
+    var dotsWrap = document.getElementById("galleryDots");
+    var viewport = document.getElementById("galleryViewport");
+    var caption = document.getElementById("galleryCaption");
+    if (!root || !track || !window.GALLERY) return;
+    var items = window.GALLERY;
+    carousel.count = items.length;
+    track.innerHTML = ""; dotsWrap.innerHTML = "";
+
+    items.forEach(function (item, i) {
+      var li = document.createElement("li");
+      li.className = "carousel__slide";
+      li.setAttribute("role", "group");
+      li.setAttribute("aria-roledescription", dict(lang)["ui.slide"] || "slide");
       var img = document.createElement("img");
-      img.src = item.thumb || item.src; // small thumb for the tile; lightbox uses full-res item.src
-      img.setAttribute("loading", "lazy");
+      img.src = item.thumb || item.src; // contained in a fixed-height viewer; thumb is plenty
+      img.setAttribute("loading", i === 0 ? "eager" : "lazy");
       img.setAttribute("decoding", "async");
       img.setAttribute("width", item.w);
       img.setAttribute("height", item.h);
       img.setAttribute("alt", item["alt_" + lang] || "");
-      var cap = document.createElement("figcaption");
-      cap.className = "gtile__cap";
-      cap.textContent = item["caption_" + lang] || "";
-      tile.appendChild(img);
-      tile.appendChild(cap);
-      tile.addEventListener("click", function () { openLightbox(i, tile); });
-      grid.appendChild(tile);
+      li.appendChild(img);
+      track.appendChild(li);
+
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "carousel__dot";
+      dot.addEventListener("click", function () { carouselGo(i); });
+      dotsWrap.appendChild(dot);
     });
-    // Re-translate gallery alts/captions on language change.
+
+    var prev = root.querySelector(".carousel__prev");
+    var next = root.querySelector(".carousel__next");
+    if (prev) prev.addEventListener("click", function () { carouselGo(carousel.index - 1); });
+    if (next) next.addEventListener("click", function () { carouselGo(carousel.index + 1); });
+
+    root.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { carouselGo(carousel.index - 1); e.preventDefault(); }
+      else if (e.key === "ArrowRight") { carouselGo(carousel.index + 1); e.preventDefault(); }
+    });
+
+    // Touch / pointer swipe
+    var startX = null, dragging = false;
+    viewport.addEventListener("pointerdown", function (e) { startX = e.clientX; dragging = true; });
+    viewport.addEventListener("pointerup", function (e) {
+      if (!dragging || startX === null) { dragging = false; return; }
+      var dx = e.clientX - startX; dragging = false; startX = null;
+      if (Math.abs(dx) > 40) carouselGo(carousel.index + (dx < 0 ? 1 : -1));
+    });
+    viewport.addEventListener("pointercancel", function () { dragging = false; startX = null; });
+
+    carousel.els = { track: track, dotsWrap: dotsWrap, caption: caption, items: items };
+    carouselUpdate();
+
+    // Re-translate alts / caption / dot+slide labels on language change.
     dynamicUpdaters.push(function (l) {
-      var imgs = grid.querySelectorAll(".gtile img");
-      var caps = grid.querySelectorAll(".gtile__cap");
-      window.GALLERY.forEach(function (item, i) {
-        if (imgs[i]) imgs[i].setAttribute("alt", item["alt_" + l] || "");
-        if (caps[i]) caps[i].textContent = item["caption_" + l] || "";
+      var slides = track.querySelectorAll(".carousel__slide");
+      items.forEach(function (item, i) {
+        var im = slides[i] && slides[i].querySelector("img");
+        if (im) im.setAttribute("alt", item["alt_" + l] || "");
+        if (slides[i]) slides[i].setAttribute("aria-roledescription", dict(l)["ui.slide"] || "slide");
       });
-      lbApplyLabels(l);
+      carouselUpdate();
     });
   }
 
@@ -378,7 +344,7 @@
   wireHeroRake();
   wireLangToggle();
   renderSliders();
-  renderGallery();
+  renderCarousel();
   setLang(lang);   // first paint already translated (script runs at end of body)
   wireReveal();
 })();

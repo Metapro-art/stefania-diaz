@@ -10,6 +10,10 @@
      The gate is always lifted by setLang() and by a failsafe inline script at end of body. */
   (function(){try{var l=localStorage.getItem('sd-lang');if(l!=='es'&&l!=='en'){var n=(navigator.language||'es').toLowerCase();l=n.indexOf('es')===0?'es':'en';}var d=document.documentElement;d.lang=l;if(l==='en')d.className+=(d.className?' ':'')+'lang-loading';}catch(e){}})();
 </script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -67,7 +71,7 @@
   .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
     padding:0 var(--mx) clamp(3rem,7vw,6rem);overflow:hidden;
     background:radial-gradient(120% 90% at 18% 8%, #2a2722 0%, #1a1c1d 42%, var(--shadow-3) 100%)}
-  .hero__surface{position:absolute;inset:0;z-index:0;mix-blend-mode:overlay;opacity:.62;pointer-events:none}
+  .hero__surface{position:absolute;inset:0;z-index:0;mix-blend-mode:soft-light;opacity:.32;pointer-events:none}
   .hero__warm{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.5;
     background:radial-gradient(140% 120% at 22% 18%, rgba(182,144,79,.45), transparent 55%),radial-gradient(120% 130% at 85% 95%, rgba(57,87,106,.40), transparent 60%)}
   .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
@@ -167,31 +171,21 @@
   .work__t{font-family:var(--display);font-size:1.3rem;font-weight:380;line-height:1.2}
   .work__d{font-size:.92rem;color:var(--muted-d);line-height:1.55}
 
-  /* INTERVENCIONES — galería */
-  .gallery{margin-top:3rem}
-  .gallery__grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2.4vw,1.6rem)}
-  .gtile{position:relative;display:block;width:100%;padding:0;margin:0;border:1px solid var(--line-l);background:#cfc9bd;border-radius:2px;overflow:hidden;cursor:pointer;text-align:left;font:inherit;color:inherit}
-  .gtile img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
-  .gtile:hover img{transform:scale(1.045)}
-  .gtile__cap{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .9rem .75rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;line-height:1.45;color:var(--bone);background:linear-gradient(0deg,rgba(12,13,15,.86),rgba(12,13,15,.2) 70%,transparent);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
-  .gtile:hover .gtile__cap,.gtile:focus-visible .gtile__cap{opacity:1;transform:none}
-  .gtile:focus-visible{outline:none;box-shadow:0 0 0 2px var(--putty),0 0 0 4px var(--lapis)}
-
-  /* LIGHTBOX */
-  body.lb-open{overflow:hidden}
-  .lightbox{position:fixed;inset:0;z-index:100;display:grid;place-items:center}
-  .lightbox[hidden]{display:none}
-  .lightbox__backdrop{position:absolute;inset:0;background:rgba(8,9,10,.93);backdrop-filter:blur(4px)}
-  .lightbox__dialog{position:relative;z-index:1;width:min(92vw,1100px);display:flex;justify-content:center}
-  .lightbox__figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:100%}
-  .lightbox__img{max-width:100%;max-height:78vh;width:auto;height:auto;border-radius:2px;box-shadow:0 40px 120px -40px rgba(0,0,0,.85)}
-  .lightbox__cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--putty);text-align:center;max-width:60ch;line-height:1.5}
-  .lightbox__btn{background:rgba(20,23,26,.6);border:1px solid var(--line-d);color:var(--bone);cursor:pointer;border-radius:50%;display:grid;place-items:center;transition:background .25s,border-color .25s}
-  .lightbox__btn:hover{background:rgba(20,23,26,.92);border-color:var(--gilt)}
-  .lightbox__btn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
-  .lightbox__close{position:fixed;top:1rem;right:1rem;width:42px;height:42px;font-size:1.5rem;line-height:1}
-  .lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:1.7rem;line-height:1}
-  .lightbox__prev{left:.25rem} .lightbox__next{right:.25rem}
+  /* INTERVENCIONES — carrusel de altura fija */
+  .carousel{margin-top:3rem;max-width:60rem}
+  .carousel__viewport{position:relative;height:clamp(320px,38vh,440px);overflow:hidden;background:var(--shadow-2);border:1px solid var(--line-l);border-radius:2px}
+  .carousel__track{display:flex;height:100%;margin:0;padding:0;list-style:none;transition:transform .55s cubic-bezier(.16,.84,.3,1);will-change:transform}
+  .carousel__slide{flex:0 0 100%;width:100%;height:100%;display:grid;place-items:center;padding:clamp(.5rem,2vw,1.25rem)}
+  .carousel__slide img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:1px}
+  .carousel__arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer;font-size:1.55rem;line-height:1;color:var(--gilt);background:rgba(15,17,19,.6);border:1px solid var(--gilt);backdrop-filter:blur(3px);transition:background .25s}
+  .carousel__arrow:hover{background:rgba(15,17,19,.92)}
+  .carousel__arrow:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-2),0 0 0 4px var(--lapis)}
+  .carousel__prev{left:.6rem} .carousel__next{right:.6rem}
+  .carousel__caption{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--muted-l);margin-top:1rem;min-height:1.4em;text-align:center;line-height:1.5}
+  .carousel__dots{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:1rem}
+  .carousel__dot{width:9px;height:9px;border-radius:50%;padding:0;border:1px solid var(--muted-l);background:transparent;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
+  .carousel__dot[aria-current="true"]{background:var(--gilt);border-color:var(--gilt);transform:scale(1.25)}
+  .carousel__dot:focus-visible{outline:none;box-shadow:0 0 0 2px var(--putty),0 0 0 4px var(--lapis)}
 
   /* METODOLOGÍA */
   .method__head{max-width:46rem}
@@ -226,8 +220,8 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.3,1)}
   .reveal.in{opacity:1;transform:none}
 
-  @media(min-width:560px){
-    .gallery__grid{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:700px){
+    .carousel__viewport{height:clamp(220px,34vh,300px)}
   }
   @media(min-width:720px){
     .perfil__intro{grid-template-columns:.85fr 1.15fr}
@@ -238,9 +232,6 @@
   }
   @media(min-width:860px){
     .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
-  }
-  @media(min-width:900px){
-    .gallery__grid{grid-template-columns:repeat(3,1fr)}
   }
   /* Keep the inline desktop nav from crowding (and hide the role subtitle) in the band
      just above the hamburger breakpoint, in either language */
@@ -267,17 +258,11 @@
     .step:last-child::before{display:none}
     .step__t{margin-top:.1rem} .step__d{grid-column:2}
   }
-  /* Lightbox on narrow screens: reserve side gutters so the prev/next buttons
-     sit beside the photo rather than overlapping it */
-  @media(max-width:560px){
-    .lightbox__dialog{padding-left:3.25rem;padding-right:3.25rem}
-  }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto}
     .hero__rake{transform:translateX(-30%)}
     .reveal{opacity:1;transform:none;transition:none}
-    .gtile img,.lightbox__btn,.gtile__cap{transition:none}
-    .gtile__cap{transform:none}
+    .carousel__track,.carousel__dot,.carousel__arrow{transition:none}
   }
 </style>
 </head>
@@ -314,8 +299,8 @@
 <header class="hero" id="hero">
   <svg class="hero__surface" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <filter id="raking">
-      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.05" numOctaves="4" seed="7" result="n"/>
-      <feDiffuseLighting in="n" surfaceScale="3.2" diffuseConstant="1.15" lighting-color="#f3ecdc" result="l">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85 0.85" numOctaves="2" seed="7" result="n"/>
+      <feDiffuseLighting in="n" surfaceScale="1.4" diffuseConstant="1.1" lighting-color="#f3ecdc" result="l">
         <feDistantLight azimuth="248" elevation="13"/>
       </feDiffuseLighting>
       <feColorMatrix in="l" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/>
@@ -432,8 +417,14 @@
   <p class="lede reveal" data-i18n="gal.lede">06 — Intervenciones</p>
   <h2 class="h-sec reveal" data-i18n="gal.h">Trabajo en obra.</h2>
   <p class="philo__body reveal" style="max-width:52ch;color:#33373b" data-i18n="gal.sub">Una selección de procesos de conservación y restauración.</p>
-  <div class="gallery reveal">
-    <div class="gallery__grid" id="galleryGrid"><!-- tiles rendered by main.js (data-driven) --></div>
+  <div class="carousel reveal" id="gallery" role="region" aria-roledescription="carrusel" data-i18n-attr="aria-label:gal.h" aria-label="Trabajo en obra.">
+    <div class="carousel__viewport" id="galleryViewport">
+      <ul class="carousel__track" id="galleryTrack"><!-- slides rendered by main.js (data-driven) --></ul>
+      <button class="carousel__arrow carousel__prev" type="button" data-i18n-attr="aria-label:ui.prev" aria-label="Anterior">&#8249;</button>
+      <button class="carousel__arrow carousel__next" type="button" data-i18n-attr="aria-label:ui.next" aria-label="Siguiente">&#8250;</button>
+    </div>
+    <p class="carousel__caption" id="galleryCaption" aria-live="polite"></p>
+    <div class="carousel__dots" id="galleryDots"></div>
   </div>
 </section>
 

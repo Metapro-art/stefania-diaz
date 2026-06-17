@@ -146,7 +146,9 @@ window.I18N = {
     "ui.langEn": "Inglés",
     "ui.close": "Cerrar",
     "ui.prev": "Anterior",
-    "ui.next": "Siguiente"
+    "ui.next": "Siguiente",
+    "ui.slide": "diapositiva",
+    "ui.goImage": "Ir a la imagen"
   },
 
   en: {
@@ -282,6 +284,8 @@ window.I18N = {
     "ui.langEn": "English",
     "ui.close": "Close",
     "ui.prev": "Previous",
-    "ui.next": "Next"
+    "ui.next": "Next",
+    "ui.slide": "slide",
+    "ui.goImage": "Go to image"
   }
 };
