@@ -140,9 +140,11 @@
     ba.setAttribute("role", "group");
 
     if (entry.demo) {
+      // Demo surfaces are pure CSS gradients (see .ba--demo). The previous SVG
+      // raking-light filter (feTurbulence) was removed for performance.
       ba.innerHTML =
-        '<div class="ba__layer ba__before"><svg class="ba__surface" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100%" height="100%" filter="url(#raking)"/></svg></div>' +
-        '<div class="ba__layer ba__after"><svg class="ba__surface" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100%" height="100%" filter="url(#raking)"/></svg></div>';
+        '<div class="ba__layer ba__before"></div>' +
+        '<div class="ba__layer ba__after"></div>';
     } else {
       ba.innerHTML =
         '<div class="ba__layer ba__before"><img src="' + entry.before + '" alt="" loading="lazy" decoding="async"></div>' +

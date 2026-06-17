@@ -89,7 +89,6 @@
   .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
     padding:0 var(--mx) clamp(3rem,7vw,6rem);overflow:hidden;
     background:radial-gradient(120% 90% at 18% 8%, #2a2722 0%, #1a1c1d 42%, var(--shadow-3) 100%)}
-  .svg-defs{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
   .hero__warm{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.5;
     background:radial-gradient(140% 120% at 22% 18%, rgba(182,144,79,.45), transparent 55%),radial-gradient(120% 130% at 85% 95%, rgba(57,87,106,.40), transparent 60%)}
   .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
@@ -160,7 +159,6 @@
   .ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:2px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none;box-shadow:0 30px 80px -40px rgba(0,0,0,.7);background:#1a1714}
   .ba__layer{position:absolute;inset:0}
   .ba__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .ba__surface{position:absolute;inset:0;mix-blend-mode:overlay;opacity:.7}
   .ba--demo .ba__before{background:radial-gradient(130% 120% at 30% 30%, #6e5a33 0%, #4a3d23 55%, #2c2415 100%)}
   .ba--demo .ba__before::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(40,28,10,.55), rgba(120,90,30,.28)),radial-gradient(120% 120% at 50% 50%, transparent 40%, rgba(20,12,4,.7) 100%);mix-blend-mode:multiply}
   .ba__after{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
@@ -343,15 +341,8 @@
 
 <!-- HERO -->
 <header class="hero" id="hero">
-  <!-- Hidden defs: the #raking filter is still used by the before/after demo slider.
-       The painted hero surface was removed (it produced an uneven corner patch). -->
-  <svg class="svg-defs" aria-hidden="true" focusable="false"><filter id="raking">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85 0.85" numOctaves="2" seed="7" result="n"/>
-      <feDiffuseLighting in="n" surfaceScale="1.4" diffuseConstant="1.1" lighting-color="#f3ecdc" result="l">
-        <feDistantLight azimuth="248" elevation="13"/>
-      </feDiffuseLighting>
-      <feColorMatrix in="l" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/>
-  </filter></svg>
+  <!-- The in-browser raking-light SVG filter (feTurbulence) was removed for performance.
+       The hero keeps its CSS light sweep, warm gradients and vignette below. -->
   <div class="hero__warm" aria-hidden="true"></div>
   <div class="hero__rake" id="rake" aria-hidden="true"></div>
   <div class="hero__vignette" aria-hidden="true"></div>
