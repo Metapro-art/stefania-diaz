@@ -345,44 +345,24 @@
     });
   }
 
-  /* --- Contact form (Web3Forms AJAX + hCaptcha) --------------------------- */
+  /* --- Contact form (Web3Forms AJAX) ------------------------------------- */
   function wireContactForm() {
     var form = document.getElementById("contact-form");
     var statusEl = document.getElementById("cf-status");
     if (!form || !statusEl) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-
-      // The hCaptcha token must travel inside the POST body for Web3Forms to
-      // verify it (Manual Setup). Read it explicitly and inject it into FormData.
-      var token = "";
-      try { if (window.hcaptcha && window.hcaptcha.getResponse) token = window.hcaptcha.getResponse(); } catch (err) {}
-      if (!token) {
-        var ta = form.querySelector('textarea[name="h-captcha-response"]');
-        token = ta ? ta.value : "";
-      }
-      if (!token) {
-        statusEl.className = "cform__status is-err";
-        statusEl.textContent = t("con.formCaptcha");
-        return;
-      }
-
       statusEl.className = "cform__status";
       statusEl.textContent = t("con.formSending");
-
-      var formData = new FormData(form);
-      formData.set("h-captcha-response", token); // ensure the token is included
-      formData.delete("g-recaptcha-response");   // avoid Web3Forms treating it as reCaptcha (Pro feature)
 
       var httpStatus = 0;
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Accept": "application/json" }, // no Content-Type: the browser sets the multipart boundary
-        body: formData
+        body: new FormData(form)                   // includes the honeypot (botcheck); no captcha token needed
       }).then(function (r) { httpStatus = r.status; return r.json(); }).then(function (data) {
         if (data && data.success) {
           form.reset();
-          if (window.hcaptcha && window.hcaptcha.reset) { try { window.hcaptcha.reset(); } catch (err) {} }
           statusEl.className = "cform__status is-ok";
           statusEl.textContent = t("con.formOk");
         } else {
@@ -396,29 +376,6 @@
         statusEl.textContent = t("con.formErr");
       });
     });
-  }
-
-  /* --- Lazy-load hCaptcha (only as the visitor nears the contact form) ----- */
-  function wireHcaptchaLazy() {
-    var section = document.getElementById("contacto");
-    var form = document.getElementById("contact-form");
-    var loaded = false;
-    function load() {
-      if (loaded) return; loaded = true;
-      var s = document.createElement("script");
-      s.src = "https://js.hcaptcha.com/1/api.js?recaptchacompat=off"; // keep recaptchacompat off
-      s.async = true; s.defer = true;
-      document.body.appendChild(s);
-    }
-    if (section && "IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { load(); io.disconnect(); } });
-      }, { rootMargin: "500px" });
-      io.observe(section);
-    } else {
-      load();
-    }
-    if (form) form.addEventListener("focusin", load, { once: true });
   }
 
   /* --- Reveal on scroll --------------------------------------------------- */
@@ -443,7 +400,6 @@
   renderSliders();
   renderGallery();
   wireContactForm();
-  wireHcaptchaLazy();
   setLang(lang);   // first paint already translated (script runs at end of body)
   wireReveal();
 })();
