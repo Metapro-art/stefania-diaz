@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="meta.title">Stefania Díaz · Conservación y Restauración de Bienes Culturales</title>
+<meta name="description" data-i18n-attr="content:meta.desc" content="Conservadora-restauradora de bienes culturales especializada en el mercado del arte. Bogotá, Colombia.">
+<script>
+  /* Set <html lang> as early as possible, and gate paint for EN to avoid a Spanish flash.
+     The gate is always lifted by setLang() and by a failsafe inline script at end of body. */
+  (function(){try{var l=localStorage.getItem('sd-lang');if(l!=='es'&&l!=='en'){var n=(navigator.language||'es').toLowerCase();l=n.indexOf('es')===0?'es':'en';}var d=document.documentElement;d.lang=l;if(l==='en')d.className+=(d.className?' ':'')+'lang-loading';}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --shadow:#14171a; --shadow-2:#1b1f23; --shadow-3:#0f1113;
+    --putty:#dad6cb; --bone:#ece8de; --ink:#16191c;
+    --lapis:#39576a; --lapis-deep:#243a47;
+    --gilt:#b6904f; --oxide:#9a5440;
+    --muted-d:#8a9095; --muted-l:#6f6c61;
+    --line-d:rgba(236,232,222,.16); --line-l:rgba(22,25,28,.14);
+    --serif:"Spectral",Georgia,serif;
+    --display:"Fraunces",Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --mx:clamp(1.25rem,5vw,7rem);
+    --pad:clamp(4.5rem,11vw,9rem);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html.lang-loading body{visibility:hidden}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--shadow);color:var(--bone);font-family:var(--serif);font-weight:400;
+    font-size:clamp(1rem,.55vw + .9rem,1.16rem);line-height:1.68;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--muted-d)}
+  .section--light .eyebrow{color:var(--muted-l)}
+  .gilt{color:var(--gilt)} .em{font-style:italic;font-weight:400}
+
+  /* NAV */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:1.15rem var(--mx);transition:background .5s,padding .5s,border-color .5s;border-bottom:1px solid transparent}
+  .nav.is-stuck{background:rgba(15,17,19,.86);backdrop-filter:blur(10px);padding-top:.85rem;padding-bottom:.85rem;border-bottom-color:var(--line-d)}
+  .nav__brand{display:flex;align-items:baseline;gap:.7rem;flex-shrink:0}
+  .nav__mark{font-family:var(--display);font-weight:500;font-size:1.18rem;letter-spacing:.02em}
+  .nav__role{font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-d)}
+  .nav__right{display:flex;align-items:center;gap:1.6rem;min-width:0}
+  .nav__links{display:flex;gap:2rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+  .nav__links a{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--bone);opacity:.78;transition:opacity .25s,color .25s;padding:.2rem 0}
+  .nav__links a:hover{opacity:1;color:var(--gilt)}
+  .nav__links a:focus-visible{outline:none;opacity:1;color:var(--gilt);box-shadow:0 2px 0 0 var(--gilt)}
+  .nav__actions{display:flex;align-items:center;gap:1rem;flex-shrink:0}
+  .nav__toggle{display:none}
+  /* Language toggle */
+  .lang{display:inline-flex;align-items:center;gap:.4rem}
+  .lang__btn{background:none;border:none;color:var(--bone);opacity:.55;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;cursor:pointer;padding:.2rem .15rem;transition:opacity .25s,color .25s}
+  .lang__btn:hover{opacity:.85}
+  .lang__btn.is-active{opacity:1;color:var(--gilt)}
+  .lang__btn:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(182,144,79,.55);border-radius:2px}
+  .lang__sep{opacity:.4;font-size:.7rem;color:var(--muted-d)}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:0 var(--mx) clamp(3rem,7vw,6rem);overflow:hidden;
+    background:radial-gradient(120% 90% at 18% 8%, #2a2722 0%, #1a1c1d 42%, var(--shadow-3) 100%)}
+  .hero__surface{position:absolute;inset:0;z-index:0;mix-blend-mode:overlay;opacity:.62;pointer-events:none}
+  .hero__warm{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.5;
+    background:radial-gradient(140% 120% at 22% 18%, rgba(182,144,79,.45), transparent 55%),radial-gradient(120% 130% at 85% 95%, rgba(57,87,106,.40), transparent 60%)}
+  .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
+    background:linear-gradient(78deg,transparent 30%,rgba(244,238,224,.05) 43%,rgba(248,243,230,.16) 50%,rgba(244,238,224,.05) 57%,transparent 70%);
+    mix-blend-mode:soft-light;transform:translateX(var(--sweep,-60%));transition:transform .25s ease-out;
+    animation:rake-in 2.6s cubic-bezier(.16,.84,.3,1) .2s both}
+  @keyframes rake-in{from{transform:translateX(-115%)}to{transform:translateX(var(--sweep,-60%))}}
+  .hero__vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 100% at 50% 40%, transparent 55%, rgba(10,11,12,.72) 100%)}
+  .hero__inner{position:relative;z-index:3;max-width:64rem}
+  .hero__eyebrow{margin-bottom:1.6rem}
+  .hero h1{font-family:var(--display);font-weight:340;font-size:clamp(3.4rem,11vw,8.4rem);line-height:.94;letter-spacing:-.02em;
+    color:var(--bone);margin-bottom:1.7rem;font-variation-settings:"opsz" 144;text-wrap:balance}
+  .hero h1 .last{display:block;color:var(--putty)}
+  .hero__thesis{max-width:44rem;font-size:clamp(1.08rem,1.6vw,1.4rem);line-height:1.6;color:#cfccc2;font-weight:300}
+  .hero__cue{display:flex;align-items:center;gap:.8rem;margin-top:2.8rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-d)}
+  .hero__cue .bar{display:inline-block;width:48px;height:1px;background:var(--gilt);opacity:.7}
+
+  /* SECTION SCAFFOLD */
+  .section{padding:var(--pad) var(--mx);position:relative}
+  .section--light{background:var(--putty);color:var(--ink)}
+  .section--dark{background:var(--shadow)}
+  .section--deep{background:var(--shadow-3)}
+  .lede{font-family:var(--mono);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gilt);margin-bottom:1.4rem}
+  .section--light .lede{color:var(--oxide)}
+  .h-sec{font-family:var(--display);font-weight:360;line-height:1.02;letter-spacing:-.018em;font-size:clamp(2rem,5vw,3.5rem);max-width:20ch;font-variation-settings:"opsz" 80}
+
+  /* PERFIL */
+  .perfil__intro{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);margin-top:3rem;align-items:start}
+  .portrait{position:relative;border-radius:2px;overflow:hidden;border:1px solid var(--line-l);background:#cfc9bd;box-shadow:0 30px 70px -45px rgba(0,0,0,.6)}
+  .portrait img{width:100%;height:auto;display:block}
+  .philo__body p{max-width:44ch;margin-bottom:1.3rem;color:#33373b}
+  .philo__body p:last-child{margin-bottom:0}
+  .tenets{display:grid;gap:1.4rem;align-content:start}
+  .tenets--row{margin-top:clamp(2.6rem,5vw,3.8rem)}
+  .tenet{border-top:1px solid var(--line-l);padding-top:1.1rem}
+  .tenet__n{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;color:var(--lapis);text-transform:uppercase}
+  .tenet__t{font-family:var(--display);font-size:1.32rem;font-weight:420;margin:.45rem 0 .35rem}
+  .tenet__d{font-size:.96rem;color:var(--muted-l);line-height:1.55}
+
+  /* ESPECIALIZACIÓN */
+  .areas{display:grid;grid-template-columns:1fr;gap:0;margin-top:3rem;border-top:1px solid var(--line-d)}
+  .area{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:baseline;padding:1.55rem 0;border-bottom:1px solid var(--line-d);transition:padding-left .35s,color .35s}
+  .area:hover{padding-left:1rem}
+  .area__n{font-family:var(--mono);font-size:.72rem;color:var(--gilt);letter-spacing:.12em}
+  .area__t{font-family:var(--display);font-size:clamp(1.25rem,2.6vw,1.85rem);font-weight:360;line-height:1.25}
+  .area__d{font-size:.95rem;color:var(--muted-d);margin-top:.35rem;max-width:60ch}
+
+  /* ENFOQUE — el diferenciador */
+  .enfoque{display:grid;gap:2.2rem}
+  .enfoque__text{display:grid;gap:2.2rem;align-content:center}
+  .enfoque__fig{position:relative;border-radius:2px;overflow:hidden;border:1px solid var(--line-d);box-shadow:0 30px 80px -50px rgba(0,0,0,.8)}
+  .enfoque__fig img{width:100%;height:auto;display:block}
+  .statement{font-family:var(--display);font-weight:330;font-size:clamp(1.7rem,4.4vw,3.1rem);line-height:1.12;letter-spacing:-.015em;max-width:26ch;color:var(--bone)}
+  .enfoque__sub{font-family:var(--serif);color:var(--muted-d);max-width:52ch;font-size:1.05rem}
+
+  /* PROYECTO DESTACADO + ANTES/DESPUÉS */
+  .feature__top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem;align-items:flex-end;margin-bottom:2.6rem}
+  .feature__meta{display:flex;gap:2rem;flex-wrap:wrap}
+  .meta-k{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lapis);display:block;margin-bottom:.3rem}
+  .meta-v{font-family:var(--display);font-size:1.05rem;font-weight:420}
+  .featured__media{margin:0 0 2.6rem;max-width:34rem;border-radius:2px;overflow:hidden;border:1px solid var(--line-l);box-shadow:0 30px 80px -45px rgba(0,0,0,.5)}
+  .featured__media img{width:100%;height:auto;display:block}
+  .ba-module + .ba-module{margin-top:2.4rem}
+  .ba-module__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;margin-bottom:1rem}
+  .ba-module__tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);border:1px solid var(--line-l);padding:.3rem .55rem;border-radius:2px}
+  .ba-module__title{font-family:var(--display);font-size:1.05rem;font-weight:420}
+  .ba-module__meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--muted-l)}
+  .ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:2px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none;box-shadow:0 30px 80px -40px rgba(0,0,0,.7);background:#1a1714}
+  .ba__layer{position:absolute;inset:0}
+  .ba__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .ba__surface{position:absolute;inset:0;mix-blend-mode:overlay;opacity:.7}
+  .ba--demo .ba__before{background:radial-gradient(130% 120% at 30% 30%, #6e5a33 0%, #4a3d23 55%, #2c2415 100%)}
+  .ba--demo .ba__before::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(40,28,10,.55), rgba(120,90,30,.28)),radial-gradient(120% 120% at 50% 50%, transparent 40%, rgba(20,12,4,.7) 100%);mix-blend-mode:multiply}
+  .ba__after{clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+  .ba--demo .ba__after{background:radial-gradient(130% 120% at 30% 28%, #b08a52 0%, #7d5f37 50%, #4d3a22 100%)}
+  .ba--demo .ba__after::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 38% 36%, rgba(255,240,210,.18), transparent 55%);mix-blend-mode:screen}
+  .ba__tag{position:absolute;top:1rem;z-index:4;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);padding:.35rem .6rem;background:rgba(15,17,19,.55);backdrop-filter:blur(3px)}
+  .ba__tag--after{left:1rem} .ba__tag--before{right:1rem}
+  .ba__handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;z-index:5;background:linear-gradient(var(--bone),var(--gilt),var(--bone));transform:translateX(-1px);cursor:ew-resize}
+  .ba__knob{position:absolute;top:50%;left:50%;width:42px;height:42px;border-radius:50%;transform:translate(-50%,-50%);background:rgba(15,17,19,.7);backdrop-filter:blur(4px);border:1px solid var(--gilt);display:grid;place-items:center}
+  .ba__knob::before{content:"";width:13px;height:13px;border-left:1.5px solid var(--bone);border-right:1.5px solid var(--bone);opacity:.85}
+  .ba__handle:focus-visible{outline:none}
+  .ba__handle:focus-visible .ba__knob{box-shadow:0 0 0 3px var(--lapis),0 0 0 5px rgba(255,255,255,.35)}
+  .feature__caption{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;color:var(--muted-l);margin-top:1.1rem;max-width:62ch;line-height:1.6}
+  .feature__narr{margin-top:2.4rem;max-width:48ch;color:#34383c}
+
+  /* PROYECTOS */
+  .works{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem);margin-top:3rem}
+  .work{display:flex;flex-direction:column;gap:1rem}
+  .work__frame{position:relative;aspect-ratio:4/5;border-radius:2px;overflow:hidden;background:linear-gradient(140deg,#23262a,#15181b);border:1px solid var(--line-d);display:grid;place-items:center;transition:transform .5s cubic-bezier(.16,.84,.3,1)}
+  .work:hover .work__frame{transform:translateY(-6px)}
+  .work__frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .work__frame::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 0%, rgba(182,144,79,.1), transparent 60%);pointer-events:none}
+  .work__ph{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-d);text-align:center}
+  .work__ph .dim{display:block;color:var(--gilt);margin-top:.4rem;font-size:.56rem}
+  .work__yr{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;color:var(--gilt)}
+  .work__t{font-family:var(--display);font-size:1.3rem;font-weight:380;line-height:1.2}
+  .work__d{font-size:.92rem;color:var(--muted-d);line-height:1.55}
+
+  /* INTERVENCIONES — galería */
+  .gallery{margin-top:3rem}
+  .gallery__grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2.4vw,1.6rem)}
+  .gtile{position:relative;display:block;width:100%;padding:0;margin:0;border:1px solid var(--line-l);background:#cfc9bd;border-radius:2px;overflow:hidden;cursor:pointer;text-align:left;font:inherit;color:inherit}
+  .gtile img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
+  .gtile:hover img{transform:scale(1.045)}
+  .gtile__cap{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .9rem .75rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;line-height:1.45;color:var(--bone);background:linear-gradient(0deg,rgba(12,13,15,.86),rgba(12,13,15,.2) 70%,transparent);opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+  .gtile:hover .gtile__cap,.gtile:focus-visible .gtile__cap{opacity:1;transform:none}
+  .gtile:focus-visible{outline:none;box-shadow:0 0 0 2px var(--putty),0 0 0 4px var(--lapis)}
+
+  /* LIGHTBOX */
+  body.lb-open{overflow:hidden}
+  .lightbox{position:fixed;inset:0;z-index:100;display:grid;place-items:center}
+  .lightbox[hidden]{display:none}
+  .lightbox__backdrop{position:absolute;inset:0;background:rgba(8,9,10,.93);backdrop-filter:blur(4px)}
+  .lightbox__dialog{position:relative;z-index:1;width:min(92vw,1100px);display:flex;justify-content:center}
+  .lightbox__figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:100%}
+  .lightbox__img{max-width:100%;max-height:78vh;width:auto;height:auto;border-radius:2px;box-shadow:0 40px 120px -40px rgba(0,0,0,.85)}
+  .lightbox__cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--putty);text-align:center;max-width:60ch;line-height:1.5}
+  .lightbox__btn{background:rgba(20,23,26,.6);border:1px solid var(--line-d);color:var(--bone);cursor:pointer;border-radius:50%;display:grid;place-items:center;transition:background .25s,border-color .25s}
+  .lightbox__btn:hover{background:rgba(20,23,26,.92);border-color:var(--gilt)}
+  .lightbox__btn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
+  .lightbox__close{position:fixed;top:1rem;right:1rem;width:42px;height:42px;font-size:1.5rem;line-height:1}
+  .lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:1.7rem;line-height:1}
+  .lightbox__prev{left:.25rem} .lightbox__next{right:.25rem}
+
+  /* METODOLOGÍA */
+  .method__head{max-width:46rem}
+  .method__intro{margin-top:1.4rem;color:#cfccc2;font-weight:300;max-width:50ch}
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:clamp(3rem,6vw,5rem)}
+  .step{position:relative;padding:0 1.1rem}
+  .step::before{content:"";position:absolute;top:21px;left:50%;right:-50%;height:1px;background:var(--line-d);z-index:0}
+  .step:last-child::before{display:none}
+  .step__node{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;border:1px solid var(--gilt);display:grid;place-items:center;background:var(--shadow);font-family:var(--mono);font-size:.74rem;color:var(--gilt);letter-spacing:.04em}
+  .step__t{font-family:var(--display);font-size:1.12rem;font-weight:420;margin:1.2rem 0 .5rem;line-height:1.2}
+  .step__d{font-size:.9rem;color:var(--muted-d);line-height:1.55;max-width:24ch}
+  .method__media{margin-top:clamp(3rem,6vw,5rem);border-radius:2px;overflow:hidden;border:1px solid var(--line-d)}
+  .method__media img{width:100%;height:auto;max-height:62vh;object-fit:cover;display:block}
+
+  /* TRAYECTORIA */
+  .cv{display:grid;grid-template-columns:1fr;gap:0;margin-top:3rem;border-top:1px solid var(--line-l)}
+  .cv__row{display:grid;grid-template-columns:1fr;gap:.4rem;padding:1.7rem 0;border-bottom:1px solid var(--line-l)}
+  .cv__k{font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lapis)}
+  .cv__v{font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.55rem);font-weight:360;color:var(--ink);line-height:1.25}
+  .cv__note{font-size:.92rem;color:var(--muted-l);max-width:60ch}
+
+  /* CONTACTO */
+  .contact{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4rem);align-items:end}
+  .contact h2{font-family:var(--display);font-weight:330;font-size:clamp(2.4rem,7vw,5rem);line-height:.98;letter-spacing:-.02em;font-variation-settings:"opsz" 120}
+  .contact__side{display:grid;gap:1.5rem;align-content:end}
+  .contact__item .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt);display:block;margin-bottom:.4rem}
+  .contact__item .v{font-size:1.15rem;color:var(--bone);border-bottom:1px solid var(--line-d);padding-bottom:.5rem;transition:border-color .3s;display:inline-block}
+  .contact__item a.v:hover{border-color:var(--gilt)}
+
+  footer{padding:2rem var(--mx);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-top:1px solid var(--line-d);background:var(--shadow-3);font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d)}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(min-width:560px){
+    .gallery__grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(min-width:720px){
+    .perfil__intro{grid-template-columns:.85fr 1.15fr}
+    .tenets--row{grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,3vw,2.4rem)}
+    .works{grid-template-columns:repeat(3,1fr)}
+    .cv__row{grid-template-columns:.5fr 1.2fr 1.3fr;align-items:baseline}
+    .contact{grid-template-columns:1.4fr .8fr}
+  }
+  @media(min-width:860px){
+    .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
+  }
+  @media(min-width:900px){
+    .gallery__grid{grid-template-columns:repeat(3,1fr)}
+  }
+  /* Keep the inline desktop nav from crowding (and hide the role subtitle) in the band
+     just above the hamburger breakpoint, in either language */
+  @media(min-width:1025px) and (max-width:1300px){
+    .nav__right{gap:1rem}
+    .nav__links{gap:1.05rem}
+    .nav__links a{font-size:.66rem;letter-spacing:.12em}
+    .nav__role{display:none}
+  }
+  /* Hamburger menu until the horizontal nav genuinely fits (8 links + ES/EN toggle).
+     Closed menu is removed from the tab order + AT tree via visibility:hidden. */
+  @media(max-width:1024px){
+    .nav__links{position:absolute;top:100%;right:var(--mx);left:var(--mx);flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:1.2rem;background:rgba(15,17,19,.97);backdrop-filter:blur(12px);border:1px solid var(--line-d);padding:1.4rem 1.3rem;transform:translateY(-8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s,transform .3s,visibility .3s}
+    .nav__links.open{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+    .nav__toggle{display:inline-flex;background:none;border:1px solid var(--line-d);color:var(--bone);font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;padding:.5rem .8rem;cursor:pointer;border-radius:2px}
+    .nav__toggle:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(182,144,79,.55)}
+    .nav__role{display:none}
+  }
+  /* Methodology diagram stacks until it can show 5 nodes without cramping the titles */
+  @media(max-width:899px){
+    .flow{grid-template-columns:1fr;gap:0}
+    .step{padding:0 0 2.2rem 0;display:grid;grid-template-columns:44px 1fr;column-gap:1.2rem}
+    .step::before{top:44px;bottom:-2px;left:21px;right:auto;width:1px;height:auto}
+    .step:last-child::before{display:none}
+    .step__t{margin-top:.1rem} .step__d{grid-column:2}
+  }
+  /* Lightbox on narrow screens: reserve side gutters so the prev/next buttons
+     sit beside the photo rather than overlapping it */
+  @media(max-width:560px){
+    .lightbox__dialog{padding-left:3.25rem;padding-right:3.25rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto}
+    .hero__rake{transform:translateX(-30%)}
+    .reveal{opacity:1;transform:none;transition:none}
+    .gtile img,.lightbox__btn,.gtile__cap{transition:none}
+    .gtile__cap{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav__brand">
+    <span class="nav__mark">Stefania Díaz</span>
+    <span class="nav__role" data-i18n="nav.role">Conservación · Restauración</span>
+  </div>
+  <div class="nav__right">
+    <div class="nav__links" id="navLinks">
+      <a href="#perfil" data-i18n="nav.profile">Perfil</a>
+      <a href="#especializacion" data-i18n="nav.expertise">Especialización</a>
+      <a href="#enfoque" data-i18n="nav.market">Mercado del arte</a>
+      <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+      <a href="#intervenciones" data-i18n="nav.gallery">Intervenciones</a>
+      <a href="#metodologia" data-i18n="nav.method">Metodología</a>
+      <a href="#trayectoria" data-i18n="nav.background">Trayectoria</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </div>
+    <div class="nav__actions">
+      <div class="lang" role="group" data-i18n-attr="aria-label:ui.langLabel" aria-label="Cambiar idioma">
+        <button class="lang__btn is-active" type="button" data-lang="es" aria-pressed="true" data-i18n-attr="title:ui.langEs" title="Español">ES</button>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <button class="lang__btn" type="button" data-lang="en" aria-pressed="false" data-i18n-attr="title:ui.langEn" title="Inglés">EN</button>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" data-i18n="nav.menu">Menú</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <svg class="hero__surface" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <filter id="raking">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.05" numOctaves="4" seed="7" result="n"/>
+      <feDiffuseLighting in="n" surfaceScale="3.2" diffuseConstant="1.15" lighting-color="#f3ecdc" result="l">
+        <feDistantLight azimuth="248" elevation="13"/>
+      </feDiffuseLighting>
+      <feColorMatrix in="l" type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#raking)"/>
+  </svg>
+  <div class="hero__warm" aria-hidden="true"></div>
+  <div class="hero__rake" id="rake" aria-hidden="true"></div>
+  <div class="hero__vignette" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__eyebrow eyebrow" data-i18n="hero.eyebrow">Conservación y restauración de bienes culturales · Bogotá</div>
+    <h1>Stefania<span class="last">Díaz</span></h1>
+    <p class="hero__thesis" data-i18n-html="hero.thesis">Conservo y restauro patrimonio cultural justo donde la obra entra en circulación —subastas, colecciones privadas e institucionales—. <span class="em">Uno el cuidado material de la pieza con la transparencia</span> que el mercado del arte necesita.</p>
+    <div class="hero__cue"><span class="bar"></span> <span data-i18n="hero.cue">Luz rasante · mueva el cursor sobre la superficie</span></div>
+  </div>
+</header>
+
+<!-- PERFIL -->
+<section class="section section--light" id="perfil">
+  <p class="lede reveal" data-i18n="perfil.lede">01 — Perfil</p>
+  <h2 class="h-sec reveal" data-i18n="perfil.h">Conservadora-restauradora formada en la Universidad Externado de Colombia.</h2>
+  <div class="perfil__intro">
+    <figure class="portrait reveal">
+      <img src="assets/img/portrait.webp" width="1200" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:perfil.portraitAlt" alt="Stefania Díaz, conservadora-restauradora.">
+    </figure>
+    <div class="philo__body reveal">
+      <p data-i18n="perfil.p1">Soy profesional en Conservación y Restauración de Patrimonio Cultural. Trabajo en restauración, conservación preventiva, documentación, estudios técnicos, diagnóstico de estados de conservación y gestión de colecciones —tanto en piezas individuales como en conjuntos patrimoniales.</p>
+      <p data-i18n="perfil.p2">Mi línea de investigación es el rol transversal del conservador-restaurador en el mercado del arte: cómo nuestra participación fortalece la protección, la valorización y la transparencia de los bienes culturales que circulan entre instituciones, casas de subastas y colecciones privadas.</p>
+    </div>
+  </div>
+  <div class="tenets tenets--row reveal">
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t1n">i — Principio</span><h3 class="tenet__t" data-i18n="perfil.t1t">Mínima intervención</h3><p class="tenet__d" data-i18n="perfil.t1d">Cada gesto se justifica. Lo que no es necesario, no se toca.</p></div>
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t2n">ii — Principio</span><h3 class="tenet__t" data-i18n="perfil.t2t">Reversibilidad</h3><p class="tenet__d" data-i18n="perfil.t2d">Todo tratamiento debe poder deshacerse sin dañar el original.</p></div>
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t3n">iii — Principio</span><h3 class="tenet__t" data-i18n="perfil.t3t">Documentación íntegra</h3><p class="tenet__d" data-i18n="perfil.t3d">El registro técnico y fotográfico acompaña a la obra como su memoria.</p></div>
+  </div>
+</section>
+
+<!-- ESPECIALIZACIÓN -->
+<section class="section section--dark" id="especializacion">
+  <p class="lede reveal" data-i18n="exp.lede">02 — Especialización</p>
+  <h2 class="h-sec reveal" data-i18n="exp.h">Áreas de trabajo.</h2>
+  <div class="areas reveal">
+    <div class="area"><span class="area__n">01</span><div><div class="area__t" data-i18n="exp.a1t">Restauración de obra pictórica y escultórica</div><div class="area__d" data-i18n="exp.a1d">Intervención de pintura de caballete y escultura policromada, incluida obra colonial.</div></div></div>
+    <div class="area"><span class="area__n">02</span><div><div class="area__t" data-i18n="exp.a2t">Conservación preventiva</div><div class="area__d" data-i18n="exp.a2d">Análisis de condiciones ambientales y planes de conservación para colecciones públicas y privadas.</div></div></div>
+    <div class="area"><span class="area__n">03</span><div><div class="area__t" data-i18n="exp.a3t">Diagnóstico y estudios técnicos</div><div class="area__d" data-i18n="exp.a3d">Evaluación del estado de conservación y estudios que sustentan cada decisión de intervención.</div></div></div>
+    <div class="area"><span class="area__n">04</span><div><div class="area__t" data-i18n="exp.a4t">Gestión de colecciones</div><div class="area__d" data-i18n="exp.a4d">Coordinación y manejo de bienes culturales, incluida su entrada al mercado de subastas.</div></div></div>
+    <div class="area"><span class="area__n">05</span><div><div class="area__t" data-i18n="exp.a5t">Conservación y mercado del arte</div><div class="area__d" data-i18n="exp.a5d">Acompañamiento a casas de subastas y colecciones en la circulación responsable de la obra.</div></div></div>
+  </div>
+</section>
+
+<!-- ENFOQUE -->
+<section class="section section--deep" id="enfoque">
+  <p class="lede reveal" data-i18n="foc.lede">03 — Enfoque</p>
+  <div class="enfoque enfoque--media reveal">
+    <div class="enfoque__text">
+      <p class="statement" data-i18n="foc.statement">El conservador-restaurador no termina en el taller. En el mercado del arte —subastas, tasaciones, colecciones que cambian de manos— su criterio es lo que protege la obra y da transparencia a su circulación.</p>
+      <p class="enfoque__sub" data-i18n="foc.sub">Ese cruce entre conservación, valoración y mercado es el centro de mi trabajo y de mi investigación: cuidar la pieza y, a la vez, sostener la confianza con que se compra, se vende y se hereda.</p>
+    </div>
+    <figure class="enfoque__fig">
+      <img src="assets/img/enfoque-museum.jpg" width="1200" height="1600" loading="lazy" decoding="async" data-i18n-attr="alt:foc.imgAlt" alt="Stefania Díaz observando una obra en una sala de museo.">
+    </figure>
+  </div>
+</section>
+
+<!-- PROYECTO DESTACADO -->
+<section class="section section--light" id="proyectos">
+  <p class="lede reveal" data-i18n="feat.lede">04 — Proyecto destacado</p>
+  <div class="feature__top reveal">
+    <h2 class="h-sec" style="margin:0" data-i18n="feat.h">Escultura policromada · pieza colonial</h2>
+    <div class="feature__meta">
+      <div><span class="meta-k" data-i18n="feat.k1">Colección</span><span class="meta-v" data-i18n="feat.v1">Iglesia de San Francisco de Asís</span></div>
+      <div><span class="meta-k" data-i18n="feat.k2">Tipo</span><span class="meta-v" data-i18n="feat.v2">Pesebre · arte colonial</span></div>
+      <div><span class="meta-k" data-i18n="feat.k3">Intervención</span><span class="meta-v" data-i18n="feat.v3">2024</span></div>
+    </div>
+  </div>
+  <figure class="featured__media reveal">
+    <img src="assets/img/featured-sanfrancisco.jpg" width="632" height="800" loading="lazy" decoding="async" data-i18n-attr="alt:feat.imgAlt" alt="Detalle de la intervención sobre la escultura policromada.">
+  </figure>
+  <div class="reveal">
+    <div id="baList"><!-- before/after sliders rendered by main.js (data-driven) --></div>
+    <p class="feature__caption" data-i18n="feat.demoNote">Módulo de demostración — el deslizador queda listo para recibir la documentación fotográfica real del antes y el después de la restauración.</p>
+  </div>
+  <p class="feature__narr reveal" data-i18n="feat.narr">Restauración de una pieza colonial perteneciente a la colección de pesebre de la Iglesia de San Francisco de Asís, en Bogotá. Espacio para la memoria del tratamiento: estado de conservación inicial, diagnóstico, limpieza, consolidación, reintegración cromática y criterios de intervención.</p>
+</section>
+
+<!-- TRABAJO INSTITUCIONAL -->
+<section class="section section--deep" id="mas-proyectos">
+  <p class="lede reveal" data-i18n="sel.lede">05 — Selección</p>
+  <h2 class="h-sec reveal" data-i18n="sel.h">Trabajo institucional.</h2>
+  <div class="works reveal">
+    <article class="work">
+      <div class="work__frame"><img src="assets/img/work-la-independencia.jpg" width="1280" height="854" loading="lazy" decoding="async" data-i18n-attr="alt:sel.w1alt" alt="Trabajo de conservación en taller."></div>
+      <span class="work__yr" data-i18n="sel.w1yr">2023 — actualidad</span>
+      <h3 class="work__t" data-i18n="sel.w1t">La Independencia · Casa de Subastas</h3>
+      <p class="work__d" data-i18n="sel.w1d">Dirección del Departamento de Conservación y Restauración y gestión de los bienes culturales que ingresan al mercado de subastas.</p>
+    </article>
+    <article class="work">
+      <div class="work__frame"><img src="assets/img/work-av-villas.jpg" width="1280" height="1600" loading="lazy" decoding="async" data-i18n-attr="alt:sel.w2alt" alt="Intervención sobre obra pictórica."></div>
+      <span class="work__yr" data-i18n="sel.w2yr">2024</span>
+      <h3 class="work__t" data-i18n="sel.w2t">Banco AV Villas</h3>
+      <p class="work__d" data-i18n="sel.w2d">Diagnóstico y restauración de obra pictórica perteneciente a la colección del banco.</p>
+    </article>
+    <article class="work">
+      <div class="work__frame"><img src="assets/img/work-banco-bogota.jpg" width="1334" height="1600" loading="lazy" decoding="async" data-i18n-attr="alt:sel.w3alt" alt="Conservación preventiva en sala de exhibición."></div>
+      <span class="work__yr" data-i18n="sel.w3yr">2025</span>
+      <h3 class="work__t" data-i18n="sel.w3t">Banco de Bogotá</h3>
+      <p class="work__d" data-i18n="sel.w3d">Análisis de condiciones ambientales y consultoría en conservación preventiva para la colección privada.</p>
+    </article>
+  </div>
+</section>
+
+<!-- INTERVENCIONES — galería -->
+<section class="section section--light" id="intervenciones">
+  <p class="lede reveal" data-i18n="gal.lede">06 — Intervenciones</p>
+  <h2 class="h-sec reveal" data-i18n="gal.h">Trabajo en obra.</h2>
+  <p class="philo__body reveal" style="max-width:52ch;color:#33373b" data-i18n="gal.sub">Una selección de procesos de conservación y restauración.</p>
+  <div class="gallery reveal">
+    <div class="gallery__grid" id="galleryGrid"><!-- tiles rendered by main.js (data-driven) --></div>
+  </div>
+</section>
+
+<!-- METODOLOGÍA -->
+<section class="section section--dark" id="metodologia">
+  <div class="method__head">
+    <p class="lede reveal" data-i18n="met.lede">07 — Metodología</p>
+    <h2 class="h-sec reveal" data-i18n="met.h">Del examen a la conservación.</h2>
+    <p class="method__intro reveal" data-i18n="met.intro">Toda intervención sigue una secuencia ordenada. Cada etapa documenta a la anterior y condiciona a la siguiente: el método es lo que separa la restauración de la improvisación.</p>
+  </div>
+  <div class="flow reveal">
+    <div class="step"><div class="step__node">01</div><h3 class="step__t" data-i18n="met.s1t">Examen</h3><p class="step__d" data-i18n="met.s1d">Observación con luz visible, rasante y ultravioleta. Identificación de materiales y alteraciones.</p></div>
+    <div class="step"><div class="step__node">02</div><h3 class="step__t" data-i18n="met.s2t">Diagnóstico</h3><p class="step__d" data-i18n="met.s2d">Determinación del estado de conservación y de las causas del deterioro.</p></div>
+    <div class="step"><div class="step__node">03</div><h3 class="step__t" data-i18n="met.s3t">Documentación</h3><p class="step__d" data-i18n="met.s3d">Registro fotográfico, cartografía de daños y propuesta de intervención.</p></div>
+    <div class="step"><div class="step__node">04</div><h3 class="step__t" data-i18n="met.s4t">Intervención</h3><p class="step__d" data-i18n="met.s4d">Limpieza, consolidación y reintegración con materiales estables y reversibles.</p></div>
+    <div class="step"><div class="step__node">05</div><h3 class="step__t" data-i18n="met.s5t">Conservación preventiva</h3><p class="step__d" data-i18n="met.s5d">Recomendaciones de manipulación, exhibición y control ambiental.</p></div>
+  </div>
+  <figure class="method__media reveal">
+    <img src="assets/img/tools-flatlay.jpg" width="1800" height="1350" loading="lazy" decoding="async" data-i18n-attr="alt:met.toolsAlt" alt="Herramientas de conservación y restauración dispuestas sobre la mesa de trabajo.">
+  </figure>
+</section>
+
+<!-- TRAYECTORIA -->
+<section class="section section--light" id="trayectoria">
+  <p class="lede reveal" data-i18n="bg.lede">08 — Trayectoria</p>
+  <h2 class="h-sec reveal" data-i18n="bg.h">Formación y experiencia.</h2>
+  <div class="cv reveal">
+    <div class="cv__row">
+      <span class="cv__k" data-i18n="bg.k1">Formación</span>
+      <span class="cv__v" data-i18n="bg.v1">Universidad Externado de Colombia</span>
+      <span class="cv__note" data-i18n="bg.n1">Profesional en Conservación y Restauración de Patrimonio Cultural, Museos y Colecciones de Arte (2021–2025). Tesis 4.9 / 5.0 · Promedio 4.59 / 5.0.</span>
+    </div>
+    <div class="cv__row">
+      <span class="cv__k" data-i18n="bg.k2">Experiencia</span>
+      <span class="cv__v" data-i18n="bg.v2">La Independencia Casa de Subastas & Anticuario</span>
+      <span class="cv__note" data-i18n="bg.n2">Líder del Departamento de Conservación y Restauración (2023–actualidad). Práctica independiente y colaboraciones institucionales desde 2024.</span>
+    </div>
+    <div class="cv__row">
+      <span class="cv__k" data-i18n="bg.k3">Certificaciones</span>
+      <span class="cv__v" data-i18n="bg.v3">Valoración de obras de arte · Conservación en bibliotecas</span>
+      <span class="cv__note" data-i18n="bg.n3">Ágora — Valoración de obras de arte (2025). Biblioteca Nacional de Colombia — Conservación del patrimonio en bibliotecas (2024). NSLS — Leadership for the Future (2023).</span>
+    </div>
+    <div class="cv__row">
+      <span class="cv__k" data-i18n="bg.k4">Idiomas</span>
+      <span class="cv__v" data-i18n="bg.v4">Español · Inglés</span>
+      <span class="cv__note" data-i18n="bg.n4">Comunicación profesional en ambos idiomas, oral y escrita.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section section--deep" id="contacto">
+  <div class="contact">
+    <div class="reveal">
+      <p class="lede" data-i18n="con.lede">09 — Contacto</p>
+      <h2 data-i18n-html="con.h">Conversemos<br>sobre tu obra.</h2>
+    </div>
+    <div class="contact__side reveal">
+      <div class="contact__item"><span class="k" data-i18n="con.k1">Correo</span><a class="v" href="mailto:hola@stefaniadiaz.art">hola@stefaniadiaz.art</a></div>
+      <div class="contact__item"><span class="k" data-i18n="con.k2">Instagram</span><a class="v" href="https://instagram.com/ella_restaura_arte" target="_blank" rel="noopener">@ella_restaura_arte</a></div>
+      <div class="contact__item"><span class="k" data-i18n="con.k3">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/stefania-diaz2611/" target="_blank" rel="noopener">/stefania-diaz</a></div>
+      <div class="contact__item"><span class="k" data-i18n="con.k4">Estudio</span><span class="v" data-i18n="con.v4">Bogotá, Colombia</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Stefania Díaz</span>
+  <span data-i18n="foot.tag">Conservación · Restauración · Mercado del arte</span>
+  <span>stefaniadiaz.art</span>
+</footer>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/data/before-after.js"></script>
+<script src="assets/data/gallery.js"></script>
+<script src="assets/js/main.js"></script>
+<script>/* Failsafe: lift the EN paint-gate even if a script above failed to load. */
+document.documentElement.classList.remove('lang-loading');</script>
+</body>
+</html>
