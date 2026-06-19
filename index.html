@@ -266,7 +266,7 @@
   }
   @media(min-width:720px){
     .perfil__intro{grid-template-columns:.85fr 1.15fr}
-    .tenets--row{grid-template-columns:repeat(3,1fr);gap:clamp(1.4rem,3vw,2.4rem)}
+    .tenets--row{grid-template-columns:repeat(2,1fr);gap:clamp(1.4rem,3vw,2.4rem)}
     .works{grid-template-columns:repeat(3,1fr)}
     .cv__row{grid-template-columns:.5fr 1.2fr 1.3fr;align-items:baseline}
     .contact{grid-template-columns:1fr 1fr}
@@ -321,7 +321,7 @@
     <div class="nav__links" id="navLinks">
       <a href="#perfil" data-i18n="nav.profile">Perfil</a>
       <a href="#especializacion" data-i18n="nav.expertise">Especialización</a>
-      <a href="#enfoque" data-i18n="nav.market">Mercado del arte</a>
+      <a href="#enfoque" data-i18n="nav.market">Enfoque</a>
       <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
       <a href="#intervenciones" data-i18n="nav.gallery">Intervenciones</a>
       <a href="#metodologia" data-i18n="nav.method">Metodología</a>
@@ -362,14 +362,16 @@
       <img src="assets/img/portrait.webp" width="1200" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:perfil.portraitAlt" alt="Stefania Díaz, conservadora-restauradora.">
     </figure>
     <div class="philo__body reveal">
-      <p data-i18n="perfil.p1">Soy profesional en Conservación y Restauración de Patrimonio Cultural. Trabajo en restauración, conservación preventiva, documentación, estudios técnicos, diagnóstico de estados de conservación y gestión de colecciones —tanto en piezas individuales como en conjuntos patrimoniales.</p>
-      <p data-i18n="perfil.p2">Mi línea de investigación es el rol transversal del conservador-restaurador en el mercado del arte: cómo nuestra participación fortalece la protección, la valorización y la transparencia de los bienes culturales que circulan entre instituciones, casas de subastas y colecciones privadas.</p>
+      <p data-i18n="perfil.p1">Profesional en Conservación y Restauración del Patrimonio Cultural de la Universidad Externado de Colombia. Cuento con competencias técnicas y analíticas, respaldadas por una comprensión profunda de los principios y criterios de la conservación y restauración de bienes culturales, así como de las metodologías de investigación y evaluación analítica que conlleva cada intervención.</p>
+      <p data-i18n="perfil.p2">Mi experiencia se ha construido mediante la colaboración con instituciones culturales y colecciones privadas en Colombia, participando en intervenciones sobre diversos soportes. Cuento con experiencia en tratamientos de conservación y restauración en tipologías como pintura caballete, escultura policromada y obra gráfica, aplicando procesos rigurosos y especializados de diagnóstico, investigación y análisis técnico según la naturaleza de cada obra.</p>
+      <p data-i18n="perfil.p3">Asimismo, tengo experiencia en la gestión de colecciones y en la implementación de estrategias de conservación preventiva en galerías de arte y colecciones privadas.</p>
     </div>
   </div>
   <div class="tenets tenets--row reveal">
-    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t1n">i — Principio</span><h3 class="tenet__t" data-i18n="perfil.t1t">Mínima intervención</h3><p class="tenet__d" data-i18n="perfil.t1d">Cada gesto se justifica. Lo que no es necesario, no se toca.</p></div>
-    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t2n">ii — Principio</span><h3 class="tenet__t" data-i18n="perfil.t2t">Reversibilidad</h3><p class="tenet__d" data-i18n="perfil.t2d">Todo tratamiento debe poder deshacerse sin dañar el original.</p></div>
-    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t3n">iii — Principio</span><h3 class="tenet__t" data-i18n="perfil.t3t">Documentación íntegra</h3><p class="tenet__d" data-i18n="perfil.t3d">El registro técnico y fotográfico acompaña a la obra como su memoria.</p></div>
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t1n">i — Principio</span><h3 class="tenet__t" data-i18n="perfil.t1t">Mínima intervención</h3><p class="tenet__d" data-i18n="perfil.t1d">limitando las acciones exclusivamente a aquellas necesarias para garantizar la estabilidad y la conservación de la obra.</p></div>
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t2n">ii — Principio</span><h3 class="tenet__t" data-i18n="perfil.t2t">Reversibilidad</h3><p class="tenet__d" data-i18n="perfil.t2d">los materiales y procedimientos empleados puedan ser retirados o modificados en el futuro sin ocasionar daños a los componentes originales de la pieza.</p></div>
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t3n">iii — Principio</span><h3 class="tenet__t" data-i18n="perfil.t3t">Compatibilidad de materiales</h3><p class="tenet__d" data-i18n="perfil.t3d">productos y materiales cuyas propiedades físicas, químicas y mecánicas son compatibles con los materiales constitutivos de la obra.</p></div>
+    <div class="tenet"><span class="tenet__n" data-i18n="perfil.t4n">iv — Principio</span><h3 class="tenet__t" data-i18n="perfil.t4t">Estabilidad y durabilidad de los materiales de intervención</h3><p class="tenet__d" data-i18n="perfil.t4d">permanencia y eficacia de los tratamientos realizados a largo plazo.</p></div>
   </div>
 </section>
 
@@ -378,11 +380,10 @@
   <p class="lede reveal" data-i18n="exp.lede">02 — Especialización</p>
   <h2 class="h-sec reveal" data-i18n="exp.h">Áreas de trabajo.</h2>
   <div class="areas reveal">
-    <div class="area"><span class="area__n">01</span><div><div class="area__t" data-i18n="exp.a1t">Restauración de obra pictórica y escultórica</div><div class="area__d" data-i18n="exp.a1d">Intervención de pintura de caballete y escultura policromada, incluida obra colonial.</div></div></div>
-    <div class="area"><span class="area__n">02</span><div><div class="area__t" data-i18n="exp.a2t">Conservación preventiva</div><div class="area__d" data-i18n="exp.a2d">Análisis de condiciones ambientales y planes de conservación para colecciones públicas y privadas.</div></div></div>
-    <div class="area"><span class="area__n">03</span><div><div class="area__t" data-i18n="exp.a3t">Diagnóstico y estudios técnicos</div><div class="area__d" data-i18n="exp.a3d">Evaluación del estado de conservación y estudios que sustentan cada decisión de intervención.</div></div></div>
-    <div class="area"><span class="area__n">04</span><div><div class="area__t" data-i18n="exp.a4t">Gestión de colecciones</div><div class="area__d" data-i18n="exp.a4d">Coordinación y manejo de bienes culturales, incluida su entrada al mercado de subastas.</div></div></div>
-    <div class="area"><span class="area__n">05</span><div><div class="area__t" data-i18n="exp.a5t">Conservación y mercado del arte</div><div class="area__d" data-i18n="exp.a5d">Acompañamiento a casas de subastas y colecciones en la circulación responsable de la obra.</div></div></div>
+    <div class="area"><span class="area__n">01</span><div><div class="area__t" data-i18n="exp.a1t">Restauración de obras de arte y objetos antiguos</div><div class="area__d" data-i18n="exp.a1d">Pintura sobre lienzo y madera · Escultura policromada · Obras gráficas y documentales · Cerámica arqueológica</div></div></div>
+    <div class="area"><span class="area__n">02</span><div><div class="area__t" data-i18n="exp.a2t">Conservación preventiva</div><div class="area__d" data-i18n="exp.a2d">Análisis y evaluación de condiciones ambientales para la adecuada protección de colecciones artísticas y bienes culturales. Desarrollo e implementación de estrategias y planes de conservación preventiva orientados al almacenamiento, manipulación, transporte y exhibición.</div></div></div>
+    <div class="area"><span class="area__n">03</span><div><div class="area__t" data-i18n="exp.a3t">Diagnóstico y estudios técnicos</div><div class="area__d" data-i18n="exp.a3d">Estudio especializado de bienes culturales mediante investigación y análisis técnico orientados a comprender la materialidad, estado de conservación y dinámicas de deterioro de cada pieza. Desarrollo de propuestas de intervención fundamentadas en los principios y criterios éticos de la restauración profesional.</div></div></div>
+    <div class="area"><span class="area__n">04</span><div><div class="area__t" data-i18n="exp.a4t">Gestión de colecciones</div><div class="area__d" data-i18n="exp.a4d">Coordinación, organización y manejo especializado de bienes culturales en colecciones públicas y privadas, integrando procesos de documentación, conservación, catalogación y seguimiento técnico de las obras. Acompañamiento profesional a coleccionistas, galerías y casas de subastas en la circulación responsable de bienes culturales en el mercado del arte.</div></div></div>
   </div>
 </section>
 
@@ -391,8 +392,8 @@
   <p class="lede reveal" data-i18n="foc.lede">03 — Enfoque</p>
   <div class="enfoque enfoque--media reveal">
     <div class="enfoque__text">
-      <p class="statement" data-i18n="foc.statement">El conservador-restaurador no termina en el taller. En el mercado del arte —subastas, tasaciones, colecciones que cambian de manos— su criterio es lo que protege la obra y da transparencia a su circulación.</p>
-      <p class="enfoque__sub" data-i18n="foc.sub">Ese cruce entre conservación, valoración y mercado es el centro de mi trabajo y de mi investigación: cuidar la pieza y, a la vez, sostener la confianza con que se compra, se vende y se hereda.</p>
+      <p class="statement" data-i18n="foc.statement">La conservación &amp; restauración sólo es posible si se concibe como una tarea colectiva que fomente la reflexión crítica, el diálogo y la colaboración entre todas las partes involucradas.</p>
+      <p class="enfoque__sub" data-i18n="foc.sub">La incorporación de profesionales representa un valor agregado que profesionaliza el mercado posicionándolo como una herramienta al servicio del Patrimonio Cultural.</p>
     </div>
     <figure class="enfoque__fig">
       <img src="assets/img/enfoque-museum.jpg" width="1200" height="1600" loading="lazy" decoding="async" data-i18n-attr="alt:foc.imgAlt" alt="Stefania Díaz observando una obra en una sala de museo.">
