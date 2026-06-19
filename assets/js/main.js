@@ -2,7 +2,7 @@
    main.js — Stefania Díaz portfolio
    Plain JS, no dependencies. Loaded (with i18n.js + data files) at the end of
    <body> so the DOM exists and the first paint is already translated.
-   Depends on globals: window.I18N, window.INTERVENCIONES
+   Depends on globals: window.I18N, window.INTERVENCIONES, window.PREVENTIVA
 ============================================================================ */
 (function () {
   "use strict";
@@ -117,7 +117,7 @@
          caption: 'Tratamiento de ...' }
      With pairs present the modal renders one slider per pair; empty -> a tidy
      "coming soon" state. */
-  var ivModal = null, ivLastFocus = null, ivCurrentFolder = null;
+  var sdModal = null, sdLastFocus = null, sdRender = null;
 
   function buildIvSlider(pair) {
     var fig = document.createElement("figure");
@@ -170,48 +170,26 @@
     return fig;
   }
 
-  function renderIvModal(folderKey) {
-    var data = (window.INTERVENCIONES || {})[folderKey];
-    if (!data) return;
-    ivModal.querySelector(".ivmodal__title").textContent = t(data.title_key);
-    ivModal.querySelector(".ivmodal__close").setAttribute("aria-label", t("ui.close"));
-    var body = ivModal.querySelector(".ivmodal__body");
-    body.innerHTML = "";
-    if (data.pairs && data.pairs.length) {
-      data.pairs.forEach(function (pair) { body.appendChild(buildIvSlider(pair)); });
-    } else {
-      var empty = document.createElement("div");
-      empty.className = "iv-empty";
-      var img = document.createElement("img");
-      img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
-      var msg = document.createElement("p");
-      msg.className = "iv-empty__msg";
-      msg.textContent = t("interv.empty");
-      empty.appendChild(img); empty.appendChild(msg);
-      body.appendChild(empty);
-    }
-  }
-
-  function buildIvModal() {
-    ivModal = document.createElement("div");
-    ivModal.className = "ivmodal";
-    ivModal.setAttribute("role", "dialog");
-    ivModal.setAttribute("aria-modal", "true");
-    ivModal.setAttribute("aria-labelledby", "ivmodal-title");
-    ivModal.hidden = true;
-    ivModal.innerHTML =
-      '<div class="ivmodal__backdrop" data-iv-close></div>' +
+  function buildSdModal() {
+    sdModal = document.createElement("div");
+    sdModal.className = "ivmodal";
+    sdModal.setAttribute("role", "dialog");
+    sdModal.setAttribute("aria-modal", "true");
+    sdModal.setAttribute("aria-labelledby", "sd-modal-title");
+    sdModal.hidden = true;
+    sdModal.innerHTML =
+      '<div class="ivmodal__backdrop" data-modal-close></div>' +
       '<div class="ivmodal__dialog">' +
-        '<button class="ivmodal__close" type="button" data-iv-close>&#215;</button>' +
-        '<h3 class="ivmodal__title" id="ivmodal-title"></h3>' +
+        '<button class="ivmodal__close" type="button" data-modal-close>&#215;</button>' +
+        '<h3 class="ivmodal__title" id="sd-modal-title"></h3>' +
         '<div class="ivmodal__body"></div>' +
       '</div>';
-    document.body.appendChild(ivModal);
-    ivModal.querySelectorAll("[data-iv-close]").forEach(function (el) { el.addEventListener("click", closeIvModal); });
-    ivModal.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { closeIvModal(); return; }
+    document.body.appendChild(sdModal);
+    sdModal.querySelectorAll("[data-modal-close]").forEach(function (el) { el.addEventListener("click", closeSdModal); });
+    sdModal.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeSdModal(); return; }
       if (e.key === "Tab") {
-        var f = ivModal.querySelectorAll("button, [tabindex='0']");
+        var f = sdModal.querySelectorAll("button, [tabindex='0']");
         var vis = Array.prototype.filter.call(f, function (b) { return b.offsetParent !== null; });
         if (!vis.length) return;
         var first = vis[0], last = vis[vis.length - 1];
@@ -221,33 +199,92 @@
     });
   }
 
-  function openIvModal(folderKey, trigger) {
-    if (!ivModal) buildIvModal();
-    if (!(window.INTERVENCIONES || {})[folderKey]) return;
-    ivCurrentFolder = folderKey;
-    ivLastFocus = trigger || document.activeElement;
-    renderIvModal(folderKey);
-    ivModal.hidden = false;
+  // Shared modal. `render(titleEl, bodyEl)` fills the content; it is retained so
+  // the modal can be re-rendered in place when the language changes.
+  function openSdModal(render, trigger) {
+    if (!sdModal) buildSdModal();
+    sdRender = render;
+    sdLastFocus = trigger || document.activeElement;
+    sdModal.querySelector(".ivmodal__close").setAttribute("aria-label", t("ui.close"));
+    render(sdModal.querySelector(".ivmodal__title"), sdModal.querySelector(".ivmodal__body"));
+    sdModal.hidden = false;
     document.body.classList.add("lb-open"); // lock background scroll
-    ivModal.querySelector(".ivmodal__close").focus();
+    sdModal.querySelector(".ivmodal__close").focus();
   }
-  function closeIvModal() {
-    if (!ivModal || ivModal.hidden) return;
-    ivModal.hidden = true;
-    ivCurrentFolder = null;
+  function closeSdModal() {
+    if (!sdModal || sdModal.hidden) return;
+    sdModal.hidden = true;
+    sdRender = null;
     document.body.classList.remove("lb-open");
-    if (ivLastFocus && ivLastFocus.focus) ivLastFocus.focus();
+    if (sdLastFocus && sdLastFocus.focus) sdLastFocus.focus();
   }
 
+  // Intervenciones: each folder opens the modal with a before/after slider per
+  // pair, or a tidy "coming soon" state while the pairs array is empty.
   function wireIntervenciones() {
     var cards = document.querySelectorAll(".folder[data-folder]");
     if (!cards.length) return;
     cards.forEach(function (card) {
-      card.addEventListener("click", function () { openIvModal(card.getAttribute("data-folder"), card); });
+      var key = card.getAttribute("data-folder");
+      card.addEventListener("click", function () {
+        openSdModal(function (titleEl, bodyEl) {
+          var data = (window.INTERVENCIONES || {})[key];
+          if (!data) return;
+          titleEl.textContent = t(data.title_key);
+          bodyEl.innerHTML = "";
+          if (data.pairs && data.pairs.length) {
+            data.pairs.forEach(function (pair) { bodyEl.appendChild(buildIvSlider(pair)); });
+          } else {
+            var empty = document.createElement("div");
+            empty.className = "iv-empty";
+            var img = document.createElement("img");
+            img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
+            var msg = document.createElement("p");
+            msg.className = "iv-empty__msg";
+            msg.textContent = t("interv.empty");
+            empty.appendChild(img); empty.appendChild(msg);
+            bodyEl.appendChild(empty);
+          }
+        }, card);
+      });
     });
-    // Keep an open modal in sync if the language is switched.
+  }
+
+  // Preventiva: each folder opens the modal with the area image + a short
+  // description (data-driven via window.PREVENTIVA).
+  function wirePreventiva() {
+    var cards = document.querySelectorAll(".folder[data-prev]");
+    if (!cards.length) return;
+    cards.forEach(function (card) {
+      var key = card.getAttribute("data-prev");
+      card.addEventListener("click", function () {
+        openSdModal(function (titleEl, bodyEl) {
+          var data = (window.PREVENTIVA || {})[key];
+          if (!data) return;
+          titleEl.textContent = t(data.title_key);
+          bodyEl.innerHTML = "";
+          var fig = document.createElement("figure");
+          fig.className = "prev-detail";
+          var img = document.createElement("img");
+          img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
+          img.setAttribute("loading", "lazy"); img.setAttribute("decoding", "async");
+          var p = document.createElement("p");
+          p.className = "prev-detail__text";
+          p.textContent = t(data.desc_key);
+          fig.appendChild(img); fig.appendChild(p);
+          bodyEl.appendChild(fig);
+        }, card);
+      });
+    });
+  }
+
+  // Re-render an open modal (title + body + close label) when the language changes.
+  function wireModalI18n() {
     dynamicUpdaters.push(function () {
-      if (ivModal && !ivModal.hidden && ivCurrentFolder) renderIvModal(ivCurrentFolder);
+      if (sdModal && !sdModal.hidden && sdRender) {
+        sdModal.querySelector(".ivmodal__close").setAttribute("aria-label", t("ui.close"));
+        sdRender(sdModal.querySelector(".ivmodal__title"), sdModal.querySelector(".ivmodal__body"));
+      }
     });
   }
 
@@ -323,6 +360,8 @@
   wireHeroRake();
   wireLangToggle();
   wireIntervenciones();
+  wirePreventiva();
+  wireModalI18n();
   wireContactForm();
   setLang(lang);   // first paint already translated (script runs at end of body)
   wireReveal();

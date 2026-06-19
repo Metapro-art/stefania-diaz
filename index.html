@@ -221,6 +221,9 @@
   .iv-empty{position:relative;aspect-ratio:16/9;border-radius:2px;overflow:hidden;display:grid;place-items:center;background:#1a1714}
   .iv-empty img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3}
   .iv-empty__msg{position:relative;z-index:1;font-family:var(--mono);font-size:clamp(.66rem,1.6vw,.78rem);letter-spacing:.16em;text-transform:uppercase;color:var(--bone);text-align:center;max-width:26ch;line-height:1.7;padding:1rem 1.2rem;background:rgba(10,11,12,.4)}
+  .prev-detail{margin:0}
+  .prev-detail img{width:100%;height:auto;max-height:42vh;object-fit:cover;display:block;border-radius:2px}
+  .prev-detail__text{font-family:var(--serif);font-size:1.02rem;line-height:1.6;color:#cfccc2;margin-top:1.3rem;max-width:60ch}
 
   /* CONTACTO — formulario */
   .contact__intro{display:grid;gap:1.6rem;align-content:start}
@@ -436,7 +439,7 @@
 <!-- METODOLOGÍA -->
 <section class="section section--dark" id="metodologia">
   <div class="method__head">
-    <p class="lede reveal" data-i18n="met.lede">07 — Metodología</p>
+    <p class="lede reveal" data-i18n="met.lede">05 — Metodología</p>
     <h2 class="h-sec reveal" data-i18n="met.h">Del examen a la conservación.</h2>
     <p class="method__intro reveal" data-i18n="met.intro">Toda intervención sigue una secuencia ordenada. Cada etapa documenta a la anterior y condiciona a la siguiente: el método es lo que separa la restauración de la improvisación.</p>
   </div>
@@ -477,6 +480,35 @@
       <img class="folder__img" src="assets/img/intervenciones/interv-escultura.jpg" width="213" height="271" loading="lazy" decoding="async" alt="">
       <span class="folder__cue" aria-hidden="true">&#8599;</span>
       <span class="folder__t" data-i18n="interv.t4">Escultura policromada</span>
+    </button>
+  </div>
+</section>
+
+<!-- CONSERVACIÓN PREVENTIVA Y GESTIÓN DE COLECCIONES — carpetas + modal de descripción -->
+<section class="section section--dark" id="preventiva">
+  <p class="lede reveal" data-i18n="prev.lede">07 — Conservación preventiva</p>
+  <h2 class="h-sec reveal" data-i18n="prev.heading">Conservación preventiva y gestión de colecciones</h2>
+  <p class="philo__body reveal" style="max-width:52ch;color:#cfccc2" data-i18n="prev.sub">Da clic para explorar cada área</p>
+  <div class="folders reveal">
+    <button class="folder" type="button" data-prev="catalogacion">
+      <img class="folder__img" src="assets/img/preventiva/prev-catalogacion.jpg" width="347" height="271" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="prev.t1">Catalogación y estudio</span>
+    </button>
+    <button class="folder" type="button" data-prev="exhibicion">
+      <img class="folder__img" src="assets/img/preventiva/prev-exhibicion.jpg" width="214" height="271" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="prev.t2">Apoyo a exhibición</span>
+    </button>
+    <button class="folder" type="button" data-prev="ambientales">
+      <img class="folder__img" src="assets/img/preventiva/prev-ambientales.jpg" width="188" height="271" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="prev.t3">Condiciones ambientales</span>
+    </button>
+    <button class="folder" type="button" data-prev="diagnostico">
+      <img class="folder__img" src="assets/img/preventiva/prev-diagnostico.jpg" width="216" height="273" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="prev.t4">Diagnóstico de conservación</span>
     </button>
   </div>
 </section>
@@ -563,6 +595,7 @@
 
 <script src="assets/js/i18n.js"></script>
 <script src="assets/data/intervenciones.js"></script>
+<script src="assets/data/preventiva.js"></script>
 <script src="assets/js/main.js"></script>
 <!-- hCaptcha loaded statically so the widget always renders (incl. mobile). recaptchacompat=off avoids the Web3Forms reCaptcha/Pro error. -->
 <script src="https://js.hcaptcha.com/1/api.js?recaptchacompat=off" async defer></script>

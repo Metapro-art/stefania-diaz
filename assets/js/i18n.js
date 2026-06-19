@@ -8,9 +8,8 @@
      <tag data-i18n-html="key">       -> innerHTML (only for keys with markup)
      <tag data-i18n-attr="attr:key">  -> sets attribute(s); comma-separated
 
-   Gallery item alts/captions live in assets/data/gallery.js, and before/after
-   titles/meta live in assets/data/before-after.js (per-entry, both languages),
-   because those modules are data-driven and rendered by main.js.
+   Data-driven sections (Intervenciones, Preventiva) keep their structure in
+   assets/data/*.js and reference these keys via title_key/desc_key.
 ============================================================================ */
 window.I18N = {
   es: {
@@ -80,8 +79,19 @@ window.I18N = {
     "interv.empty": "Documentación antes / después en preparación.",
     "iv.before": "Antes",
     "iv.after": "Después",
+    "prev.lede": "07 — Conservación preventiva",
+    "prev.heading": "Conservación preventiva y gestión de colecciones",
+    "prev.sub": "Da clic para explorar cada área",
+    "prev.t1": "Catalogación y estudio",
+    "prev.t2": "Apoyo a exhibición",
+    "prev.t3": "Condiciones ambientales",
+    "prev.t4": "Diagnóstico de conservación",
+    "prev.d1": "Registro y documentación técnica de cada obra: identificación de materiales, técnicas de manufactura y estado de conservación, como base para su gestión y cuidado.",
+    "prev.d2": "Acompañamiento técnico en el montaje y desmontaje de exposiciones, garantizando la manipulación, el soporte y la disposición seguros de cada pieza.",
+    "prev.d3": "Medición y evaluación de temperatura, humedad e iluminación en salas y depósitos, con recomendaciones para prevenir el deterioro de las colecciones.",
+    "prev.d4": "Examen del estado de cada obra mediante análisis técnico y registro de deterioros, orientado a definir prioridades y propuestas de conservación.",
 
-    "met.lede": "07 — Metodología",
+    "met.lede": "05 — Metodología",
     "met.h": "Del examen a la conservación.",
     "met.intro": "Toda intervención sigue una secuencia ordenada. Cada etapa documenta a la anterior y condiciona a la siguiente: el método es lo que separa la restauración de la improvisación.",
     "met.s1t": "Examen",
@@ -209,8 +219,19 @@ window.I18N = {
     "interv.empty": "Before / after documentation coming soon.",
     "iv.before": "Before",
     "iv.after": "After",
+    "prev.lede": "07 — Preventive conservation",
+    "prev.heading": "Preventive Conservation & Collections Management",
+    "prev.sub": "Click to explore each area",
+    "prev.t1": "Cataloging and study",
+    "prev.t2": "Exhibition support",
+    "prev.t3": "Environmental conditions",
+    "prev.t4": "Condition diagnosis",
+    "prev.d1": "Technical recording and documentation of each work: identification of materials, manufacturing techniques and condition, as a basis for its management and care.",
+    "prev.d2": "Technical assistance during exhibition installation and deinstallation, ensuring safe handling, support and display of each piece.",
+    "prev.d3": "Measurement and assessment of temperature, humidity and lighting in galleries and storage, with recommendations to prevent deterioration of collections.",
+    "prev.d4": "Examination of each work's condition through technical analysis and damage recording, to define priorities and conservation proposals.",
 
-    "met.lede": "07 — Methodology",
+    "met.lede": "05 — Methodology",
     "met.h": "From examination to conservation.",
     "met.intro": "Every treatment follows an ordered sequence. Each stage documents the last and shapes the next — method is what separates restoration from improvisation.",
     "met.s1t": "Examination",
