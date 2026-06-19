@@ -101,13 +101,10 @@
   @keyframes rake-in{from{transform:translateX(-115%)}to{transform:translateX(var(--sweep,-60%))}}
   .hero__vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 100% at 50% 40%, transparent 55%, rgba(10,11,12,.72) 100%)}
   .hero__inner{position:relative;z-index:3;max-width:64rem}
-  .hero__eyebrow{margin-bottom:1.6rem}
-  .hero h1{font-family:var(--display);font-weight:340;font-size:clamp(3.4rem,11vw,8.4rem);line-height:.94;letter-spacing:-.02em;
-    color:var(--bone);margin-bottom:1.7rem;font-variation-settings:"opsz" 144;text-wrap:balance}
-  .hero h1 .last{display:block;color:var(--putty)}
-  .hero__thesis{max-width:44rem;font-size:clamp(1.08rem,1.6vw,1.4rem);line-height:1.6;color:#cfccc2;font-weight:300}
-  .hero__cue{display:flex;align-items:center;gap:.8rem;margin-top:2.8rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-d)}
-  .hero__cue .bar{display:inline-block;width:48px;height:1px;background:var(--gilt);opacity:.7}
+  .hero h1{font-family:var(--display);font-weight:340;font-size:clamp(2.4rem,11vw,8rem);line-height:1;letter-spacing:-.02em;white-space:nowrap;
+    color:var(--bone);margin-bottom:1rem;font-variation-settings:"opsz" 144}
+  .hero__role{font-family:var(--mono);font-size:clamp(.7rem,1.3vw,.84rem);letter-spacing:.14em;text-transform:uppercase;color:var(--gilt);margin-bottom:1.7rem;line-height:1.6;max-width:46rem}
+  .hero__thesis{max-width:48rem;font-size:clamp(1.04rem,1.5vw,1.3rem);line-height:1.6;color:#cfccc2;font-weight:300}
 
   /* SECTION SCAFFOLD */
   .section{padding:var(--pad) var(--mx);position:relative}
@@ -350,10 +347,9 @@
   <div class="hero__rake" id="rake" aria-hidden="true"></div>
   <div class="hero__vignette" aria-hidden="true"></div>
   <div class="hero__inner">
-    <div class="hero__eyebrow eyebrow" data-i18n="hero.eyebrow">Conservación y restauración de bienes culturales · Bogotá</div>
-    <h1>Stefania<span class="last">Díaz</span></h1>
-    <p class="hero__thesis" data-i18n-html="hero.thesis">Conservo y restauro patrimonio cultural justo donde la obra entra en circulación —subastas, colecciones privadas e institucionales—. <span class="em">Uno el cuidado material de la pieza con la transparencia</span> que el mercado del arte necesita.</p>
-    <div class="hero__cue"><span class="bar"></span> <span data-i18n="hero.cue">Luz rasante · mueva el cursor sobre la superficie</span></div>
+    <h1>Stefania Díaz</h1>
+    <p class="hero__role" data-i18n="hero.role">Profesional en Conservación &amp; Restauración de Bienes Culturales</p>
+    <p class="hero__thesis" data-i18n="hero.thesis">Desde una visión dedicada a la protección del patrimonio artístico y cultural, este espacio nace para conservar, valorar y proyectar los bienes culturales como testimonios vivos de identidad, historia y legado; obras que resisten el paso del tiempo y continúan dialogando con el presente y el futuro.</p>
   </div>
 </header>
 
