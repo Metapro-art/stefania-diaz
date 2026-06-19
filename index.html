@@ -280,12 +280,12 @@
   @media(min-width:860px){
     .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
   }
-  /* Keep the inline desktop nav from crowding (and hide the role subtitle) in the band
-     just above the hamburger breakpoint, in either language */
-  @media(min-width:1025px) and (max-width:1300px){
-    .nav__right{gap:1rem}
-    .nav__links{gap:1.05rem}
-    .nav__links a{font-size:.66rem;letter-spacing:.12em}
+  /* Inline desktop nav: keep all 8 links + ES/EN toggle on a single line at every
+     desktop width (compact gap/font, hide the redundant role subtitle). */
+  @media(min-width:1025px){
+    .nav__right{gap:.85rem}
+    .nav__links{gap:.9rem;letter-spacing:.09em}
+    .nav__links a{font-size:.64rem;letter-spacing:.09em}
     .nav__role{display:none}
   }
   /* Hamburger menu until the horizontal nav genuinely fits (8 links + ES/EN toggle).
