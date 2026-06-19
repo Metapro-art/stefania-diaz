@@ -190,9 +190,9 @@
   /* PROYECTOS INSTITUCIONALES — foto + muro de logos */
   .proj__photo{margin:3rem 0 0;max-width:26rem;border-radius:2px;overflow:hidden;border:1px solid var(--line-l);box-shadow:0 30px 80px -45px rgba(0,0,0,.5)}
   .proj__photo img{width:100%;height:auto;display:block}
-  .logowall{list-style:none;margin:clamp(2.2rem,4vw,3.2rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.8rem,2vw,1.4rem)}
-  .logowall__cell{display:grid;place-items:center;aspect-ratio:3/2;background:#fff;border:1px solid var(--line-l);border-radius:4px;padding:clamp(1rem,3vw,1.8rem)}
-  .logowall__cell img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+  .logowall{list-style:none;margin:clamp(2.2rem,4vw,3.2rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(.7rem,2vw,1.4rem)}
+  .logowall__cell{display:grid;place-items:center;aspect-ratio:3/2;min-width:0;background:#fff;border:1px solid var(--line-l);border-radius:4px;padding:clamp(.9rem,3vw,1.8rem)}
+  .logowall__cell img{display:block;width:100%;height:100%;object-fit:contain}
 
   /* INTERVENCIONES — cuadrícula cuadrada + lightbox */
   .gallery{margin-top:3rem}
@@ -272,7 +272,7 @@
 
   @media(min-width:600px){
     .gallery__grid{grid-template-columns:repeat(3,1fr)}
-    .logowall{grid-template-columns:repeat(3,1fr)}
+    .logowall{grid-template-columns:repeat(3,minmax(0,1fr))}
   }
   @media(min-width:720px){
     .perfil__intro{grid-template-columns:.85fr 1.15fr}
@@ -284,7 +284,7 @@
   }
   @media(min-width:960px){
     .gallery__grid{grid-template-columns:repeat(4,1fr)}
-    .logowall{grid-template-columns:repeat(5,1fr)}
+    .logowall{grid-template-columns:repeat(5,minmax(0,1fr))}
   }
   @media(min-width:860px){
     .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
