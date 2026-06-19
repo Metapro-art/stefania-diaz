@@ -187,6 +187,13 @@
   .work__t{font-family:var(--display);font-size:1.3rem;font-weight:380;line-height:1.2}
   .work__d{font-size:.92rem;color:var(--muted-d);line-height:1.55}
 
+  /* PROYECTOS INSTITUCIONALES — foto + muro de logos */
+  .proj__photo{margin:3rem 0 0;max-width:26rem;border-radius:2px;overflow:hidden;border:1px solid var(--line-l);box-shadow:0 30px 80px -45px rgba(0,0,0,.5)}
+  .proj__photo img{width:100%;height:auto;display:block}
+  .logowall{list-style:none;margin:clamp(2.2rem,4vw,3.2rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.8rem,2vw,1.4rem)}
+  .logowall__cell{display:grid;place-items:center;aspect-ratio:3/2;background:#fff;border:1px solid var(--line-l);border-radius:4px;padding:clamp(1rem,3vw,1.8rem)}
+  .logowall__cell img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+
   /* INTERVENCIONES — cuadrícula cuadrada + lightbox */
   .gallery{margin-top:3rem}
   .gallery__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.6rem,1.6vw,1rem)}
@@ -265,6 +272,7 @@
 
   @media(min-width:600px){
     .gallery__grid{grid-template-columns:repeat(3,1fr)}
+    .logowall{grid-template-columns:repeat(3,1fr)}
   }
   @media(min-width:720px){
     .perfil__intro{grid-template-columns:.85fr 1.15fr}
@@ -276,6 +284,7 @@
   }
   @media(min-width:960px){
     .gallery__grid{grid-template-columns:repeat(4,1fr)}
+    .logowall{grid-template-columns:repeat(5,1fr)}
   }
   @media(min-width:860px){
     .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
@@ -326,8 +335,8 @@
       <a href="#especializacion" data-i18n="nav.expertise">Especialización</a>
       <a href="#enfoque" data-i18n="nav.market">Enfoque</a>
       <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
-      <a href="#intervenciones" data-i18n="nav.gallery">Intervenciones</a>
       <a href="#metodologia" data-i18n="nav.method">Metodología</a>
+      <a href="#intervenciones" data-i18n="nav.gallery">Intervenciones</a>
       <a href="#trayectoria" data-i18n="nav.background">Trayectoria</a>
       <a href="#contacto" data-i18n="nav.contact">Contacto</a>
     </div>
@@ -404,61 +413,20 @@
   </div>
 </section>
 
-<!-- PROYECTO DESTACADO -->
+<!-- PROYECTOS INSTITUCIONALES -->
 <section class="section section--light" id="proyectos">
-  <p class="lede reveal" data-i18n="feat.lede">04 — Proyecto destacado</p>
-  <div class="feature__top reveal">
-    <h2 class="h-sec" style="margin:0" data-i18n="feat.h">Escultura policromada · pieza colonial</h2>
-    <div class="feature__meta">
-      <div><span class="meta-k" data-i18n="feat.k1">Colección</span><span class="meta-v" data-i18n="feat.v1">Iglesia de San Francisco de Asís</span></div>
-      <div><span class="meta-k" data-i18n="feat.k2">Tipo</span><span class="meta-v" data-i18n="feat.v2">Pesebre · arte colonial</span></div>
-      <div><span class="meta-k" data-i18n="feat.k3">Intervención</span><span class="meta-v" data-i18n="feat.v3">2024</span></div>
-    </div>
-  </div>
-  <figure class="featured__media reveal">
-    <img src="assets/img/featured-sanfrancisco.jpg" width="632" height="800" loading="lazy" decoding="async" data-i18n-attr="alt:feat.imgAlt" alt="Detalle de la intervención sobre la escultura policromada.">
+  <p class="lede reveal" data-i18n="proj.lede">04 — Proyectos institucionales</p>
+  <h2 class="h-sec reveal" data-i18n="proj.h">Proyectos institucionales.</h2>
+  <figure class="proj__photo reveal">
+    <img src="assets/img/logos/foto-institucional.jpg" width="560" height="691" loading="lazy" decoding="async" alt="Stefania Díaz">
   </figure>
-  <div class="reveal">
-    <div id="baList"><!-- before/after sliders rendered by main.js (data-driven) --></div>
-    <p class="feature__caption" data-i18n="feat.demoNote">Módulo de demostración — el deslizador queda listo para recibir la documentación fotográfica real del antes y el después de la restauración.</p>
-  </div>
-  <p class="feature__narr reveal" data-i18n="feat.narr">Restauración de una pieza colonial perteneciente a la colección de pesebre de la Iglesia de San Francisco de Asís, en Bogotá. Espacio para la memoria del tratamiento: estado de conservación inicial, diagnóstico, limpieza, consolidación, reintegración cromática y criterios de intervención.</p>
-</section>
-
-<!-- TRABAJO INSTITUCIONAL -->
-<section class="section section--deep" id="mas-proyectos">
-  <p class="lede reveal" data-i18n="sel.lede">05 — Selección</p>
-  <h2 class="h-sec reveal" data-i18n="sel.h">Trabajo institucional.</h2>
-  <div class="works reveal">
-    <article class="work">
-      <div class="work__frame"><img src="assets/img/work-la-independencia.jpg" width="1280" height="854" loading="lazy" decoding="async" data-i18n-attr="alt:sel.w1alt" alt="Trabajo de conservación en taller."></div>
-      <span class="work__yr" data-i18n="sel.w1yr">2023 — actualidad</span>
-      <h3 class="work__t" data-i18n="sel.w1t">La Independencia · Casa de Subastas</h3>
-      <p class="work__d" data-i18n="sel.w1d">Dirección del Departamento de Conservación y Restauración y gestión de los bienes culturales que ingresan al mercado de subastas.</p>
-    </article>
-    <article class="work">
-      <div class="work__frame"><img src="assets/img/work-av-villas.jpg" width="1280" height="1600" loading="lazy" decoding="async" data-i18n-attr="alt:sel.w2alt" alt="Intervención sobre obra pictórica."></div>
-      <span class="work__yr" data-i18n="sel.w2yr">2024</span>
-      <h3 class="work__t" data-i18n="sel.w2t">Banco AV Villas</h3>
-      <p class="work__d" data-i18n="sel.w2d">Diagnóstico y restauración de obra pictórica perteneciente a la colección del banco.</p>
-    </article>
-    <article class="work">
-      <div class="work__frame"><img src="assets/img/work-banco-bogota.jpg" width="1334" height="1600" loading="lazy" decoding="async" data-i18n-attr="alt:sel.w3alt" alt="Conservación preventiva en sala de exhibición."></div>
-      <span class="work__yr" data-i18n="sel.w3yr">2025</span>
-      <h3 class="work__t" data-i18n="sel.w3t">Banco de Bogotá</h3>
-      <p class="work__d" data-i18n="sel.w3d">Análisis de condiciones ambientales y consultoría en conservación preventiva para la colección privada.</p>
-    </article>
-  </div>
-</section>
-
-<!-- INTERVENCIONES — galería -->
-<section class="section section--light" id="intervenciones">
-  <p class="lede reveal" data-i18n="gal.lede">06 — Intervenciones</p>
-  <h2 class="h-sec reveal" data-i18n="gal.h">Trabajo en obra.</h2>
-  <p class="philo__body reveal" style="max-width:52ch;color:#33373b" data-i18n="gal.sub">Una selección de procesos de conservación y restauración.</p>
-  <div class="gallery reveal">
-    <div class="gallery__grid" id="galleryGrid"><!-- square thumbnails rendered by main.js; click opens lightbox --></div>
-  </div>
+  <ul class="logowall reveal" data-i18n-attr="aria-label:proj.logosAria" aria-label="Instituciones">
+    <li class="logowall__cell"><img src="assets/img/logos/logo-mambo.png" width="162" height="42" loading="lazy" decoding="async" alt="MAMBO · Museo de Arte Moderno de Bogotá"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-san-francisco.png" width="140" height="140" loading="lazy" decoding="async" alt="Templo de San Francisco · Comunidad Franciscana"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-externado.png" width="228" height="132" loading="lazy" decoding="async" alt="Universidad Externado de Colombia"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-archivo-general-nacion.png" width="318" height="159" loading="lazy" decoding="async" alt="Archivo General de la Nación"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-uptc.svg" width="214" height="100" loading="lazy" decoding="async" alt="Universidad Pedagógica y Tecnológica de Colombia"></li>
+  </ul>
 </section>
 
 <!-- METODOLOGÍA -->
@@ -478,6 +446,16 @@
   <figure class="method__media reveal">
     <img src="assets/img/tools-flatlay.jpg" width="1800" height="1350" loading="lazy" decoding="async" data-i18n-attr="alt:met.toolsAlt" alt="Herramientas de conservación y restauración dispuestas sobre la mesa de trabajo.">
   </figure>
+</section>
+
+<!-- INTERVENCIONES — galería -->
+<section class="section section--deep" id="intervenciones">
+  <p class="lede reveal" data-i18n="gal.lede">06 — Intervenciones</p>
+  <h2 class="h-sec reveal" data-i18n="gal.h">Trabajo en obra.</h2>
+  <p class="philo__body reveal" style="max-width:52ch;color:#cfccc2" data-i18n="gal.sub">Una selección de procesos de conservación y restauración.</p>
+  <div class="gallery reveal">
+    <div class="gallery__grid" id="galleryGrid"><!-- square thumbnails rendered by main.js; click opens lightbox --></div>
+  </div>
 </section>
 
 <!-- TRAYECTORIA -->
