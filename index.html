@@ -194,29 +194,33 @@
   .logowall__cell{display:grid;place-items:center;aspect-ratio:3/2;min-width:0;background:#fff;border:1px solid var(--line-l);border-radius:4px;padding:clamp(.9rem,3vw,1.8rem)}
   .logowall__cell img{display:block;width:100%;height:100%;object-fit:contain}
 
-  /* INTERVENCIONES — cuadrícula cuadrada + lightbox */
-  .gallery{margin-top:3rem}
-  .gallery__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.6rem,1.6vw,1rem)}
-  .gtile{position:relative;display:block;width:100%;aspect-ratio:1/1;padding:0;margin:0;border:1px solid var(--line-l);background:var(--shadow-2);border-radius:2px;overflow:hidden;cursor:pointer}
-  .gtile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
-  .gtile::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 100%, rgba(182,144,79,.18), transparent 62%);opacity:0;transition:opacity .35s;pointer-events:none}
-  .gtile:hover img{transform:scale(1.05)}
-  .gtile:hover::after{opacity:1}
-  .gtile:focus-visible{outline:none;box-shadow:0 0 0 2px var(--putty),0 0 0 4px var(--lapis)}
-  /* LIGHTBOX */
+  /* INTERVENCIONES — carpetas por tipo de obra */
+  .folders{list-style:none;margin:3rem 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:clamp(.7rem,2vw,1.2rem)}
+  .folder{position:relative;display:block;width:100%;min-width:0;aspect-ratio:4/5;padding:0;margin:0;border:1px solid var(--line-d);border-radius:2px;overflow:hidden;cursor:pointer;background:var(--shadow-2);color:var(--bone);font:inherit;text-align:left}
+  .folder__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
+  .folder::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,9,10,.85),rgba(8,9,10,.12) 55%,rgba(8,9,10,.25));pointer-events:none}
+  .folder:hover .folder__img{transform:scale(1.05)}
+  .folder__t{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:1.1rem 1rem;font-family:var(--display);font-size:clamp(1.05rem,2.5vw,1.3rem);font-weight:380;line-height:1.2}
+  .folder__cue{position:absolute;top:.7rem;right:.85rem;z-index:1;font-family:var(--mono);font-size:1.05rem;color:var(--gilt);opacity:.85;transition:transform .35s,opacity .35s}
+  .folder:hover .folder__cue{transform:translate(2px,-2px);opacity:1}
+  .folder:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
+
+  /* Modal de intervenciones (reusa el componente .ba antes/después) */
   body.lb-open{overflow:hidden}
-  .lightbox{position:fixed;inset:0;z-index:100;display:grid;place-items:center}
-  .lightbox[hidden]{display:none}
-  .lightbox__backdrop{position:absolute;inset:0;background:rgba(15,17,19,.93);backdrop-filter:blur(4px)}
-  .lightbox__dialog{position:relative;z-index:1;margin:0;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:90vw}
-  .lightbox__img{max-width:90vw;max-height:85vh;width:auto;height:auto;object-fit:contain;border-radius:2px;box-shadow:0 40px 120px -40px rgba(0,0,0,.85)}
-  .lightbox__cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--putty);text-align:center;max-width:60ch;line-height:1.5}
-  .lightbox__btn{position:fixed;z-index:2;color:var(--gilt);background:rgba(15,17,19,.6);border:1px solid var(--gilt);cursor:pointer;border-radius:50%;display:grid;place-items:center;line-height:1;backdrop-filter:blur(3px);transition:background .25s}
-  .lightbox__btn:hover{background:rgba(15,17,19,.92)}
-  .lightbox__btn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
-  .lightbox__close{top:1rem;right:1rem;width:42px;height:42px;font-size:1.5rem}
-  .lightbox__nav{top:50%;transform:translateY(-50%);width:46px;height:46px;font-size:1.6rem}
-  .lightbox__prev{left:1rem} .lightbox__next{right:1rem}
+  .ivmodal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:clamp(1rem,4vw,2.5rem)}
+  .ivmodal[hidden]{display:none}
+  .ivmodal__backdrop{position:absolute;inset:0;background:rgba(8,9,10,.93);backdrop-filter:blur(4px)}
+  .ivmodal__dialog{position:relative;z-index:1;width:min(100%,860px);max-height:90vh;overflow:auto;background:var(--shadow-2);border:1px solid var(--line-d);border-radius:3px;padding:clamp(1.4rem,4vw,2.6rem);box-shadow:0 40px 120px -40px rgba(0,0,0,.85)}
+  .ivmodal__close{position:absolute;top:.7rem;right:.7rem;z-index:2;width:40px;height:40px;border-radius:50%;background:rgba(15,17,19,.6);border:1px solid var(--gilt);color:var(--gilt);font-size:1.4rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .25s}
+  .ivmodal__close:hover{background:rgba(15,17,19,.92)}
+  .ivmodal__close:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-2),0 0 0 4px var(--lapis)}
+  .ivmodal__title{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,4vw,2.2rem);color:var(--bone);margin:0 2.6rem 1.4rem 0;line-height:1.15}
+  .ivmodal__body{display:grid;gap:1.6rem}
+  .iv-slider{margin:0}
+  .iv-slider__cap{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted-d);margin-top:.8rem;line-height:1.5}
+  .iv-empty{position:relative;aspect-ratio:16/9;border-radius:2px;overflow:hidden;display:grid;place-items:center;background:#1a1714}
+  .iv-empty img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3}
+  .iv-empty__msg{position:relative;z-index:1;font-family:var(--mono);font-size:clamp(.66rem,1.6vw,.78rem);letter-spacing:.16em;text-transform:uppercase;color:var(--bone);text-align:center;max-width:26ch;line-height:1.7;padding:1rem 1.2rem;background:rgba(10,11,12,.4)}
 
   /* CONTACTO — formulario */
   .contact__intro{display:grid;gap:1.6rem;align-content:start}
@@ -271,7 +275,7 @@
   .reveal.in{opacity:1;transform:none}
 
   @media(min-width:600px){
-    .gallery__grid{grid-template-columns:repeat(3,1fr)}
+    .folders{grid-template-columns:repeat(2,minmax(0,1fr))}
     .logowall{grid-template-columns:repeat(3,minmax(0,1fr))}
   }
   @media(min-width:720px){
@@ -283,7 +287,7 @@
     .contact{grid-template-columns:1fr 1fr}
   }
   @media(min-width:960px){
-    .gallery__grid{grid-template-columns:repeat(4,1fr)}
+    .folders{grid-template-columns:repeat(4,minmax(0,1fr))}
     .logowall{grid-template-columns:repeat(5,minmax(0,1fr))}
   }
   @media(min-width:860px){
@@ -448,13 +452,32 @@
   </figure>
 </section>
 
-<!-- INTERVENCIONES — galería -->
+<!-- INTERVENCIONES — carpetas por tipo de obra -->
 <section class="section section--deep" id="intervenciones">
   <p class="lede reveal" data-i18n="gal.lede">06 — Intervenciones</p>
-  <h2 class="h-sec reveal" data-i18n="gal.h">Trabajo en obra.</h2>
-  <p class="philo__body reveal" style="max-width:52ch;color:#cfccc2" data-i18n="gal.sub">Una selección de procesos de conservación y restauración.</p>
-  <div class="gallery reveal">
-    <div class="gallery__grid" id="galleryGrid"><!-- square thumbnails rendered by main.js; click opens lightbox --></div>
+  <h2 class="h-sec reveal" data-i18n="interv.heading">Restauración de obras</h2>
+  <p class="philo__body reveal" style="max-width:52ch;color:#cfccc2" data-i18n="interv.sub">Da clic para explorar los proyectos realizados</p>
+  <div class="folders reveal">
+    <button class="folder" type="button" data-folder="madera">
+      <img class="folder__img" src="assets/img/intervenciones/interv-madera.jpg" width="347" height="272" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="interv.t1">Pintura sobre madera</span>
+    </button>
+    <button class="folder" type="button" data-folder="grafica">
+      <img class="folder__img" src="assets/img/intervenciones/interv-grafica.jpg" width="214" height="271" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="interv.t2">Obra gráfica</span>
+    </button>
+    <button class="folder" type="button" data-folder="lienzo">
+      <img class="folder__img" src="assets/img/intervenciones/interv-lienzo.jpg" width="188" height="271" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="interv.t3">Pintura sobre lienzo</span>
+    </button>
+    <button class="folder" type="button" data-folder="escultura">
+      <img class="folder__img" src="assets/img/intervenciones/interv-escultura.jpg" width="213" height="271" loading="lazy" decoding="async" alt="">
+      <span class="folder__cue" aria-hidden="true">&#8599;</span>
+      <span class="folder__t" data-i18n="interv.t4">Escultura policromada</span>
+    </button>
   </div>
 </section>
 
@@ -539,8 +562,7 @@
 </footer>
 
 <script src="assets/js/i18n.js"></script>
-<script src="assets/data/before-after.js"></script>
-<script src="assets/data/gallery.js"></script>
+<script src="assets/data/intervenciones.js"></script>
 <script src="assets/js/main.js"></script>
 <!-- hCaptcha loaded statically so the widget always renders (incl. mobile). recaptchacompat=off avoids the Web3Forms reCaptcha/Pro error. -->
 <script src="https://js.hcaptcha.com/1/api.js?recaptchacompat=off" async defer></script>

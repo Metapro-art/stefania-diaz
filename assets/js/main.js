@@ -2,15 +2,10 @@
    main.js — Stefania Díaz portfolio
    Plain JS, no dependencies. Loaded (with i18n.js + data files) at the end of
    <body> so the DOM exists and the first paint is already translated.
-   Depends on globals: window.I18N, window.BEFORE_AFTER, window.GALLERY
+   Depends on globals: window.I18N, window.INTERVENCIONES
 ============================================================================ */
 (function () {
   "use strict";
-
-  /* --- Config -------------------------------------------------------------
-     Show the labeled "Ejemplo" before/after demo to visitors. Set to false to
-     hide demo entries until real pairs exist (see assets/data/before-after.js). */
-  var SHOW_DEMO = true;
 
   var STORAGE_KEY = "sd-lang";
   var DEFAULT_LANG = "es";
@@ -113,235 +108,146 @@
     }
   }
 
-  /* --- Before / after sliders (data-driven) ------------------------------- */
-  function clampPct(p) { return Math.max(0, Math.min(100, p)); }
+  /* --- Interventions: folder cards -> modal with before/after slider ------
+     The slider reuses the .ba component. To add a real before/after pair: drop
+     the two images in assets/img/intervenciones/<tipo>/ and push an entry onto
+     INTERVENCIONES[<tipo>].pairs in assets/data/intervenciones.js, e.g.:
+       { before: 'assets/img/intervenciones/madera/x-antes.jpg',
+         after:  'assets/img/intervenciones/madera/x-despues.jpg',
+         caption: 'Tratamiento de ...' }
+     With pairs present the modal renders one slider per pair; empty -> a tidy
+     "coming soon" state. */
+  var ivModal = null, ivLastFocus = null, ivCurrentFolder = null;
 
-  function buildSlider(entry) {
-    var module = document.createElement("div");
-    module.className = "ba-module";
-
-    var head = document.createElement("div");
-    head.className = "ba-module__head";
-    if (entry.demo) {
-      var tag = document.createElement("span");
-      tag.className = "ba-module__tag";
-      head.appendChild(tag);
-    }
-    var title = document.createElement("span");
-    title.className = "ba-module__title";
-    var meta = document.createElement("span");
-    meta.className = "ba-module__meta";
-    head.appendChild(title);
-    head.appendChild(meta);
-    module.appendChild(head);
-
+  function buildIvSlider(pair) {
+    var fig = document.createElement("figure");
+    fig.className = "iv-slider";
     var ba = document.createElement("div");
-    ba.className = "ba" + (entry.demo ? " ba--demo" : "");
+    ba.className = "ba";
     ba.setAttribute("role", "group");
-
-    if (entry.demo) {
-      // Demo surfaces are pure CSS gradients (see .ba--demo). The previous SVG
-      // raking-light filter (feTurbulence) was removed for performance.
-      ba.innerHTML =
-        '<div class="ba__layer ba__before"></div>' +
-        '<div class="ba__layer ba__after"></div>';
-    } else {
-      ba.innerHTML =
-        '<div class="ba__layer ba__before"><img src="' + entry.before + '" alt="" loading="lazy" decoding="async"></div>' +
-        '<div class="ba__layer ba__after"><img src="' + entry.after + '" alt="" loading="lazy" decoding="async"></div>';
-    }
-    var tagAfter = document.createElement("span");
-    tagAfter.className = "ba__tag ba__tag--after";
-    var tagBefore = document.createElement("span");
-    tagBefore.className = "ba__tag ba__tag--before";
-    var handle = document.createElement("div");
-    handle.className = "ba__handle";
-    handle.setAttribute("role", "slider");
-    handle.setAttribute("tabindex", "0");
-    handle.setAttribute("aria-valuemin", "0");
-    handle.setAttribute("aria-valuemax", "100");
-    handle.setAttribute("aria-valuenow", "50");
-    handle.innerHTML = '<span class="ba__knob"></span>';
-    ba.appendChild(tagAfter);
-    ba.appendChild(tagBefore);
-    ba.appendChild(handle);
-    module.appendChild(ba);
-
+    ba.innerHTML =
+      '<div class="ba__layer ba__before"><img src="' + pair.before + '" alt="" loading="lazy" decoding="async"></div>' +
+      '<div class="ba__layer ba__after"><img src="' + pair.after + '" alt="" loading="lazy" decoding="async"></div>' +
+      '<span class="ba__tag ba__tag--after"></span><span class="ba__tag ba__tag--before"></span>' +
+      '<div class="ba__handle" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span class="ba__knob"></span></div>';
     var afterLayer = ba.querySelector(".ba__after");
-    var beforeImg = ba.querySelector(".ba__before img");
-    var afterImg = ba.querySelector(".ba__after img");
-
+    var handle = ba.querySelector(".ba__handle");
+    var before = t("iv.before"), after = t("iv.after");
+    ba.querySelector(".ba__tag--after").textContent = after;
+    ba.querySelector(".ba__tag--before").textContent = before;
+    ba.setAttribute("aria-label", before + " / " + after);
+    handle.setAttribute("aria-label", before + " / " + after);
+    ba.querySelector(".ba__before img").alt = (pair.caption ? pair.caption + " — " : "") + before;
+    ba.querySelector(".ba__after img").alt = (pair.caption ? pair.caption + " — " : "") + after;
     function setPos(p) {
-      p = clampPct(p);
+      p = Math.max(0, Math.min(100, p));
       afterLayer.style.setProperty("--pos", p + "%");
       handle.style.left = p + "%";
       handle.setAttribute("aria-valuenow", String(Math.round(p)));
-      handle.setAttribute("aria-valuetext", Math.round(p) + "% — " + (dict(lang)["ba.after"] || ""));
+      handle.setAttribute("aria-valuetext", Math.round(p) + "% — " + after);
     }
-    var dragging = false;
-    function fromEvent(e) {
-      var r = ba.getBoundingClientRect();
-      setPos(((e.clientX - r.left) / r.width) * 100);
-    }
-    ba.addEventListener("pointerdown", function (e) {
-      dragging = true;
-      try { ba.setPointerCapture(e.pointerId); } catch (err) {}
-      fromEvent(e);
-    });
-    ba.addEventListener("pointermove", function (e) { if (dragging) fromEvent(e); });
-    ba.addEventListener("pointerup", function () { dragging = false; });
-    ba.addEventListener("pointercancel", function () { dragging = false; });
+    var drag = false;
+    function fromEvent(e) { var r = ba.getBoundingClientRect(); setPos(((e.clientX - r.left) / r.width) * 100); }
+    ba.addEventListener("pointerdown", function (e) { drag = true; try { ba.setPointerCapture(e.pointerId); } catch (err) {} fromEvent(e); });
+    ba.addEventListener("pointermove", function (e) { if (drag) fromEvent(e); });
+    ba.addEventListener("pointerup", function () { drag = false; });
+    ba.addEventListener("pointercancel", function () { drag = false; });
     handle.addEventListener("keydown", function (e) {
-      var cur = parseFloat(handle.getAttribute("aria-valuenow")) || 50;
-      var step = e.shiftKey ? 10 : 4;
-      if (e.key === "ArrowLeft" || e.key === "ArrowDown") { setPos(cur - step); e.preventDefault(); }
-      else if (e.key === "ArrowRight" || e.key === "ArrowUp") { setPos(cur + step); e.preventDefault(); }
+      var cur = parseFloat(handle.getAttribute("aria-valuenow")) || 50, st = e.shiftKey ? 10 : 4;
+      if (e.key === "ArrowLeft" || e.key === "ArrowDown") { setPos(cur - st); e.preventDefault(); }
+      else if (e.key === "ArrowRight" || e.key === "ArrowUp") { setPos(cur + st); e.preventDefault(); }
       else if (e.key === "Home") { setPos(0); e.preventDefault(); }
       else if (e.key === "End") { setPos(100); e.preventDefault(); }
     });
     setPos(50);
-
-    // Re-translation for this module's labels.
-    function translate(l) {
-      var d = dict(l);
-      var tag = head.querySelector(".ba-module__tag");
-      if (tag) tag.textContent = d["ba.demo"] || "";
-      title.textContent = entry["title_" + l] || "";
-      meta.textContent = entry["meta_" + l] || "";
-      ba.setAttribute("aria-label", d["ba.aria"] || "");
-      handle.setAttribute("aria-label", d["ba.aria"] || "");   // name the slider itself
-      tagAfter.textContent = d["ba.after"] || "";
-      tagBefore.textContent = d["ba.before"] || "";
-      var titleTxt = entry["title_" + l] || "";
-      if (beforeImg) beforeImg.setAttribute("alt", titleTxt + " — " + (d["ba.before"] || ""));
-      if (afterImg) afterImg.setAttribute("alt", titleTxt + " — " + (d["ba.after"] || ""));
-      var nowP = parseFloat(handle.getAttribute("aria-valuenow")) || 50;
-      handle.setAttribute("aria-valuetext", Math.round(nowP) + "% — " + (d["ba.after"] || ""));
+    fig.appendChild(ba);
+    if (pair.caption) {
+      var cap = document.createElement("figcaption");
+      cap.className = "iv-slider__cap";
+      cap.textContent = pair.caption;
+      fig.appendChild(cap);
     }
-    dynamicUpdaters.push(translate);
-    translate(lang);
-
-    return module;
+    return fig;
   }
 
-  function renderSliders() {
-    var list = document.getElementById("baList");
-    if (!list || !window.BEFORE_AFTER) return;
-    list.innerHTML = "";
-    var shown = window.BEFORE_AFTER.filter(function (e) { return SHOW_DEMO || !e.demo; });
-    shown.forEach(function (entry) { list.appendChild(buildSlider(entry)); });
-  }
-
-  /* --- Interventions gallery (square grid + accessible lightbox) ---------- */
-  var lightbox = null;
-  var lbState = { items: [], index: 0, lastFocus: null };
-
-  function buildLightbox() {
-    lightbox = document.createElement("div");
-    lightbox.className = "lightbox";
-    lightbox.setAttribute("role", "dialog");
-    lightbox.setAttribute("aria-modal", "true");
-    lightbox.setAttribute("aria-labelledby", "sd-lightbox-cap"); // named by the per-image caption
-    lightbox.hidden = true;
-    lightbox.innerHTML =
-      '<div class="lightbox__backdrop" data-lb-close></div>' +
-      '<button class="lightbox__btn lightbox__close" type="button" data-lb-close>&#215;</button>' +
-      '<button class="lightbox__btn lightbox__nav lightbox__prev" type="button" data-lb-prev>&#8249;</button>' +
-      '<button class="lightbox__btn lightbox__nav lightbox__next" type="button" data-lb-next>&#8250;</button>' +
-      '<figure class="lightbox__dialog">' +
-        '<img class="lightbox__img" alt="">' +
-        '<figcaption class="lightbox__cap" id="sd-lightbox-cap"></figcaption>' +
-      '</figure>';
-    document.body.appendChild(lightbox);
-    lightbox.querySelectorAll("[data-lb-close]").forEach(function (el) { el.addEventListener("click", closeLightbox); });
-    lightbox.querySelector("[data-lb-prev]").addEventListener("click", function () { step(-1); });
-    lightbox.querySelector("[data-lb-next]").addEventListener("click", function () { step(1); });
-    lightbox.addEventListener("keydown", onLightboxKey);
-  }
-
-  function lbApplyLabels(l) {
-    if (!lightbox) return;
-    var d = dict(l);
-    lightbox.querySelector(".lightbox__close").setAttribute("aria-label", d["ui.close"] || "Close");
-    lightbox.querySelector(".lightbox__prev").setAttribute("aria-label", d["ui.prev"] || "Previous");
-    lightbox.querySelector(".lightbox__next").setAttribute("aria-label", d["ui.next"] || "Next");
-    if (!lightbox.hidden) renderLightbox();
-  }
-
-  function renderLightbox() {
-    var item = lbState.items[lbState.index];
-    if (!item) return;
-    var img = lightbox.querySelector(".lightbox__img");
-    img.src = item.src;                          // full-res in the lightbox (contain, no crop)
-    img.setAttribute("alt", item["alt_" + lang] || "");
-    lightbox.querySelector(".lightbox__cap").textContent = item["caption_" + lang] || "";
-    var many = lbState.items.length > 1;
-    lightbox.querySelector(".lightbox__prev").style.display = many ? "" : "none";
-    lightbox.querySelector(".lightbox__next").style.display = many ? "" : "none";
-  }
-
-  function openLightbox(index, trigger) {
-    if (!lightbox) buildLightbox();
-    lbApplyLabels(lang);
-    lbState.index = index;
-    lbState.lastFocus = trigger || document.activeElement;
-    renderLightbox();
-    lightbox.hidden = false;
-    document.body.classList.add("lb-open");
-    lightbox.querySelector(".lightbox__close").focus();
-  }
-  function closeLightbox() {
-    if (!lightbox || lightbox.hidden) return;
-    lightbox.hidden = true;
-    document.body.classList.remove("lb-open");
-    if (lbState.lastFocus && lbState.lastFocus.focus) lbState.lastFocus.focus();
-  }
-  function step(dir) {
-    var n = lbState.items.length;
-    if (!n) return;
-    lbState.index = (lbState.index + dir + n) % n;
-    renderLightbox();
-  }
-  function onLightboxKey(e) {
-    if (e.key === "Escape") { closeLightbox(); }
-    else if (e.key === "ArrowLeft") { step(-1); }
-    else if (e.key === "ArrowRight") { step(1); }
-    else if (e.key === "Tab") {
-      var focusables = lightbox.querySelectorAll("button:not([style*='display: none'])");
-      var visible = Array.prototype.filter.call(focusables, function (b) { return b.offsetParent !== null; });
-      if (!visible.length) return;
-      var first = visible[0], last = visible[visible.length - 1];
-      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
-    }
-  }
-
-  function renderGallery() {
-    var grid = document.getElementById("galleryGrid");
-    if (!grid || !window.GALLERY) return;
-    lbState.items = window.GALLERY;
-    grid.innerHTML = "";
-    window.GALLERY.forEach(function (item, i) {
-      var tile = document.createElement("button");
-      tile.type = "button";
-      tile.className = "gtile";
+  function renderIvModal(folderKey) {
+    var data = (window.INTERVENCIONES || {})[folderKey];
+    if (!data) return;
+    ivModal.querySelector(".ivmodal__title").textContent = t(data.title_key);
+    ivModal.querySelector(".ivmodal__close").setAttribute("aria-label", t("ui.close"));
+    var body = ivModal.querySelector(".ivmodal__body");
+    body.innerHTML = "";
+    if (data.pairs && data.pairs.length) {
+      data.pairs.forEach(function (pair) { body.appendChild(buildIvSlider(pair)); });
+    } else {
+      var empty = document.createElement("div");
+      empty.className = "iv-empty";
       var img = document.createElement("img");
-      img.src = item.thumb || item.src;          // square thumb in the grid (cover)
-      img.setAttribute("loading", "lazy");
-      img.setAttribute("decoding", "async");
-      img.setAttribute("width", item.w);
-      img.setAttribute("height", item.h);
-      img.setAttribute("alt", item["alt_" + lang] || "");
-      tile.appendChild(img);
-      tile.addEventListener("click", function () { openLightbox(i, tile); });
-      grid.appendChild(tile);
+      img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
+      var msg = document.createElement("p");
+      msg.className = "iv-empty__msg";
+      msg.textContent = t("interv.empty");
+      empty.appendChild(img); empty.appendChild(msg);
+      body.appendChild(empty);
+    }
+  }
+
+  function buildIvModal() {
+    ivModal = document.createElement("div");
+    ivModal.className = "ivmodal";
+    ivModal.setAttribute("role", "dialog");
+    ivModal.setAttribute("aria-modal", "true");
+    ivModal.setAttribute("aria-labelledby", "ivmodal-title");
+    ivModal.hidden = true;
+    ivModal.innerHTML =
+      '<div class="ivmodal__backdrop" data-iv-close></div>' +
+      '<div class="ivmodal__dialog">' +
+        '<button class="ivmodal__close" type="button" data-iv-close>&#215;</button>' +
+        '<h3 class="ivmodal__title" id="ivmodal-title"></h3>' +
+        '<div class="ivmodal__body"></div>' +
+      '</div>';
+    document.body.appendChild(ivModal);
+    ivModal.querySelectorAll("[data-iv-close]").forEach(function (el) { el.addEventListener("click", closeIvModal); });
+    ivModal.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeIvModal(); return; }
+      if (e.key === "Tab") {
+        var f = ivModal.querySelectorAll("button, [tabindex='0']");
+        var vis = Array.prototype.filter.call(f, function (b) { return b.offsetParent !== null; });
+        if (!vis.length) return;
+        var first = vis[0], last = vis[vis.length - 1];
+        if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+        else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+      }
     });
-    dynamicUpdaters.push(function (l) {
-      var imgs = grid.querySelectorAll(".gtile img");
-      window.GALLERY.forEach(function (item, i) {
-        if (imgs[i]) imgs[i].setAttribute("alt", item["alt_" + l] || "");
-      });
-      lbApplyLabels(l);
+  }
+
+  function openIvModal(folderKey, trigger) {
+    if (!ivModal) buildIvModal();
+    if (!(window.INTERVENCIONES || {})[folderKey]) return;
+    ivCurrentFolder = folderKey;
+    ivLastFocus = trigger || document.activeElement;
+    renderIvModal(folderKey);
+    ivModal.hidden = false;
+    document.body.classList.add("lb-open"); // lock background scroll
+    ivModal.querySelector(".ivmodal__close").focus();
+  }
+  function closeIvModal() {
+    if (!ivModal || ivModal.hidden) return;
+    ivModal.hidden = true;
+    ivCurrentFolder = null;
+    document.body.classList.remove("lb-open");
+    if (ivLastFocus && ivLastFocus.focus) ivLastFocus.focus();
+  }
+
+  function wireIntervenciones() {
+    var cards = document.querySelectorAll(".folder[data-folder]");
+    if (!cards.length) return;
+    cards.forEach(function (card) {
+      card.addEventListener("click", function () { openIvModal(card.getAttribute("data-folder"), card); });
+    });
+    // Keep an open modal in sync if the language is switched.
+    dynamicUpdaters.push(function () {
+      if (ivModal && !ivModal.hidden && ivCurrentFolder) renderIvModal(ivCurrentFolder);
     });
   }
 
@@ -416,8 +322,7 @@
   wireNav();
   wireHeroRake();
   wireLangToggle();
-  renderSliders();
-  renderGallery();
+  wireIntervenciones();
   wireContactForm();
   setLang(lang);   // first paint already translated (script runs at end of body)
   wireReveal();
