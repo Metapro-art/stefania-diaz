@@ -202,11 +202,13 @@
   .folders{list-style:none;margin:2.5rem 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:clamp(.7rem,2vw,1.2rem)}
   .folder{position:relative;display:block;width:100%;min-width:0;aspect-ratio:4/5;padding:0;margin:0;border:1px solid var(--line-d);border-radius:2px;overflow:hidden;cursor:pointer;background:var(--shadow-2);color:var(--bone);font:inherit;text-align:left}
   .folder__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
-  .folder__icon{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .55s ease}
+  .folder__icon{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .55s ease,transform .55s ease}
   .folder__icon--rest{opacity:1}
   .folder__icon--hover{opacity:0}
   .folder:hover .folder__icon--rest,.folder:focus-visible .folder__icon--rest{opacity:0}
   .folder:hover .folder__icon--hover,.folder:focus-visible .folder__icon--hover{opacity:1}
+  /* Zoom sutil en hover, aplicado a AMBAS capas (sepia+color) para que no se desincronicen */
+  .folder:hover .folder__icon,.folder:focus-visible .folder__icon{transform:scale(1.06)}
   .folder::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,9,10,.88),rgba(8,9,10,.08) 55%,rgba(8,9,10,.2));pointer-events:none}
   .folder:hover .folder__img{transform:scale(1.05)}
   .folder__t{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:1.1rem 1rem;font-family:var(--display);font-size:clamp(1.05rem,2.5vw,1.3rem);font-weight:380;line-height:1.2}
@@ -291,6 +293,15 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.3,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* PROSA JUSTIFICADA — solo párrafos de contenido corrido, con partición de palabras
+     (hyphens:auto) para evitar ríos. No toca títulos, hero, etiquetas, listas de una
+     línea, pies de imagen ni botones. La partición usa el lang del <html> (ES/EN). */
+  .philo__body,.philo__body p,.area__d,.method__intro,.met-step__d,
+  .cons-paras p,.prev-detail__text,.iv-project__d,.cv__note,.enfoque__sub{
+    text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  /* Dentro del Área 1: el rótulo y la lista de tipologías quedan alineados a la izquierda */
+  .area__sub,.area__list,.area__list li{text-align:left;-webkit-hyphens:manual;hyphens:manual}
+
   @media(min-width:600px){
     .folders{grid-template-columns:repeat(2,minmax(0,1fr))}
     .logowall{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -331,6 +342,13 @@
     .met-step,.met-step:nth-child(even){grid-template-columns:1fr}
     .met-step:nth-child(even) .met-step__img{order:unset}
     .met-step__img img{aspect-ratio:16/9}
+    /* En móvil el título del Área 2 fluye natural: el salto controlado estorba */
+    .area__t .area__brk{display:none}
+  }
+  /* En columnas angostas la justificación crea huecos/ríos: alinear a la izquierda */
+  @media(max-width:600px){
+    .philo__body,.philo__body p,.area__d,.method__intro,.met-step__d,
+    .cons-paras p,.prev-detail__text,.iv-project__d,.cv__note,.enfoque__sub{text-align:left}
   }
   @media(max-width:599px){
     .hero{min-height:80svh;max-height:580px}
@@ -340,6 +358,9 @@
     .hero__rake{transform:translateX(-30%)}
     .reveal{opacity:1;transform:none;transition:none}
     .gtile img,.lightbox__btn{transition:none}
+    /* Sin zoom en las tarjetas para quien pide movimiento reducido (solo crossfade) */
+    .folder__icon{transition:opacity .55s ease}
+    .folder:hover .folder__icon,.folder:focus-visible .folder__icon{transform:none}
   }
 </style>
 </head>
@@ -413,7 +434,7 @@
   <h2 class="h-sec reveal" data-i18n="exp.h">Áreas de trabajo.</h2>
   <div class="areas reveal">
     <div class="area"><span class="area__n">01</span><div><div class="area__t" data-i18n="exp.a1t">Conservación y Restauración de Bienes Culturales</div><div class="area__d" data-i18n-html="exp.a1d">Intervenciones especializadas para la conservación y restauración de bienes culturales, desarrolladas conforme a criterios éticos, metodológicos y científicos propios de la disciplina.<br><br><span class="area__sub">Áreas de especialización:</span><ul class="area__list"><li>Pintura de caballete sobre lienzo y soporte de madera.</li><li>Escultura policromada.</li><li>Obras gráficas y patrimonio documental.</li><li>Cerámica arqueológica.</li></ul></div></div></div>
-    <div class="area"><span class="area__n">02</span><div><div class="area__t" data-i18n="exp.a2t">Estudios preliminares, estado de conservación y diagnóstico para obras de arte y colecciones</div><div class="area__d" data-i18n-html="exp.a2d">Evaluación integral del estado de conservación de obras de arte y colecciones mediante procesos especializados de examen, documentación, análisis técnico y diagnóstico. Este servicio permite determinar las características materiales y técnicas de elaboración de cada bien cultural, identificar los agentes y mecanismos de deterioro, valorar su estado actual de conservación y establecer las necesidades de conservación, restauración o la implementación de medidas de conservación preventiva.<br><br>Cada estudio se desarrolla conforme a los principios éticos y metodológicos de la conservación-restauración del patrimonio cultural, priorizando una documentación técnica rigurosa, el análisis crítico fundamentado y la toma de decisiones responsables orientadas a garantizar la conservación e integridad material de cada obra o colección.</div></div></div>
+    <div class="area"><span class="area__n">02</span><div><div class="area__t" data-i18n-html="exp.a2t">Estudios preliminares, estado de conservación <br class="area__brk">y diagnóstico para obras de arte y colecciones</div><div class="area__d" data-i18n-html="exp.a2d">Evaluación integral del estado de conservación de obras de arte y colecciones mediante procesos especializados de examen, documentación, análisis técnico y diagnóstico. Este servicio permite determinar las características materiales y técnicas de elaboración de cada bien cultural, identificar los agentes y mecanismos de deterioro, valorar su estado actual de conservación y establecer las necesidades de conservación, restauración o la implementación de medidas de conservación preventiva.<br><br>Cada estudio se desarrolla conforme a los principios éticos y metodológicos de la conservación-restauración del patrimonio cultural, priorizando una documentación técnica rigurosa, el análisis crítico fundamentado y la toma de decisiones responsables orientadas a garantizar la conservación e integridad material de cada obra o colección.</div></div></div>
     <div class="area"><span class="area__n">03</span><div><div class="area__t" data-i18n="exp.a3t">Conservación Preventiva</div><div class="area__d" data-i18n="exp.a3d">Análisis y evaluación de condiciones ambientales para la adecuada protección de colecciones artísticas y bienes culturales. Desarrollo e implementación de estrategias y planes de conservación preventiva orientados al adecuado almacenamiento, manipulación, transporte y exhibición.</div></div></div>
     <div class="area"><span class="area__n">04</span><div><div class="area__t" data-i18n="exp.a4t">Gestión de Colecciones y Consultoría</div><div class="area__d" data-i18n="exp.a4d">Coordinación, organización y manejo especializado de bienes culturales en colecciones públicas y privadas, integrando procesos de documentación, conservación, catalogación y seguimiento técnico de las obras. Acompañamiento profesional a coleccionistas, galerías y casas de subastas en la circulación responsable de bienes culturales en el mercado del arte.</div></div></div>
   </div>
