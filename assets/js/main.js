@@ -147,12 +147,30 @@
       handle.setAttribute("aria-valuenow", String(Math.round(p)));
       handle.setAttribute("aria-valuetext", Math.round(p) + "% — " + after);
     }
-    var drag = false;
+    var drag = false, ivStartX = 0, ivStartY = 0, ivDir = "";
     function fromEvent(e) { var r = ba.getBoundingClientRect(); setPos(((e.clientX - r.left) / r.width) * 100); }
-    ba.addEventListener("pointerdown", function (e) { drag = true; try { ba.setPointerCapture(e.pointerId); } catch (err) {} fromEvent(e); });
-    ba.addEventListener("pointermove", function (e) { if (drag) fromEvent(e); });
-    ba.addEventListener("pointerup", function () { drag = false; });
-    ba.addEventListener("pointercancel", function () { drag = false; });
+    ba.addEventListener("pointerdown", function (e) {
+      ivStartX = e.clientX; ivStartY = e.clientY; ivDir = "";
+      // Handle touched directly → capture immediately for horizontal drag
+      if (e.target === handle || handle.contains(e.target)) {
+        drag = true; ivDir = "h";
+        try { ba.setPointerCapture(e.pointerId); } catch (err) {}
+        fromEvent(e);
+      }
+    });
+    ba.addEventListener("pointermove", function (e) {
+      if (ivDir === "v") return;
+      if (ivDir === "") {
+        var dx = Math.abs(e.clientX - ivStartX), dy = Math.abs(e.clientY - ivStartY);
+        if (dx < 8 && dy < 8) return; // wait for enough movement to classify
+        if (dy > dx) { ivDir = "v"; drag = false; return; } // vertical → let browser scroll
+        ivDir = "h"; drag = true;
+        try { ba.setPointerCapture(e.pointerId); } catch (err) {}
+      }
+      if (drag) fromEvent(e);
+    });
+    ba.addEventListener("pointerup",     function () { drag = false; ivDir = ""; });
+    ba.addEventListener("pointercancel", function () { drag = false; ivDir = ""; });
     handle.addEventListener("keydown", function (e) {
       var cur = parseFloat(handle.getAttribute("aria-valuenow")) || 50, st = e.shiftKey ? 10 : 4;
       if (e.key === "ArrowLeft" || e.key === "ArrowDown") { setPos(cur - st); e.preventDefault(); }
