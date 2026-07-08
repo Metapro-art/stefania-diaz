@@ -322,6 +322,9 @@
     .step:last-child::before{display:none}
     .step__t{margin-top:.1rem} .step__d{grid-column:2}
   }
+  @media(max-width:599px){
+    .hero{min-height:80svh;max-height:580px}
+  }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;scroll-behavior:auto}
     .hero__rake{transform:translateX(-30%)}
