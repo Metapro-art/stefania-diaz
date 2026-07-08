@@ -124,6 +124,7 @@
     fig.className = "iv-slider";
     var ba = document.createElement("div");
     ba.className = "ba";
+    if (pair.aspect) ba.style.aspectRatio = pair.aspect;
     ba.setAttribute("role", "group");
     ba.innerHTML =
       '<div class="ba__layer ba__before"><img src="' + pair.before + '" alt="" loading="lazy" decoding="async"></div>' +
@@ -219,8 +220,8 @@
     if (sdLastFocus && sdLastFocus.focus) sdLastFocus.focus();
   }
 
-  // Intervenciones: each folder opens the modal with a before/after slider per
-  // pair, or a tidy "coming soon" state while the pairs array is empty.
+  // Intervenciones: each folder opens the modal with one block per project
+  // (title + before/after slider + optional desc), or a "coming soon" state.
   function wireIntervenciones() {
     var cards = document.querySelectorAll(".folder[data-folder]");
     if (!cards.length) return;
@@ -232,8 +233,25 @@
           if (!data) return;
           titleEl.textContent = t(data.title_key);
           bodyEl.innerHTML = "";
-          if (data.pairs && data.pairs.length) {
-            data.pairs.forEach(function (pair) { bodyEl.appendChild(buildIvSlider(pair)); });
+          if (data.projects && data.projects.length) {
+            data.projects.forEach(function (proj) {
+              var wrap = document.createElement("div");
+              wrap.className = "iv-project";
+              if (proj.title) {
+                var h4 = document.createElement("h4");
+                h4.className = "iv-project__t";
+                h4.textContent = proj.title;
+                wrap.appendChild(h4);
+              }
+              wrap.appendChild(buildIvSlider({ before: proj.before, after: proj.after, aspect: proj.aspect, caption: proj.caption || "" }));
+              if (proj.desc) {
+                var p = document.createElement("p");
+                p.className = "iv-project__d";
+                p.textContent = proj.desc;
+                wrap.appendChild(p);
+              }
+              bodyEl.appendChild(wrap);
+            });
           } else {
             var empty = document.createElement("div");
             empty.className = "iv-empty";
