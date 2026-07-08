@@ -157,7 +157,7 @@
   .ba-module__tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--oxide);border:1px solid var(--line-l);padding:.3rem .55rem;border-radius:2px}
   .ba-module__title{font-family:var(--display);font-size:1.05rem;font-weight:420}
   .ba-module__meta{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:var(--muted-l)}
-  .ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:2px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:pan-y;box-shadow:0 30px 80px -40px rgba(0,0,0,.7);background:#1a1714}
+  .ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:2px;overflow:hidden;cursor:default;user-select:none;touch-action:pan-y;box-shadow:0 30px 80px -40px rgba(0,0,0,.7);background:#1a1714}
   .ba__layer{position:absolute;inset:0}
   .ba__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .ba--demo .ba__before{background:radial-gradient(130% 120% at 30% 30%, #6e5a33 0%, #4a3d23 55%, #2c2415 100%)}
@@ -167,7 +167,8 @@
   .ba--demo .ba__after::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 38% 36%, rgba(255,240,210,.18), transparent 55%);mix-blend-mode:screen}
   .ba__tag{position:absolute;top:1rem;z-index:4;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);padding:.35rem .6rem;background:rgba(15,17,19,.55);backdrop-filter:blur(3px)}
   .ba__tag--before{left:1rem} .ba__tag--after{right:1rem}
-  .ba__handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;z-index:5;background:linear-gradient(var(--bone),var(--gilt),var(--bone));transform:translateX(-1px);cursor:ew-resize;touch-action:none}
+  .ba__handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;z-index:5;background:linear-gradient(var(--bone),var(--gilt),var(--bone));transform:translateX(-1px);cursor:grab;touch-action:none}
+  .ba__handle:active{cursor:grabbing}.ba__handle::before{content:"";position:absolute;inset:0 -20px}
   .ba__knob{position:absolute;top:50%;left:50%;width:42px;height:42px;border-radius:50%;transform:translate(-50%,-50%);background:rgba(15,17,19,.7);backdrop-filter:blur(4px);border:1px solid var(--gilt);display:grid;place-items:center}
   .ba__knob::before{content:"";width:13px;height:13px;border-left:1.5px solid var(--bone);border-right:1.5px solid var(--bone);opacity:.85}
   .ba__handle:focus-visible{outline:none}
