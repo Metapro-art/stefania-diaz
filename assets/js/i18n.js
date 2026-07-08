@@ -140,7 +140,7 @@ window.I18N = {
     "con.formErr": "Hubo un problema al enviar. Intenta de nuevo o escríbele por Instagram.",
     "con.formCaptcha": "Por favor completa el captcha.",
 
-    "foot.tag": "Conservación · Restauración · Mercado del arte",
+    "foot.tag": "Conservación · Restauración · Patrimonio Cultural",
 
     "ui.langLabel": "Cambiar idioma",
     "ui.langEs": "Español",
@@ -280,7 +280,7 @@ window.I18N = {
     "con.formErr": "Something went wrong. Please try again, or reach out via Instagram.",
     "con.formCaptcha": "Please complete the captcha.",
 
-    "foot.tag": "Conservation · Restoration · Art market",
+    "foot.tag": "Conservation · Restoration · Cultural Heritage",
 
     "ui.langLabel": "Switch language",
     "ui.langEs": "Spanish",
