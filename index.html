@@ -244,15 +244,15 @@
   /* METODOLOGÍA */
   .method__head{max-width:46rem}
   .method__intro{margin-top:1.4rem;color:#cfccc2;font-weight:300;max-width:50ch}
-  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:clamp(3rem,6vw,5rem)}
-  .step{position:relative;padding:0 1.1rem}
-  .step::before{content:"";position:absolute;top:21px;left:50%;right:-50%;height:1px;background:var(--line-d);z-index:0}
-  .step:last-child::before{display:none}
-  .step__node{position:relative;z-index:1;width:44px;height:44px;border-radius:50%;border:1px solid var(--gilt);display:grid;place-items:center;background:var(--shadow);font-family:var(--mono);font-size:.74rem;color:var(--gilt);letter-spacing:.04em}
-  .step__t{font-family:var(--display);font-size:1.12rem;font-weight:420;margin:1.2rem 0 .5rem;line-height:1.2}
-  .step__d{font-size:.9rem;color:var(--muted-d);line-height:1.55;max-width:24ch}
-  .method__media{margin-top:clamp(3rem,6vw,5rem);border-radius:2px;overflow:hidden;border:1px solid var(--line-d)}
-  .method__media img{width:100%;height:auto;max-height:62vh;object-fit:cover;display:block}
+  .met-steps{display:flex;flex-direction:column;gap:clamp(4rem,8vw,6.5rem);margin-top:clamp(3rem,6vw,5rem)}
+  .met-step{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+  .met-step:nth-child(even) .met-step__img{order:2}
+  .met-step__img{border-radius:2px;overflow:hidden;border:1px solid var(--line-d);box-shadow:0 24px 60px -30px rgba(0,0,0,.7)}
+  .met-step__img img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;display:block}
+  .met-step__body{display:flex;flex-direction:column;gap:.9rem}
+  .met-step__n{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--gilt)}
+  .met-step__t{font-family:var(--display);font-size:clamp(1.45rem,2.6vw,2rem);font-weight:420;line-height:1.15;color:var(--bone)}
+  .met-step__d{font-size:.93rem;line-height:1.72;color:var(--muted-d)}
 
   /* TRAYECTORIA */
   .cv{display:grid;grid-template-columns:1fr;gap:0;margin-top:3rem;border-top:1px solid var(--line-l)}
@@ -312,13 +312,10 @@
     .nav__toggle:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(182,144,79,.55)}
     .nav__role{display:none}
   }
-  /* Methodology diagram stacks until it can show 5 nodes without cramping the titles */
-  @media(max-width:899px){
-    .flow{grid-template-columns:1fr;gap:0}
-    .step{padding:0 0 2.2rem 0;display:grid;grid-template-columns:44px 1fr;column-gap:1.2rem}
-    .step::before{top:44px;bottom:-2px;left:21px;right:auto;width:1px;height:auto}
-    .step:last-child::before{display:none}
-    .step__t{margin-top:.1rem} .step__d{grid-column:2}
+  @media(max-width:767px){
+    .met-step,.met-step:nth-child(even){grid-template-columns:1fr}
+    .met-step:nth-child(even) .met-step__img{order:unset}
+    .met-step__img img{aspect-ratio:16/9}
   }
   @media(max-width:599px){
     .hero{min-height:80svh;max-height:580px}
@@ -437,19 +434,67 @@
 <section class="section section--dark" id="metodologia">
   <div class="method__head">
     <p class="lede reveal" data-i18n="met.lede">05 — Metodología</p>
-    <h2 class="h-sec reveal" data-i18n="met.h">Del examen a la conservación.</h2>
+    <h2 class="h-sec reveal" data-i18n="met.h">De la evaluación a la conservación.</h2>
     <p class="method__intro reveal" data-i18n="met.intro">Toda intervención sigue una secuencia ordenada. Cada etapa documenta a la anterior y condiciona a la siguiente: el método es lo que separa la restauración de la improvisación.</p>
   </div>
-  <div class="flow reveal">
-    <div class="step"><div class="step__node">01</div><h3 class="step__t" data-i18n="met.s1t">Examen</h3><p class="step__d" data-i18n="met.s1d">Observación con luz visible, rasante y ultravioleta. Identificación de materiales y alteraciones.</p></div>
-    <div class="step"><div class="step__node">02</div><h3 class="step__t" data-i18n="met.s2t">Diagnóstico</h3><p class="step__d" data-i18n="met.s2d">Determinación del estado de conservación y de las causas del deterioro.</p></div>
-    <div class="step"><div class="step__node">03</div><h3 class="step__t" data-i18n="met.s3t">Documentación</h3><p class="step__d" data-i18n="met.s3d">Registro fotográfico, cartografía de daños y propuesta de intervención.</p></div>
-    <div class="step"><div class="step__node">04</div><h3 class="step__t" data-i18n="met.s4t">Intervención</h3><p class="step__d" data-i18n="met.s4d">Limpieza, consolidación y reintegración con materiales estables y reversibles.</p></div>
-    <div class="step"><div class="step__node">05</div><h3 class="step__t" data-i18n="met.s5t">Conservación preventiva</h3><p class="step__d" data-i18n="met.s5d">Recomendaciones de manipulación, exhibición y control ambiental.</p></div>
+  <div class="met-steps">
+
+    <div class="met-step reveal">
+      <figure class="met-step__img">
+        <img src="assets/img/metodologia/met-evaluacion.jpg" width="1200" height="800" loading="lazy" decoding="async" data-i18n-attr="alt:met.s1alt" alt="Escultura policromada iluminada para su examen técnico inicial.">
+      </figure>
+      <div class="met-step__body">
+        <span class="met-step__n">01</span>
+        <h3 class="met-step__t" data-i18n="met.s1t">Evaluación</h3>
+        <p class="met-step__d" data-i18n="met.s1d">Mediante un examen técnico inicial, apoyado en herramientas especializadas, se realiza el análisis integral de la obra con el fin de identificar sus materialidades constitutivas, técnicas de ejecución, intervenciones anteriores y factores de deterioro.</p>
+      </div>
+    </div>
+
+    <div class="met-step reveal">
+      <figure class="met-step__img">
+        <img src="assets/img/metodologia/met-diagnostico.jpg" width="1200" height="800" loading="lazy" decoding="async" data-i18n-attr="alt:met.s2alt" alt="Análisis técnico con microscopio estereoscópico y detalle de cartografía de deterioros.">
+      </figure>
+      <div class="met-step__body">
+        <span class="met-step__n">02</span>
+        <h3 class="met-step__t" data-i18n="met.s2t">Diagnóstico</h3>
+        <p class="met-step__d" data-i18n="met.s2d">Determinación y análisis del estado de conservación de la obra, orientado a identificar las alteraciones presentes, sus niveles de afectación y las posibles causas y agentes de deterioro.</p>
+      </div>
+    </div>
+
+    <div class="met-step reveal">
+      <figure class="met-step__img">
+        <img src="assets/img/metodologia/met-intervencion.jpg" width="1200" height="982" loading="lazy" decoding="async" data-i18n-attr="alt:met.s3alt" alt="Proceso de limpieza con bisturí sobre superficie pictórica.">
+      </figure>
+      <div class="met-step__body">
+        <span class="met-step__n">03</span>
+        <h3 class="met-step__t" data-i18n="met.s3t">Intervención</h3>
+        <p class="met-step__d" data-i18n="met.s3d">Ejecución de los procesos de conservación y restauración orientados a la estabilización material y recuperación estética de la obra, mediante procedimientos como limpieza, consolidación y reintegración.</p>
+      </div>
+    </div>
+
+    <div class="met-step reveal">
+      <figure class="met-step__img">
+        <img src="assets/img/metodologia/met-documentacion.jpg" width="1200" height="800" loading="lazy" decoding="async" data-i18n-attr="alt:met.s4alt" alt="Informe técnico de intervención desplegado en pantalla.">
+      </figure>
+      <div class="met-step__body">
+        <span class="met-step__n">04</span>
+        <h3 class="met-step__t" data-i18n="met.s4t">Documentación</h3>
+        <p class="met-step__d" data-i18n="met.s4d">Consolidación y registro técnico de los procesos realizados durante la intervención, incluyendo los tratamientos ejecutados, metodologías aplicadas y materiales utilizados.</p>
+      </div>
+    </div>
+
+    <div class="met-step reveal">
+      <figure class="met-step__img">
+        <img src="assets/img/metodologia/met-preventiva.jpg" width="1083" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:met.s5alt" alt="Aplicación de pincel sobre obra gráfica durante seguimiento preventivo.">
+      </figure>
+      <div class="met-step__body">
+        <span class="met-step__n">05</span>
+        <h3 class="met-step__t" data-i18n="met.s5t">Conservación Preventiva</h3>
+        <p class="met-step__d" data-i18n="met.s5d">Fase de seguimiento y monitoreo continuo de las condiciones de exhibición, almacenamiento y manejo de las obras, orientada a garantizar su adecuada conservación a largo plazo.</p>
+      </div>
+    </div>
+
   </div>
-  <figure class="method__media reveal">
-    <img src="assets/img/tools-flatlay.jpg" width="1800" height="1350" loading="lazy" decoding="async" data-i18n-attr="alt:met.toolsAlt" alt="Herramientas de conservación y restauración dispuestas sobre la mesa de trabajo.">
-  </figure>
 </section>
 
 <!-- INTERVENCIONES — carpetas por tipo de obra -->
