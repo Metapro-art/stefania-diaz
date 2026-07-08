@@ -3,27 +3,19 @@
    Data-driven: main.js renders one folder card per entry; clicking opens a modal
    with a before/after slider per project (or a "coming soon" state if empty).
 
-   ---------------------------------------------------------------------------
    HOW TO ADD A PROJECT
    ---------------------------------------------------------------------------
-   Push an entry onto the `projects` array for the relevant category:
-     projects: [
-       { before: 'assets/img/intervenciones/ceramica/ceramica-antes.jpg',
-         after:  'assets/img/intervenciones/ceramica/ceramica-despues.jpg',
-         aspect: '4/3',   // optional; overrides the slider aspect-ratio
-         title:  'Cuenco arqueológico · consolidación y reintegración',
-         desc:   '' }     // leave empty until text is ready
-     ]
-   For projects with multiple before/after pairs (e.g. anverso + reverso), use:
-     { title: 'Proyecto 1', aspect: '3/4', pairs: [
-       { before: '...a-antes.jpg', after: '...a-despues.jpg' },
-       { before: '...b-antes.jpg', after: '...b-despues.jpg' }
+   Single pair:
+     { before:'path/antes.jpg', after:'path/despues.jpg', aspect:'3/4',
+       title:'Proyecto N', desc:'' }
+   Multiple pairs per project (anverso + reverso, etc.):
+     { title:'Proyecto N', desc:'', aspect:'3/4', pairs:[
+       { before:'path/a-antes.jpg', after:'path/a-despues.jpg' },
+       { before:'path/b-antes.jpg', after:'path/b-despues.jpg' }
      ]}
-   The modal then shows a draggable before/after slider for each pair.
-   While a category has no projects, its modal shows a "coming soon" panel.
-
-   `img` is used only for the empty-state background in the modal.
-   `icon_rest` / `icon_hover` are the card's sepia/color photo states.
+   `img` → empty-state modal background. `icon_rest/hover` → card states.
+   aspect → CSS aspect-ratio for the .ba slider container. Both images in a
+   pair MUST share the same pixel dimensions (centre-cropped at build time).
 ============================================================================ */
 window.INTERVENCIONES = {
   lienzoMadera: {
@@ -32,22 +24,22 @@ window.INTERVENCIONES = {
     icon_rest:  "assets/img/intervenciones/iconos/icon-pintura-sepia.jpg",
     icon_hover: "assets/img/intervenciones/iconos/icon-pintura-color.jpg",
     projects: [
-      /* PL&M/1 — Paisaje con rebaño (2 pares: anverso + reverso/bastidor) */
+      /* PL&M/1 — Paisaje con rebaño · 2 pares (frente + bastidor) */
       { title: "Proyecto 1", desc: "", aspect: "4/3", pairs: [
         { before: "assets/img/intervenciones/lienzoMadera/p1/a-antes.jpg",
           after:  "assets/img/intervenciones/lienzoMadera/p1/a-despues.jpg" },
         { before: "assets/img/intervenciones/lienzoMadera/p1/b-antes.jpg",
           after:  "assets/img/intervenciones/lienzoMadera/p1/b-despues.jpg" }
       ]},
-      /* PL&M/2 — Paisaje nocturno lunar (reencuadre + nuevo marco) */
+      /* PL&M/2 — Paisaje nocturno lunar */
       { title: "Proyecto 2", desc: "", aspect: "3/4",
         before: "assets/img/intervenciones/lienzoMadera/p2/antes.jpg",
         after:  "assets/img/intervenciones/lienzoMadera/p2/despues.jpg" },
-      /* PL&M/3 — Detalle microscópico: reparación de tela */
+      /* PL&M/3 — Detalle microscópico reparación de tela */
       { title: "Proyecto 3", desc: "", aspect: "3/4",
         before: "assets/img/intervenciones/lienzoMadera/p3/antes.jpg",
         after:  "assets/img/intervenciones/lienzoMadera/p3/despues.jpg" },
-      /* PL&M/4 — S. Juan Nepomuceno Mártir (2 pares: anverso + reverso) */
+      /* PL&M/4 — S. Juan Nepomuceno Mártir · 2 pares (frente + reverso) */
       { title: "Proyecto 4", desc: "", aspect: "3/4", pairs: [
         { before: "assets/img/intervenciones/lienzoMadera/p4/a-antes.jpg",
           after:  "assets/img/intervenciones/lienzoMadera/p4/a-despues.jpg" },
@@ -57,7 +49,11 @@ window.INTERVENCIONES = {
       /* PL&M/5 — Pequeño paisaje (A. Páramo) */
       { title: "Proyecto 5", desc: "", aspect: "4/3",
         before: "assets/img/intervenciones/lienzoMadera/p5/antes.jpg",
-        after:  "assets/img/intervenciones/lienzoMadera/p5/despues.jpg" }
+        after:  "assets/img/intervenciones/lienzoMadera/p5/despues.jpg" },
+      /* PL&M/6 — Paisaje de niebla (con marco → sin marco) */
+      { title: "Proyecto 6", desc: "En preparación", aspect: "3/2",
+        before: "assets/img/intervenciones/lienzoMadera/p6/antes.jpg",
+        after:  "assets/img/intervenciones/lienzoMadera/p6/despues.jpg" }
     ]
   },
   escultura: {
@@ -66,7 +62,8 @@ window.INTERVENCIONES = {
     icon_rest:  "assets/img/intervenciones/iconos/icon-escultura-sepia.jpg",
     icon_hover: "assets/img/intervenciones/iconos/icon-escultura-color.jpg",
     projects: [
-      { title: "Proyecto 1", desc: "", aspect: "3/4",
+      /* Both images centre-cropped to 676×1200 from source for pixel-perfect sync */
+      { title: "Proyecto 1", desc: "", aspect: "9/16",
         before: "assets/img/intervenciones/escultura/escultura-antes.jpg",
         after:  "assets/img/intervenciones/escultura/escultura-despues.jpg" }
     ]
@@ -77,30 +74,34 @@ window.INTERVENCIONES = {
     icon_rest:  "assets/img/intervenciones/iconos/icon-grafica-sepia.jpg",
     icon_hover: "assets/img/intervenciones/iconos/icon-grafica-color.jpg",
     projects: [
-      /* OG/1 — Acuarela (2 pares: anverso + reverso) */
+      /* OG/1 — Acuarela figurativa · 2 pares (anverso + reverso) */
       { title: "Proyecto 1", desc: "", aspect: "3/4", pairs: [
         { before: "assets/img/intervenciones/grafica/p1/a-antes.jpg",
           after:  "assets/img/intervenciones/grafica/p1/a-despues.jpg" },
         { before: "assets/img/intervenciones/grafica/p1/b-antes.jpg",
           after:  "assets/img/intervenciones/grafica/p1/b-despues.jpg" }
       ]},
-      /* OG/2 — Serigrafía Warhol (2 pares: anverso + reverso) */
+      /* OG/2 — Serigrafía Warhol · 2 pares (anverso + reverso) */
       { title: "Proyecto 2", desc: "", aspect: "3/4", pairs: [
         { before: "assets/img/intervenciones/grafica/p2/a-antes.jpg",
           after:  "assets/img/intervenciones/grafica/p2/a-despues.jpg" },
         { before: "assets/img/intervenciones/grafica/p2/b-antes.jpg",
           after:  "assets/img/intervenciones/grafica/p2/b-despues.jpg" }
       ]},
-      /* OG/4 — Litografía "Las Monjas" */
+      /* OG/3 — David Manzur watercolor (acuarela, 1983) */
       { title: "Proyecto 3", desc: "", aspect: "3/4",
+        before: "assets/img/intervenciones/grafica/p3/antes.jpg",
+        after:  "assets/img/intervenciones/grafica/p3/despues.jpg" },
+      /* OG/4 — Litografía "Las Monjas" */
+      { title: "Proyecto 4", desc: "", aspect: "3/4",
         before: "assets/img/intervenciones/grafica/p4/antes.jpg",
         after:  "assets/img/intervenciones/grafica/p4/despues.jpg" },
       /* OG/5 — "El Torito" (Grau) */
-      { title: "Proyecto 4", desc: "", aspect: "4/3",
+      { title: "Proyecto 5", desc: "", aspect: "4/3",
         before: "assets/img/intervenciones/grafica/p5/antes.jpg",
         after:  "assets/img/intervenciones/grafica/p5/despues.jpg" },
-      /* OG/6 — Spiritus Sapientiae (2 pares: anverso + reverso) */
-      { title: "Proyecto 5", desc: "", aspect: "3/4", pairs: [
+      /* OG/6 — Spiritus Sapientiae · 2 pares (anverso + reverso) */
+      { title: "Proyecto 6", desc: "", aspect: "3/4", pairs: [
         { before: "assets/img/intervenciones/grafica/p6/a-antes.jpg",
           after:  "assets/img/intervenciones/grafica/p6/a-despues.jpg" },
         { before: "assets/img/intervenciones/grafica/p6/b-antes.jpg",
@@ -114,7 +115,8 @@ window.INTERVENCIONES = {
     icon_rest:  "assets/img/intervenciones/iconos/icon-ceramica-sepia.jpg",
     icon_hover: "assets/img/intervenciones/iconos/icon-ceramica-color.jpg",
     projects: [
-      { title: "Proyecto 1", desc: "", aspect: "4/3",
+      /* antes centre-cropped to 1200×800 to match despues (both 3:2 landscape) */
+      { title: "Proyecto 1", desc: "", aspect: "3/2",
         before: "assets/img/intervenciones/ceramica/ceramica-antes.jpg",
         after:  "assets/img/intervenciones/ceramica/ceramica-despues.jpg" }
     ]
