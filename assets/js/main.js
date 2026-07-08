@@ -306,6 +306,39 @@
     });
   }
 
+  // Consultoria: each folder opens the modal with the area image + multi-paragraph
+  // description (desc_keys array → one <p> per key, via window.CONSULTORIA).
+  function wireConsultoria() {
+    var cards = document.querySelectorAll(".folder[data-cons]");
+    if (!cards.length) return;
+    cards.forEach(function (card) {
+      var key = card.getAttribute("data-cons");
+      card.addEventListener("click", function () {
+        openSdModal(function (titleEl, bodyEl) {
+          var data = (window.CONSULTORIA || {})[key];
+          if (!data) return;
+          titleEl.textContent = t(data.title_key);
+          bodyEl.innerHTML = "";
+          var fig = document.createElement("figure");
+          fig.className = "prev-detail";
+          var img = document.createElement("img");
+          img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
+          img.setAttribute("loading", "lazy"); img.setAttribute("decoding", "async");
+          fig.appendChild(img);
+          bodyEl.appendChild(fig);
+          var paras = document.createElement("div");
+          paras.className = "cons-paras";
+          (data.desc_keys || []).forEach(function (dk) {
+            var p = document.createElement("p");
+            p.textContent = t(dk);
+            paras.appendChild(p);
+          });
+          bodyEl.appendChild(paras);
+        }, card);
+      });
+    });
+  }
+
   // Re-render an open modal (title + body + close label) when the language changes.
   function wireModalI18n() {
     dynamicUpdaters.push(function () {
@@ -389,6 +422,7 @@
   wireLangToggle();
   wireIntervenciones();
   wirePreventiva();
+  wireConsultoria();
   wireModalI18n();
   wireContactForm();
   setLang(lang);   // first paint already translated (script runs at end of body)

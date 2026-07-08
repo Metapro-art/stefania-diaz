@@ -233,6 +233,8 @@
   .prev-detail{margin:0}
   .prev-detail img{width:100%;height:auto;max-height:42vh;object-fit:cover;display:block;border-radius:2px}
   .prev-detail__text{font-family:var(--serif);font-size:1.02rem;line-height:1.6;color:#cfccc2;margin-top:1.3rem;max-width:60ch}
+  .cons-paras{display:flex;flex-direction:column;gap:.9rem}
+  .cons-paras p{font-family:var(--serif);font-size:1.02rem;line-height:1.65;color:#cfccc2;margin:0}
 
   /* CONTACTO — formulario */
   .contact__intro{display:grid;gap:1.6rem;align-content:start}
@@ -543,29 +545,30 @@
 
 <!-- CONSERVACIÓN PREVENTIVA Y GESTIÓN DE COLECCIONES — carpetas + modal de descripción -->
 <section class="section section--dark" id="preventiva">
-  <p class="lede reveal" data-i18n="prev.lede">07 — Conservación preventiva</p>
-  <h2 class="h-sec reveal" data-i18n="prev.heading">Conservación preventiva y gestión de colecciones</h2>
-  <p class="philo__body reveal" style="max-width:52ch;color:#cfccc2" data-i18n="prev.sub">Da clic para explorar cada área</p>
+  <p class="lede reveal" data-i18n="cons.lede">07 — Consultoría</p>
+  <h2 class="h-sec reveal" data-i18n="cons.h">Conservación Preventiva y Gestión de Colecciones</h2>
+  <p class="philo__body reveal" style="max-width:62ch;color:#cfccc2" data-i18n="cons.intro">Los servicios de conservación preventiva y gestión de colecciones se desarrollan a partir de una metodología estructurada por fases y etapas de trabajo, diseñada para adaptarse a las necesidades específicas de cada entidad, empresa, institución o coleccionista.</p>
+  <p class="philo__body reveal" style="max-width:52ch;color:#cfccc2;margin-top:.8rem" data-i18n="cons.sub">Da clic para explorar cada área</p>
   <div class="folders reveal">
-    <button class="folder" type="button" data-prev="catalogacion">
-      <img class="folder__img" src="assets/img/preventiva/prev-catalogacion.jpg" width="347" height="271" loading="lazy" decoding="async" alt="">
+    <button class="folder" type="button" data-cons="catalogacion">
+      <img class="folder__img" src="assets/img/consultoria/cons-catalogacion.jpg" width="735" height="1200" loading="lazy" decoding="async" alt="">
       <span class="folder__cue" aria-hidden="true">&#8599;</span>
-      <span class="folder__t" data-i18n="prev.t1">Catalogación y estudio</span>
+      <span class="folder__t" data-i18n="cons.t1">Catalogación y Estudio</span>
     </button>
-    <button class="folder" type="button" data-prev="exhibicion">
-      <img class="folder__img" src="assets/img/preventiva/prev-exhibicion.jpg" width="214" height="271" loading="lazy" decoding="async" alt="">
+    <button class="folder" type="button" data-cons="diagnostico">
+      <img class="folder__img" src="assets/img/consultoria/cons-diagnostico.jpg" width="1200" height="1192" loading="lazy" decoding="async" alt="">
       <span class="folder__cue" aria-hidden="true">&#8599;</span>
-      <span class="folder__t" data-i18n="prev.t2">Apoyo a exhibición</span>
+      <span class="folder__t" data-i18n="cons.t2">Diagnóstico y Estado de Conservación</span>
     </button>
-    <button class="folder" type="button" data-prev="ambientales">
-      <img class="folder__img" src="assets/img/preventiva/prev-ambientales.jpg" width="188" height="271" loading="lazy" decoding="async" alt="">
+    <button class="folder" type="button" data-cons="ambientales">
+      <img class="folder__img" src="assets/img/consultoria/cons-ambientales.jpg" width="898" height="1200" loading="lazy" decoding="async" alt="">
       <span class="folder__cue" aria-hidden="true">&#8599;</span>
-      <span class="folder__t" data-i18n="prev.t3">Condiciones ambientales</span>
+      <span class="folder__t" data-i18n="cons.t3">Condiciones Ambientales</span>
     </button>
-    <button class="folder" type="button" data-prev="diagnostico">
-      <img class="folder__img" src="assets/img/preventiva/prev-diagnostico.jpg" width="216" height="273" loading="lazy" decoding="async" alt="">
+    <button class="folder" type="button" data-cons="curatorial">
+      <img class="folder__img" src="assets/img/consultoria/cons-curatorial.jpg" width="997" height="1088" loading="lazy" decoding="async" alt="">
       <span class="folder__cue" aria-hidden="true">&#8599;</span>
-      <span class="folder__t" data-i18n="prev.t4">Diagnóstico de conservación</span>
+      <span class="folder__t" data-i18n="cons.t4">Asesoría Curatorial y Montaje</span>
     </button>
   </div>
 </section>
@@ -653,6 +656,7 @@
 <script src="assets/js/i18n.js"></script>
 <script src="assets/data/intervenciones.js"></script>
 <script src="assets/data/preventiva.js"></script>
+<script src="assets/data/consultoria.js"></script>
 <script src="assets/js/main.js"></script>
 <!-- hCaptcha loaded statically so the widget always renders (incl. mobile). recaptchacompat=off avoids the Web3Forms reCaptcha/Pro error. -->
 <script src="https://js.hcaptcha.com/1/api.js?recaptchacompat=off" async defer></script>
