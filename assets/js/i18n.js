@@ -27,7 +27,7 @@ window.I18N = {
     "nav.contact": "Contacto",
     "nav.menu": "Menú",
 
-    "hero.role": "Profesional en Conservación & Restauración de Bienes Culturales",
+    "hero.role": "Profesional en Conservación y Restauración de Bienes Culturales",
     "hero.thesis": "Desde una visión dedicada a la protección del patrimonio artístico y cultural, este espacio nace para conservar, valorar y proyectar los bienes culturales como testimonios vivos de identidad, historia y legado; obras que resisten el paso del tiempo y continúan dialogando con el presente y el futuro.",
 
     "perfil.lede": "01 — Perfil",
@@ -167,7 +167,7 @@ window.I18N = {
     "nav.contact": "Contact",
     "nav.menu": "Menu",
 
-    "hero.role": "Professional in Conservation & Restoration of Cultural Heritage",
+    "hero.role": "Professional in Conservation and Restoration of Cultural Heritage",
     "hero.thesis": "From a vision devoted to protecting our artistic and cultural heritage, this space exists to conserve, value and project cultural assets as living testimonies of identity, history and legacy — works that withstand the passing of time and keep dialoguing with the present and the future.",
 
     "perfil.lede": "01 — Profile",
