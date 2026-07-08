@@ -188,9 +188,7 @@
   .work__t{font-family:var(--display);font-size:1.3rem;font-weight:380;line-height:1.2}
   .work__d{font-size:.92rem;color:var(--muted-d);line-height:1.55}
 
-  /* PROYECTOS INSTITUCIONALES — foto + muro de logos */
-  .proj__photo{margin:3rem 0 0;max-width:26rem;border-radius:2px;overflow:hidden;border:1px solid var(--line-l);box-shadow:0 30px 80px -45px rgba(0,0,0,.5)}
-  .proj__photo img{width:100%;height:auto;display:block}
+  /* PROYECTOS INSTITUCIONALES — muro de logos */
   .logowall{list-style:none;margin:clamp(2.2rem,4vw,3.2rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(.7rem,2vw,1.4rem)}
   .logowall__cell{display:grid;place-items:center;aspect-ratio:3/2;min-width:0;background:#fff;border:1px solid var(--line-l);border-radius:4px;padding:clamp(.9rem,3vw,1.8rem)}
   .logowall__cell img{display:block;width:100%;height:100%;object-fit:contain}
@@ -292,7 +290,7 @@
   }
   @media(min-width:960px){
     .folders{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .logowall{grid-template-columns:repeat(5,minmax(0,1fr))}
+    .logowall{grid-template-columns:repeat(6,minmax(0,1fr))}
   }
   @media(min-width:860px){
     .enfoque--media{grid-template-columns:1.3fr .7fr;align-items:center;gap:clamp(2.5rem,5vw,5rem)}
@@ -425,15 +423,13 @@
 <section class="section section--light" id="proyectos">
   <p class="lede reveal" data-i18n="proj.lede">04 — Proyectos institucionales</p>
   <h2 class="h-sec reveal" data-i18n="proj.h">Proyectos institucionales.</h2>
-  <figure class="proj__photo reveal">
-    <img src="assets/img/logos/foto-institucional.jpg" width="560" height="691" loading="lazy" decoding="async" alt="Stefania Díaz">
-  </figure>
   <ul class="logowall reveal" data-i18n-attr="aria-label:proj.logosAria" aria-label="Instituciones">
-    <li class="logowall__cell"><img src="assets/img/logos/logo-mambo.png" width="162" height="42" loading="lazy" decoding="async" alt="MAMBO · Museo de Arte Moderno de Bogotá"></li>
-    <li class="logowall__cell"><img src="assets/img/logos/logo-san-francisco.png" width="140" height="140" loading="lazy" decoding="async" alt="Templo de San Francisco · Comunidad Franciscana"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-mambo.png" width="585" height="132" loading="lazy" decoding="async" alt="MAMBO · Museo de Arte Moderno de Bogotá"></li>
     <li class="logowall__cell"><img src="assets/img/logos/logo-externado.png" width="228" height="132" loading="lazy" decoding="async" alt="Universidad Externado de Colombia"></li>
     <li class="logowall__cell"><img src="assets/img/logos/logo-archivo-general-nacion.png" width="318" height="159" loading="lazy" decoding="async" alt="Archivo General de la Nación"></li>
     <li class="logowall__cell"><img src="assets/img/logos/logo-uptc.svg" width="214" height="100" loading="lazy" decoding="async" alt="Universidad Pedagógica y Tecnológica de Colombia"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-san-francisco.png" width="385" height="417" loading="lazy" decoding="async" alt="Templo de San Francisco · Comunidad Franciscana"></li>
+    <li class="logowall__cell"><img src="assets/img/logos/logo-independencia.png" width="600" height="600" loading="lazy" decoding="async" alt="La Independencia · Casa de Subastas y Anticuario"></li>
   </ul>
 </section>
 
