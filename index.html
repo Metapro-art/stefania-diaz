@@ -71,7 +71,8 @@
     padding:1.15rem var(--mx);transition:background .5s,padding .5s,border-color .5s;border-bottom:1px solid transparent}
   .nav.is-stuck{background:rgba(15,17,19,.86);backdrop-filter:blur(10px);padding-top:.85rem;padding-bottom:.85rem;border-bottom-color:var(--line-d)}
   .nav__brand{display:flex;align-items:baseline;gap:.7rem;flex-shrink:0}
-  .nav__mark{font-family:var(--display);font-weight:500;font-size:1.18rem;letter-spacing:.02em}
+  .nav__mark{font-family:var(--display);font-weight:500;font-size:1.18rem;letter-spacing:.02em;transition:color .25s}
+  a.nav__mark:hover{color:var(--gilt)}
   .nav__role{font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-d)}
   .nav__right{display:flex;align-items:center;gap:1.6rem;min-width:0}
   .nav__links{display:flex;gap:2rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}
@@ -333,8 +334,7 @@
 
 <nav class="nav" id="nav">
   <div class="nav__brand">
-    <span class="nav__mark">Stefania Díaz</span>
-    <span class="nav__role" data-i18n="nav.role">Conservación · Restauración</span>
+    <a href="https://instagram.com/ella_restaura_arte" target="_blank" rel="noopener" class="nav__mark">@ella_restaura_arte</a>
   </div>
   <div class="nav__right">
     <div class="nav__links" id="navLinks">
