@@ -105,7 +105,7 @@ window.I18N = {
     "met.s4alt": "Informe técnico de intervención desplegado en pantalla.",
     "met.s5t": "Conservación Preventiva",
     "met.s5d": "Fase de seguimiento y monitoreo continuo de las condiciones de exhibición, almacenamiento y manejo de las obras, orientada a garantizar su adecuada conservación a largo plazo. Este proceso comprende la realización de evaluaciones programadas para analizar el comportamiento de las áreas de almacenamiento y exhibición, así como el control de las condiciones ambientales —temperatura, humedad relativa e iluminación— y la identificación de posibles factores de riesgo que puedan afectar la estabilidad material de las piezas.",
-    "met.s5alt": "Aplicación de pincel sobre obra gráfica durante seguimiento preventivo.",
+    "met.s5alt": "Medición de iluminación con luxómetro frente a una pintura en sala de exhibición.",
 
     "bg.lede": "08 — Trayectoria",
     "bg.h": "Formación y experiencia.",
@@ -246,7 +246,7 @@ window.I18N = {
     "met.s4alt": "Technical treatment report displayed on screen.",
     "met.s5t": "Preventive Conservation",
     "met.s5d": "A phase of continuous follow-up and monitoring of the display, storage and handling conditions of the works, aimed at ensuring their proper long-term conservation. This process includes scheduled assessments to analyze the behavior of storage and display areas, as well as the control of environmental conditions —temperature, relative humidity and lighting— and the identification of possible risk factors that could affect the material stability of the pieces.",
-    "met.s5alt": "Brush application on a graphic work during preventive monitoring.",
+    "met.s5alt": "Light measurement with a lux meter in front of a painting in an exhibition room.",
 
     "bg.lede": "08 — Background",
     "bg.h": "Education & experience.",
