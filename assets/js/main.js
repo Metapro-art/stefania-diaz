@@ -142,7 +142,7 @@
     ba.querySelector(".ba__after img").alt = (pair.caption ? pair.caption + " — " : "") + after;
     function setPos(p) {
       p = Math.max(0, Math.min(100, p));
-      afterLayer.style.setProperty("--pos", p + "%");
+      ba.style.setProperty("--pos", p + "%");
       handle.style.left = p + "%";
       handle.setAttribute("aria-valuenow", String(Math.round(p)));
       handle.setAttribute("aria-valuetext", Math.round(p) + "% — " + after);

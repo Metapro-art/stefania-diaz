@@ -162,7 +162,7 @@
   .ba__layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .ba--demo .ba__before{background:radial-gradient(130% 120% at 30% 30%, #6e5a33 0%, #4a3d23 55%, #2c2415 100%)}
   .ba--demo .ba__before::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(40,28,10,.55), rgba(120,90,30,.28)),radial-gradient(120% 120% at 50% 50%, transparent 40%, rgba(20,12,4,.7) 100%);mix-blend-mode:multiply}
-  .ba__after{clip-path:inset(0 0 0 calc(100% - var(--pos,50%)))}
+  .ba__before{z-index:1;clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
   .ba--demo .ba__after{background:radial-gradient(130% 120% at 30% 28%, #b08a52 0%, #7d5f37 50%, #4d3a22 100%)}
   .ba--demo .ba__after::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 38% 36%, rgba(255,240,210,.18), transparent 55%);mix-blend-mode:screen}
   .ba__tag{position:absolute;top:1rem;z-index:4;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);padding:.35rem .6rem;background:rgba(15,17,19,.55);backdrop-filter:blur(3px)}
