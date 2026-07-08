@@ -57,7 +57,7 @@ window.I18N = {
     "exp.a2d": "Evaluación integral del estado de conservación y diagnóstico técnico de bienes culturales, mediante procesos de examen, documentación y análisis especializados orientados a determinar sus características materiales, técnicas de elaboración, estado actual de conservación y necesidades potenciales de intervención.<br><br>El servicio se desarrolla bajo criterios éticos y metodológicos propios de la conservación-restauración, priorizando la documentación precisa, el análisis riguroso y la responsabilidad con el bien.",
 
     "foc.lede": "03 — Enfoque",
-    "foc.statement": "La conservación & restauración sólo es posible si se concibe como una tarea colectiva que fomente la reflexión crítica, el diálogo y la colaboración entre todas las partes involucradas.",
+    "foc.statement": "La Conservación y Restauración sólo es posible si se concibe como una tarea colectiva que fomente la reflexión crítica, el diálogo y la colaboración entre todas las partes involucradas.",
     "foc.sub": "La incorporación de profesionales representa un valor agregado que profesionaliza el mercado posicionándolo como una herramienta al servicio del Patrimonio Cultural.",
     "foc.imgAlt": "Stefania Díaz observando una obra en una sala de museo.",
 
@@ -193,7 +193,7 @@ window.I18N = {
     "exp.a2d": "Comprehensive assessment of the condition and technical diagnosis of cultural property, through specialized examination, documentation and analysis aimed at determining its material characteristics, manufacturing techniques, current condition and potential treatment needs.<br><br>The service is carried out under the ethical and methodological criteria of conservation-restoration, prioritizing precise documentation, rigorous analysis and responsibility toward the object.",
 
     "foc.lede": "03 — Focus",
-    "foc.statement": "Conservation & restoration is only possible when understood as a collective endeavour that fosters critical reflection, dialogue and collaboration among all parties involved.",
+    "foc.statement": "Conservation and Restoration is only possible when understood as a collective endeavour that fosters critical reflection, dialogue and collaboration among all parties involved.",
     "foc.sub": "Bringing in qualified professionals adds value that professionalizes the market, positioning it as a tool in the service of Cultural Heritage.",
     "foc.imgAlt": "Stefania Díaz looking at a work in a museum gallery.",
 
