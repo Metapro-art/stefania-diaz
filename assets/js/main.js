@@ -243,7 +243,12 @@
                 h4.textContent = proj.title;
                 wrap.appendChild(h4);
               }
-              wrap.appendChild(buildIvSlider({ before: proj.before, after: proj.after, aspect: proj.aspect, caption: proj.caption || "" }));
+              var pairsToRender = (proj.pairs && proj.pairs.length)
+                ? proj.pairs
+                : [{ before: proj.before, after: proj.after, caption: proj.caption || "" }];
+              pairsToRender.forEach(function (pair) {
+                wrap.appendChild(buildIvSlider({ before: pair.before, after: pair.after, aspect: proj.aspect, caption: pair.caption || "" }));
+              });
               if (proj.desc) {
                 var p = document.createElement("p");
                 p.className = "iv-project__d";
