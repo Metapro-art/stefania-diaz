@@ -8,16 +8,21 @@
   "use strict";
 
   var STORAGE_KEY = "sd-lang";
-  var DEFAULT_LANG = "es";
+  var FALLBACK_LANG = "es";
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* --- Language resolution ------------------------------------------------ */
+  /* --- Language resolution ------------------------------------------------
+     El script inline del <head> ya resolvió el idioma ANTES del primer paint
+     (preferencia guardada → DEFAULT_LANG → navegador) y lo dejó en <html lang>.
+     Leerlo de ahí evita mantener la detección duplicada en dos archivos. */
   function resolveInitialLang() {
     try {
       var saved = localStorage.getItem(STORAGE_KEY);
       if (saved === "es" || saved === "en") return saved;
     } catch (e) { /* localStorage may be unavailable */ }
-    var nav = (navigator.language || navigator.userLanguage || DEFAULT_LANG).toLowerCase();
+    var early = document.documentElement.lang;
+    if (early === "es" || early === "en") return early;
+    var nav = (navigator.language || navigator.userLanguage || FALLBACK_LANG).toLowerCase();
     return nav.indexOf("es") === 0 ? "es" : "en";
   }
 

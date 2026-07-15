@@ -25,8 +25,13 @@
 <meta name="twitter:image" content="https://stefaniadiaz.art/assets/img/og-image.jpg">
 <script>
   /* Set <html lang> as early as possible, and gate paint for EN to avoid a Spanish flash.
-     The gate is always lifted by setLang() and by a failsafe inline script at end of body. */
-  (function(){try{var l=localStorage.getItem('sd-lang');if(l!=='es'&&l!=='en'){var n=(navigator.language||'es').toLowerCase();l=n.indexOf('es')===0?'es':'en';}var d=document.documentElement;d.lang=l;if(l==='en')d.className+=(d.className?' ':'')+'lang-loading';}catch(e){}})();
+     The gate is always lifted by setLang() and by a failsafe inline script at end of body.
+     Idioma inicial para visitantes SIN preferencia guardada (el toggle ES/EN siempre gana):
+       'auto' → según navegador (es-* → ES, resto → EN)
+       'en'   → siempre inglés
+       'es'   → siempre español */
+  const DEFAULT_LANG = 'auto';
+  (function(){try{var l=localStorage.getItem('sd-lang');if(l!=='es'&&l!=='en'){if(DEFAULT_LANG==='es'||DEFAULT_LANG==='en'){l=DEFAULT_LANG;}else{var n=(navigator.language||'es').toLowerCase();l=n.indexOf('es')===0?'es':'en';}}var d=document.documentElement;d.lang=l;if(l==='en')d.className+=(d.className?' ':'')+'lang-loading';}catch(e){}})();
 </script>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
