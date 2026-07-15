@@ -363,4 +363,4 @@ Dimensions: 8 × 16 × 16 cm
 
 ## Nota para la codificación
 
-Seis proyectos tienen dos pares de fotos (frente y reverso): Gómez Campuzano, San Juan Nepomuceno, Botero, Warhol y Walter Wolff. Cada slider necesita una palabra que diga cuál es cuál — **Anverso / Reverso**, *Front / Reverse*. Sin eso, el visitante ve un bastidor de madera sin saber de qué obra es.
+Cinco proyectos tienen dos pares de fotos (frente y reverso): Gómez Campuzano, San Juan Nepomuceno, Botero, Warhol y Walter Wolff. Cada slider necesita una palabra que diga cuál es cuál — **Anverso / Reverso**, *Front / Reverse*. Sin eso, el visitante ve un bastidor de madera sin saber de qué obra es.
