@@ -6,7 +6,7 @@
 //
 // To add a new image: add a row to `jobs` and re-run. Originals are never modified.
 import sharp from 'sharp';
-import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { mkdir, stat, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -84,7 +84,9 @@ for (const pair of pairSync) {
   for (let i = 0; i < abs.length; i++) {
     const m = metas[i];
     if (m.width === cw && m.height === ch) continue;
-    const buf = await sharp(abs[i])
+    // A buffer primero: en Windows, sharp mantiene abierto el archivo de entrada
+    // y no se puede sobreescribir en el mismo paso.
+    const buf = await sharp(await readFile(abs[i]))
       .extract({ left: Math.floor((m.width - cw) / 2), top: Math.floor((m.height - ch) / 2), width: cw, height: ch })
       .jpeg({ quality: 92, mozjpeg: true, progressive: true })
       .toBuffer();
