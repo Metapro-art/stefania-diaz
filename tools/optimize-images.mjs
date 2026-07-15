@@ -16,7 +16,8 @@ await mkdir(outDir, { recursive: true });
 await mkdir(path.join(outDir, 'before-after'), { recursive: true });
 await mkdir(path.join(outDir, 'hero'), { recursive: true });
 
-// [sourceRelPath, outName, format, maxEdge, quality]
+// [sourceRelPath, outName, format, maxEdge, quality, crop?]
+// crop → sharp.extract({left,top,width,height}) sobre el ORIGINAL, antes del resize.
 const jobs = [
   // Portrait — kept as WebP (the source is .webp), square.
   ['Resources/profile pic.webp', 'portrait', 'webp', 1200, 82],
@@ -27,19 +28,23 @@ const jobs = [
 
   // Hero — capa fotográfica difuminada (fondo de .hero__photo; va con blur, comprimir fuerte).
   ['Resources/8.jpeg', 'hero/hero-taller', 'jpeg', 1280, 72],
+  // Hero móvil (≤640px) — recorte VERTICAL compuesto alrededor del sujeto: cabeza con
+  // visera, mano con pincel sobre la obra y paleta. El horizontal en cover a 390px solo
+  // mostraba el 43% del ancho: una tajada no es un taller.
+  ['Resources/8.jpeg', 'hero/hero-taller-mobile', 'jpeg', 1200, 72, { left: 820, top: 110, width: 700, height: 1090 }],
 ];
 
 const kb = (b) => (b / 1024).toFixed(0).padStart(5) + ' KB';
 let totalIn = 0, totalOut = 0;
 
-for (const [rel, name, format, maxEdge, quality] of jobs) {
+for (const [rel, name, format, maxEdge, quality, crop] of jobs) {
   const src = path.join(root, rel);
   const out = path.join(outDir, `${name}.${format === 'jpeg' ? 'jpg' : format}`);
   try {
     const meta = await sharp(src).metadata();
-    let pipe = sharp(src)
-      .rotate() // bake EXIF orientation
-      .resize({ width: maxEdge, height: maxEdge, fit: 'inside', withoutEnlargement: true });
+    let pipe = sharp(src).rotate(); // bake EXIF orientation
+    if (crop) pipe = pipe.extract(crop);
+    pipe = pipe.resize({ width: maxEdge, height: maxEdge, fit: 'inside', withoutEnlargement: true });
     pipe = format === 'webp'
       ? pipe.webp({ quality })
       : pipe.jpeg({ quality, mozjpeg: true, progressive: true });

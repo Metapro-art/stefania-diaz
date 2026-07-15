@@ -118,6 +118,8 @@
     --photo-focus-y:38%;
     --photo-rx:92%;        /* radios del radial: qué tanto “abraza” al sujeto */
     --photo-ry:88%;
+    --photo-fade-a:40px;   /* fade superior (franja del nav): de transparente… */
+    --photo-fade-b:140px;  /* …a opaco */
     position:absolute;inset:0;z-index:0;pointer-events:none;
     background:url("assets/img/hero/hero-taller.jpg") right center/cover no-repeat;
     /* overscan: sin él, blur() samplea fuera del elemento y lava los bordes */
@@ -128,15 +130,23 @@
     /* Máscara triple en intersección: el radial abraza al sujeto, el linear diagonal
        despeja el cuadrante inferior-izquierdo (h1, línea de rol, párrafo) y el fade
        superior despeja la franja del nav. */
-    -webkit-mask-image:radial-gradient(var(--photo-rx) var(--photo-ry) at var(--photo-focus-x) var(--photo-focus-y),#000 30%,transparent 60%),linear-gradient(225deg,#000 52%,transparent 68%),linear-gradient(180deg,transparent 40px,#000 140px);
+    -webkit-mask-image:radial-gradient(var(--photo-rx) var(--photo-ry) at var(--photo-focus-x) var(--photo-focus-y),#000 30%,transparent 60%),linear-gradient(225deg,#000 52%,transparent 68%),linear-gradient(180deg,transparent var(--photo-fade-a),#000 var(--photo-fade-b));
     -webkit-mask-composite:source-in;
-            mask-image:radial-gradient(var(--photo-rx) var(--photo-ry) at var(--photo-focus-x) var(--photo-focus-y),#000 30%,transparent 60%),linear-gradient(225deg,#000 52%,transparent 68%),linear-gradient(180deg,transparent 40px,#000 140px);
+            mask-image:radial-gradient(var(--photo-rx) var(--photo-ry) at var(--photo-focus-x) var(--photo-focus-y),#000 30%,transparent 60%),linear-gradient(225deg,#000 52%,transparent 68%),linear-gradient(180deg,transparent var(--photo-fade-a),#000 var(--photo-fade-b));
             mask-composite:intersect;
   }
-  /* Móvil: el h1 ocupa casi todo el ancho — radial ancho y bajo (todo el sujeto,
-     nada del título): se apaga verticalmente antes de llegar al h1 */
+  /* Móvil: asset VERTICAL propio, compuesto alrededor del sujeto (el horizontal en
+     cover a 390px solo mostraba el 43% del ancho: una tajada, no un taller). Blur
+     proporcional (9px a 390 pegaba ~2× más fuerte sobre la foto original que a 1920)
+     y máscara recalibrada al encuadre nuevo: se apaga antes de llegar al h1. */
   @media(max-width:640px){
-    .hero__photo{--photo-opacity:.42;--photo-focus-x:80%;--photo-focus-y:20%;--photo-rx:120%;--photo-ry:55%}
+    .hero__photo{
+      --photo-opacity:.55;--photo-blur:3px;
+      --photo-focus-x:50%;--photo-focus-y:22%;--photo-rx:140%;--photo-ry:52%;
+      --photo-fade-a:16px;--photo-fade-b:90px;
+      background-image:url("assets/img/hero/hero-taller-mobile.jpg");
+      background-position:center top;
+    }
   }
   .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
     background:linear-gradient(78deg,transparent 30%,rgba(244,238,224,.05) 43%,rgba(248,243,230,.16) 50%,rgba(244,238,224,.05) 57%,transparent 70%);
