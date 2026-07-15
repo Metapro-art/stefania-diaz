@@ -95,6 +95,35 @@
     background:radial-gradient(120% 90% at 18% 8%, #2a2722 0%, #1a1c1d 42%, var(--shadow-3) 100%)}
   .hero__warm{position:absolute;inset:0;z-index:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.5;
     background:radial-gradient(140% 120% at 22% 18%, rgba(182,144,79,.45), transparent 55%),radial-gradient(120% 130% at 85% 95%, rgba(57,87,106,.40), transparent 60%)}
+  /* Capa fotográfica del taller (Resources/8.jpeg → assets/img/hero/hero-taller.jpg).
+     Va como FONDO enmascarado que se disuelve antes de tocar cualquier arista — nunca
+     como <img> con caja propia (eso produjo el parche rectangular de la vez pasada).
+     La dueña tunea solo las variables. Para cambiar de variante, sustituir los TRES
+     valores marcados con ▼ por los de la fila elegida:
+       V1 · Susurro    → --photo-opacity:.20; --photo-blur:28px; mix-blend-mode:multiply;
+       V2 · Atmósfera  → --photo-opacity:.32; --photo-blur:22px; mix-blend-mode:multiply;   ← ACTIVA
+       V3 · Presencia  → --photo-opacity:.42; --photo-blur:16px; mix-blend-mode:luminosity;
+         (V3 aclara los ventanales quemados de la foto: si el blanco se dispara,
+          añadir brightness(.7) al principio del filter.) */
+  .hero__photo{
+    --photo-opacity:.32;   /* ▼ */
+    --photo-blur:22px;     /* ▼ */
+    --photo-focus-x:72%;   /* centro de la máscara, hacia el sujeto */
+    --photo-focus-y:45%;
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:url("assets/img/hero/hero-taller.jpg") right center/cover no-repeat;
+    /* overscan: sin él, blur() samplea fuera del elemento y lava los bordes */
+    transform:scale(1.08);transform-origin:72% 45%;
+    filter:blur(var(--photo-blur)) saturate(.55) sepia(.35);
+    opacity:var(--photo-opacity);
+    mix-blend-mode:multiply;  /* ▼ */
+    -webkit-mask-image:radial-gradient(120% 100% at var(--photo-focus-x) var(--photo-focus-y),#000 25%,transparent 72%);
+            mask-image:radial-gradient(120% 100% at var(--photo-focus-x) var(--photo-focus-y),#000 25%,transparent 72%);
+  }
+  /* Móvil: el h1 ocupa casi todo el ancho — foto más tenue y empujada arriba, lejos del título */
+  @media(max-width:640px){
+    .hero__photo{--photo-opacity:.18;--photo-focus-y:22%}
+  }
   .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
     background:linear-gradient(78deg,transparent 30%,rgba(244,238,224,.05) 43%,rgba(248,243,230,.16) 50%,rgba(244,238,224,.05) 57%,transparent 70%);
     mix-blend-mode:soft-light;transform:translateX(var(--sweep,-60%));transition:transform .25s ease-out;
@@ -394,6 +423,7 @@
   <!-- The in-browser raking-light SVG filter (feTurbulence) was removed for performance.
        The hero keeps its CSS light sweep, warm gradients and vignette below. -->
   <div class="hero__warm" aria-hidden="true"></div>
+  <div class="hero__photo" aria-hidden="true"></div>
   <div class="hero__rake" id="rake" aria-hidden="true"></div>
   <div class="hero__vignette" aria-hidden="true"></div>
   <div class="hero__inner">
