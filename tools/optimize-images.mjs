@@ -28,10 +28,12 @@ const jobs = [
 
   // Hero — capa fotográfica difuminada (fondo de .hero__photo; va con blur, comprimir fuerte).
   ['Resources/8.jpeg', 'hero/hero-taller', 'jpeg', 1280, 72],
-  // Hero móvil (≤640px) — recorte VERTICAL compuesto alrededor del sujeto: cabeza con
-  // visera, mano con pincel sobre la obra y paleta. El horizontal en cover a 390px solo
-  // mostraba el 43% del ancho: una tajada no es un taller.
-  ['Resources/8.jpeg', 'hero/hero-taller-mobile', 'jpeg', 1200, 72, { left: 820, top: 110, width: 700, height: 1090 }],
+  // Hero móvil (≤640px) — recorte VERTICAL compuesto alrededor del sujeto. Encuadre
+  // bajo a pedido de la dueña: cara con visera y mano con pincel sobre la obra caen en
+  // la banda que la máscara muestra (el prendedor queda fuera de cuadro — arriba no
+  // cabían ambos sin mover la máscara). El horizontal en cover a 390px solo mostraba
+  // el 43% del ancho: una tajada no es un taller.
+  ['Resources/8.jpeg', 'hero/hero-taller-mobile', 'jpeg', 1200, 72, { left: 870, top: 440, width: 440, height: 760 }],
 ];
 
 const kb = (b) => (b / 1024).toFixed(0).padStart(5) + ' KB';
