@@ -14,7 +14,7 @@
 window.I18N = {
   es: {
     "meta.title": "Stefania Díaz · Conservación y Restauración de Bienes Culturales",
-    "meta.desc": "Conservadora-restauradora de bienes culturales especializada en el mercado del arte. Bogotá, Colombia.",
+    "meta.desc": "Conservadora-restauradora especializada en el mercado del arte. Diagnóstico, conservación preventiva y restauración de pintura y escultura. Bogotá, Colombia.",
 
     "nav.role": "Conservación · Restauración",
     "nav.profile": "Perfil",
@@ -182,7 +182,7 @@ window.I18N = {
 
   en: {
     "meta.title": "Stefania Díaz · Conservation & Restoration of Cultural Heritage",
-    "meta.desc": "Conservator-restorer of cultural heritage specialized in the art market. Bogotá, Colombia.",
+    "meta.desc": "Conservator-restorer specializing in the art market. Diagnosis, preventive conservation and restoration of paintings and sculpture. Bogotá, Colombia.",
 
     "nav.role": "Conservation · Restoration",
     "nav.profile": "Profile",
