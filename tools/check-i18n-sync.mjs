@@ -93,7 +93,9 @@ for (const key of allKeys) {
 const dataDir = path.join(root, 'assets', 'data');
 const refs = new Map(); // key -> archivo(s)
 for (const f of readdirSync(dataDir).filter(f => f.endsWith('.js'))) {
-  const src = readFileSync(path.join(dataDir, f), 'utf8');
+  // Sin comentarios: los bloques de documentación traen ejemplos con *_key de mentira.
+  const src = readFileSync(path.join(dataDir, f), 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
   for (const m of src.matchAll(/\b\w*_key\s*:\s*["']([^"']+)["']/g)) refs.set(m[1], f);
   for (const m of src.matchAll(/\bdesc_keys\s*:\s*\[([^\]]*)\]/g)) {
     for (const k of m[1].matchAll(/["']([^"']+)["']/g)) refs.set(k[1], f);

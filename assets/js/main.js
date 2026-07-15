@@ -138,8 +138,8 @@
     ba.querySelector(".ba__tag--before").textContent = before;
     ba.setAttribute("aria-label", before + " / " + after);
     handle.setAttribute("aria-label", before + " / " + after);
-    ba.querySelector(".ba__before img").alt = (pair.caption ? pair.caption + " — " : "") + before;
-    ba.querySelector(".ba__after img").alt = (pair.caption ? pair.caption + " — " : "") + after;
+    ba.querySelector(".ba__before img").alt = pair.altBefore || ((pair.caption ? pair.caption + " — " : "") + before);
+    ba.querySelector(".ba__after img").alt = pair.altAfter || ((pair.caption ? pair.caption + " — " : "") + after);
     function setPos(p) {
       p = Math.max(0, Math.min(100, p));
       ba.style.setProperty("--pos", p + "%");
@@ -242,23 +242,54 @@
             data.projects.forEach(function (proj) {
               var wrap = document.createElement("div");
               wrap.className = "iv-project";
-              if (proj.title) {
+              // Cartela de museo: nombre (t) · obra y año (sub) · ficha técnica (meta).
+              // t y meta admiten <em> del diccionario (términos y títulos en cursiva).
+              var tTxt = proj.t_key ? t(proj.t_key) : (proj.title || "");
+              var subTxt = proj.sub_key ? t(proj.sub_key) : "";
+              var metaTxt = proj.meta_key ? t(proj.meta_key) : "";
+              var descTxt = proj.desc_key ? t(proj.desc_key) : (proj.desc || "");
+              if (tTxt) {
                 var h4 = document.createElement("h4");
                 h4.className = "iv-project__t";
-                h4.textContent = proj.title;
+                h4.innerHTML = tTxt;
                 wrap.appendChild(h4);
               }
+              if (subTxt) {
+                var sub = document.createElement("p");
+                sub.className = "iv-project__sub";
+                sub.textContent = subTxt;
+                wrap.appendChild(sub);
+              }
+              if (metaTxt) {
+                var meta = document.createElement("p");
+                meta.className = "iv-project__meta";
+                metaTxt.split("\n").forEach(function (line) {
+                  var span = document.createElement("span");
+                  span.innerHTML = line;
+                  meta.appendChild(span);
+                });
+                wrap.appendChild(meta);
+              }
+              var altName = (tTxt + (subTxt ? " — " + subTxt : "")).replace(/<[^>]+>/g, "");
               var pairsToRender = (proj.pairs && proj.pairs.length)
                 ? proj.pairs
                 : [{ before: proj.before, after: proj.after, caption: proj.caption || "" }];
               pairsToRender.forEach(function (pair) {
-                wrap.appendChild(buildIvSlider({ before: pair.before, after: pair.after, aspect: proj.aspect, caption: pair.caption || "" }));
+                var capTxt = pair.cap_key ? t(pair.cap_key) : (pair.caption || "");
+                var side = capTxt ? " (" + capTxt + ")" : "";
+                wrap.appendChild(buildIvSlider({
+                  before: pair.before, after: pair.after, aspect: proj.aspect, caption: capTxt,
+                  altBefore: altName ? altName + side + ", " + t("interv.alt.before") : "",
+                  altAfter:  altName ? altName + side + ", " + t("interv.alt.after") : ""
+                }));
               });
-              if (proj.desc) {
-                var p = document.createElement("p");
-                p.className = "iv-project__d";
-                p.textContent = proj.desc;
-                wrap.appendChild(p);
+              if (descTxt) {
+                descTxt.split("\n\n").forEach(function (parText) {
+                  var p = document.createElement("p");
+                  p.className = "iv-project__d";
+                  p.textContent = parText;
+                  wrap.appendChild(p);
+                });
               }
               bodyEl.appendChild(wrap);
             });
