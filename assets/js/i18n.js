@@ -94,7 +94,7 @@ window.I18N = {
 
     "cons.lede": "07 — Consultoría",
     "cons.h": "Conservación Preventiva y Gestión de Colecciones",
-    "cons.intro": "Los servicios de conservación preventiva y gestión de colecciones se desarrollan a partir de una metodología estructurada por fases y etapas de trabajo, diseñada para adaptarse a las necesidades específicas de cada entidad, empresa, institución o coleccionista.",
+    "cons.intro": "Los servicios de conservación preventiva y gestión de colecciones se desarrollan a partir de una metodología estructurada por fases y etapas de trabajo, diseñadas para adaptarse a las necesidades específicas de cada entidad, empresa, institución o coleccionista.",
     "cons.sub": "Da clic para explorar cada área",
     "cons.t1": "Catalogación y Estudio",
     "cons.t2": "Diagnóstico y Estado de Conservación",
@@ -131,7 +131,7 @@ window.I18N = {
     "met.s4d": "Consolidación y registro técnico de los procesos realizados durante la intervención, incluyendo los tratamientos ejecutados, metodologías aplicadas y materiales utilizados. Esta documentación constituye un insumo fundamental para la conservación de la obra, ya que permite preservar un historial técnico detallado de sus intervenciones y procesos de conservación. Asimismo, facilita futuras evaluaciones o tratamientos, proporcionando al profesional una base de información sólida sobre la trayectoria material y los procesos de restauración previamente aplicados.",
     "met.s4alt": "Informe técnico de intervención desplegado en pantalla.",
     "met.s5t": "Conservación Preventiva",
-    "met.s5d": "Fase de seguimiento y monitoreo continuo de las condiciones de exhibición, almacenamiento y manejo de las obras, orientada a garantizar su adecuada conservación a largo plazo. Este proceso comprende la realización de evaluaciones programadas para analizar el comportamiento de las áreas de almacenamiento y exhibición, así como el control de las condiciones ambientales —temperatura, humedad relativa e iluminación— y la identificación de posibles factores de riesgo que puedan afectar la estabilidad material de las piezas.",
+    "met.s5d": "Fase de seguimiento y monitoreo continuo de las condiciones de exhibición, almacenamiento y manejo de las obras, orientada a garantizar su adecuada conservación a largo plazo. Este proceso comprende la realización de evaluaciones programadas para analizar el comportamiento de las áreas de almacenamiento y exhibición, así como el control de las condiciones ambientales —temperatura, humedad relativa e iluminación— y la identificación de posibles factores de riesgo que puedan afectar la estabilidad material de las piezas o colecciones.",
     "met.s5alt": "Medición de iluminación con luxómetro frente a una pintura en sala de exhibición.",
 
     "bg.lede": "08 — Trayectoria",
@@ -299,7 +299,7 @@ window.I18N = {
     "met.s4d": "Consolidation and technical recording of the processes carried out during treatment, including the treatments performed, methodologies applied and materials used. This documentation is a fundamental resource for the work's conservation, preserving a detailed technical history of its interventions and conservation processes. It also facilitates future assessments or treatments, providing a solid information base on the work's material trajectory and previously applied restoration processes.",
     "met.s4alt": "Technical treatment report displayed on screen.",
     "met.s5t": "Preventive Conservation",
-    "met.s5d": "A phase of continuous follow-up and monitoring of the display, storage and handling conditions of the works, aimed at ensuring their proper long-term conservation. This process includes scheduled assessments to analyze the behavior of storage and display areas, as well as the control of environmental conditions —temperature, relative humidity and lighting— and the identification of possible risk factors that could affect the material stability of the pieces.",
+    "met.s5d": "A phase of continuous follow-up and monitoring of the display, storage and handling conditions of the works, aimed at ensuring their proper long-term conservation. This process includes scheduled assessments to analyze the behavior of storage and display areas, as well as the control of environmental conditions —temperature, relative humidity and lighting— and the identification of possible risk factors that could affect the material stability of the pieces or collections.",
     "met.s5alt": "Light measurement with a lux meter in front of a painting in an exhibition room.",
 
     "bg.lede": "08 — Background",
