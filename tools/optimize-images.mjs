@@ -14,6 +14,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'assets', 'img');
 await mkdir(outDir, { recursive: true });
 await mkdir(path.join(outDir, 'before-after'), { recursive: true });
+await mkdir(path.join(outDir, 'hero'), { recursive: true });
 
 // [sourceRelPath, outName, format, maxEdge, quality]
 const jobs = [
@@ -23,6 +24,9 @@ const jobs = [
   // Section accents.
   ['Resources/4.jpeg', 'tools-flatlay', 'jpeg', 1800, 82],          // Metodología
   ['Resources/3.jpg', 'enfoque-museum', 'jpeg', 1600, 82],          // Enfoque (Monet)
+
+  // Hero — capa fotográfica difuminada (fondo de .hero__photo; va con blur, comprimir fuerte).
+  ['Resources/8.jpeg', 'hero/hero-taller', 'jpeg', 1280, 72],
 ];
 
 const kb = (b) => (b / 1024).toFixed(0).padStart(5) + ' KB';
