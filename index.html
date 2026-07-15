@@ -103,26 +103,34 @@
        V1 · Susurro    → --photo-opacity:.20; --photo-blur:28px; mix-blend-mode:multiply;
        V2 · Atmósfera  → --photo-opacity:.32; --photo-blur:22px; mix-blend-mode:multiply;
        V3 · Presencia  → --photo-opacity:.42; --photo-blur:16px; mix-blend-mode:luminosity;   ← ACTIVA
-         (V3 aclara los ventanales quemados de la foto: si el blanco se dispara,
-          añadir brightness(.7) al principio del filter. Con V1/V2 —multiply— quitarlo.) */
+         (V3 va SIN brightness: la máscara doble mantiene la foto fuera de las zonas de
+          texto. Si al mover foco/radios el rol en pan de oro pierde margen AA, la
+          palanca de rescate es añadir brightness(.7) al principio del filter.) */
   .hero__photo{
     --photo-opacity:.42;   /* ▼ */
     --photo-blur:16px;     /* ▼ */
-    --photo-focus-x:72%;   /* centro de la máscara, hacia el sujeto */
-    --photo-focus-y:45%;
+    --photo-focus-x:76%;   /* centro de la máscara = el sujeto (arriba a la derecha) */
+    --photo-focus-y:38%;
+    --photo-rx:92%;        /* radios del radial: qué tanto “abraza” al sujeto */
+    --photo-ry:88%;
     position:absolute;inset:0;z-index:0;pointer-events:none;
     background:url("assets/img/hero/hero-taller.jpg") right center/cover no-repeat;
     /* overscan: sin él, blur() samplea fuera del elemento y lava los bordes */
-    transform:scale(1.08);transform-origin:72% 45%;
-    filter:brightness(.7) blur(var(--photo-blur)) saturate(.55) sepia(.35);
+    transform:scale(1.08);transform-origin:var(--photo-focus-x) var(--photo-focus-y);
+    filter:blur(var(--photo-blur)) saturate(.55) sepia(.35);
     opacity:var(--photo-opacity);
     mix-blend-mode:luminosity;  /* ▼ */
-    -webkit-mask-image:radial-gradient(120% 100% at var(--photo-focus-x) var(--photo-focus-y),#000 25%,transparent 72%);
-            mask-image:radial-gradient(120% 100% at var(--photo-focus-x) var(--photo-focus-y),#000 25%,transparent 72%);
+    /* Máscara doble en intersección: el radial abraza al sujeto y el linear despeja
+       el cuadrante inferior-izquierdo, donde viven h1, línea de rol y párrafo. */
+    -webkit-mask-image:radial-gradient(var(--photo-rx) var(--photo-ry) at var(--photo-focus-x) var(--photo-focus-y),#000 30%,transparent 60%),linear-gradient(225deg,#000 52%,transparent 68%);
+    -webkit-mask-composite:source-in;
+            mask-image:radial-gradient(var(--photo-rx) var(--photo-ry) at var(--photo-focus-x) var(--photo-focus-y),#000 30%,transparent 60%),linear-gradient(225deg,#000 52%,transparent 68%);
+            mask-composite:intersect;
   }
-  /* Móvil: el h1 ocupa casi todo el ancho — foto más tenue y empujada arriba, lejos del título */
+  /* Móvil: el h1 ocupa casi todo el ancho — radial ancho y bajo (todo el sujeto,
+     nada del título): se apaga verticalmente antes de llegar al h1 */
   @media(max-width:640px){
-    .hero__photo{--photo-opacity:.18;--photo-focus-y:22%}
+    .hero__photo{--photo-opacity:.30;--photo-focus-x:80%;--photo-focus-y:20%;--photo-rx:120%;--photo-ry:55%}
   }
   .hero__rake{position:absolute;inset:-30% -40%;z-index:1;pointer-events:none;
     background:linear-gradient(78deg,transparent 30%,rgba(244,238,224,.05) 43%,rgba(248,243,230,.16) 50%,rgba(244,238,224,.05) 57%,transparent 70%);
