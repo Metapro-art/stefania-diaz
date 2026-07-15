@@ -4,14 +4,17 @@
    main.js:wireConsultoria() renders folder cards; clicking opens the shared
    modal with the area image + multi-paragraph description (i18n keys).
 
-   Each entry: { title_key, desc_keys: [], img }
+   Each entry: { title_key, desc_keys: [], img, pos? }
    desc_keys → array of i18n keys, one per paragraph (rendered in order).
+   pos → object-position del retrato en el modal (la caja recorta a 42vh con
+   object-fit:cover; úsalo cuando el encuadre centrado corte lo importante).
 ============================================================================ */
 window.CONSULTORIA = {
   catalogacion: {
     title_key: "cons.title1",
     desc_keys: ["cons.d1a", "cons.d1b"],
-    img: "assets/img/consultoria/cons-catalogacion.jpg"
+    img: "assets/img/consultoria/cons-catalogacion.jpg",
+    pos: "50% 18%"
   },
   diagnostico: {
     title_key: "cons.title2",

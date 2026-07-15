@@ -355,6 +355,7 @@
           var img = document.createElement("img");
           img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
           img.setAttribute("loading", "lazy"); img.setAttribute("decoding", "async");
+          if (data.pos) img.style.objectPosition = data.pos; // encuadre por imagen (la caja 42vh recorta)
           fig.appendChild(img);
           bodyEl.appendChild(fig);
           var paras = document.createElement("div");
