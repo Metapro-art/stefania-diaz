@@ -2,7 +2,7 @@
    main.js — Stefania Díaz portfolio
    Plain JS, no dependencies. Loaded (with i18n.js + data files) at the end of
    <body> so the DOM exists and the first paint is already translated.
-   Depends on globals: window.I18N, window.INTERVENCIONES, window.PREVENTIVA
+   Depends on globals: window.I18N, window.INTERVENCIONES, window.CONSULTORIA
 ============================================================================ */
 (function () {
   "use strict";
@@ -314,34 +314,6 @@
     });
   }
 
-  // Preventiva: each folder opens the modal with the area image + a short
-  // description (data-driven via window.PREVENTIVA).
-  function wirePreventiva() {
-    var cards = document.querySelectorAll(".folder[data-prev]");
-    if (!cards.length) return;
-    cards.forEach(function (card) {
-      var key = card.getAttribute("data-prev");
-      card.addEventListener("click", function () {
-        openSdModal(function (titleEl, bodyEl) {
-          var data = (window.PREVENTIVA || {})[key];
-          if (!data) return;
-          titleEl.textContent = t(data.title_key);
-          bodyEl.innerHTML = "";
-          var fig = document.createElement("figure");
-          fig.className = "prev-detail";
-          var img = document.createElement("img");
-          img.src = data.img; img.alt = ""; img.setAttribute("aria-hidden", "true");
-          img.setAttribute("loading", "lazy"); img.setAttribute("decoding", "async");
-          var p = document.createElement("p");
-          p.className = "prev-detail__text";
-          p.textContent = t(data.desc_key);
-          fig.appendChild(img); fig.appendChild(p);
-          bodyEl.appendChild(fig);
-        }, card);
-      });
-    });
-  }
-
   // Consultoria: each folder opens the modal with the area image + multi-paragraph
   // description (desc_keys array → one <p> per key, via window.CONSULTORIA).
   function wireConsultoria() {
@@ -458,7 +430,6 @@
   wireHeroRake();
   wireLangToggle();
   wireIntervenciones();
-  wirePreventiva();
   wireConsultoria();
   wireModalI18n();
   wireContactForm();

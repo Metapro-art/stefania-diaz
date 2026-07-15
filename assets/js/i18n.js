@@ -8,8 +8,8 @@
      <tag data-i18n-html="key">       -> innerHTML (only for keys with markup)
      <tag data-i18n-attr="attr:key">  -> sets attribute(s); comma-separated
 
-   Data-driven sections (Intervenciones, Preventiva) keep their structure in
-   assets/data/*.js and reference these keys via title_key/desc_key.
+   Data-driven sections (Intervenciones, Consultoría) keep their structure in
+   assets/data/*.js and reference these keys via title_key/desc_keys.
 ============================================================================ */
 window.I18N = {
   es: {
@@ -138,18 +138,6 @@ window.I18N = {
     "interv.cer.sub": "950 a 400 A. P.",
     "interv.cer.meta": "Valle de Tensa · UPTC, Tunja, Colombia\nMedidas: 8 × 16 × 16 cm",
     "interv.cer.desc": "Esta intervención, desarrollada en el marco de la conservación y restauración del patrimonio arqueológico, tuvo como objetivo restablecer la estabilidad física de la pieza y favorecer la comprensión de su contexto arqueológico, tecnológico y cultural. El proceso incluyó la reconstrucción y estabilización de la copa para facilitar el análisis de su forma original, su técnica de manufactura y su proceso de ejecución. Asimismo, la intervención estuvo acompañada por una investigación orientada a comprender su diseño, función y contexto de uso dentro de los ajuares funerarios, contribuyendo a una mejor interpretación del bien arqueológico. Todo el tratamiento se realizó siguiendo los principios éticos de la conservación-restauración del patrimonio arqueológico, con un riguroso proceso de documentación técnica y el empleo de materiales compatibles, reversibles y claramente diferenciables del original.\n\nEste tipo de tratamientos se lleva a cabo bajo la responsabilidad de instituciones competentes y de conformidad con la normativa vigente de protección y manejo.",
-    "prev.lede": "07 — Conservación preventiva",
-    "prev.heading": "Conservación preventiva y gestión de colecciones",
-    "prev.sub": "Da clic para explorar cada área",
-    "prev.t1": "Catalogación y estudio",
-    "prev.t2": "Apoyo a exhibición",
-    "prev.t3": "Condiciones ambientales",
-    "prev.t4": "Diagnóstico de conservación",
-    "prev.d1": "Registro y documentación técnica de cada obra: identificación de materiales, técnicas de manufactura y estado de conservación, como base para su gestión y cuidado.",
-    "prev.d2": "Acompañamiento técnico en el montaje y desmontaje de exposiciones, garantizando la manipulación, el soporte y la disposición seguros de cada pieza.",
-    "prev.d3": "Medición y evaluación de temperatura, humedad e iluminación en salas y depósitos, con recomendaciones para prevenir el deterioro de las colecciones.",
-    "prev.d4": "Examen del estado de cada obra mediante análisis técnico y registro de deterioros, orientado a definir prioridades y propuestas de conservación.",
-
     "cons.lede": "07 — Consultoría",
     "cons.h": "Conservación Preventiva y Gestión de Colecciones",
     "cons.intro": "Los servicios de conservación preventiva y gestión de colecciones se desarrollan a partir de una metodología estructurada por fases y etapas de trabajo, diseñadas para adaptarse a las necesidades específicas de cada entidad, empresa, institución o coleccionista.",
@@ -364,18 +352,6 @@ window.I18N = {
     "interv.cer.sub": "950 to 400 BP",
     "interv.cer.meta": "Tensa Valley · UPTC, Tunja, Colombia\nDimensions: 8 × 16 × 16 cm",
     "interv.cer.desc": "This intervention, carried out within the field of archaeological heritage conservation, aimed to restore the physical stability of the piece and to support an understanding of its archaeological, technological and cultural context. The process included the reassembly and stabilization of the cup to enable analysis of its original form, its manufacturing technique and its process of execution. The treatment was accompanied by research into its design, function and context of use within funerary assemblages, contributing to a better interpretation of the archaeological object. The entire treatment followed the ethical principles of archaeological heritage conservation, with rigorous technical documentation and the use of compatible, reversible materials clearly distinguishable from the original.\n\nTreatments of this kind are carried out under the responsibility of the competent institutions and in accordance with current protection and management regulations.",
-    "prev.lede": "07 — Preventive conservation",
-    "prev.heading": "Preventive Conservation & Collections Management",
-    "prev.sub": "Click to explore each area",
-    "prev.t1": "Cataloging and study",
-    "prev.t2": "Exhibition support",
-    "prev.t3": "Environmental conditions",
-    "prev.t4": "Condition diagnosis",
-    "prev.d1": "Technical recording and documentation of each work: identification of materials, manufacturing techniques and condition, as a basis for its management and care.",
-    "prev.d2": "Technical assistance during exhibition installation and deinstallation, ensuring safe handling, support and display of each piece.",
-    "prev.d3": "Measurement and assessment of temperature, humidity and lighting in galleries and storage, with recommendations to prevent deterioration of collections.",
-    "prev.d4": "Examination of each work's condition through technical analysis and damage recording, to define priorities and conservation proposals.",
-
     "cons.lede": "07 — Consultancy",
     "cons.h": "Preventive Conservation and Collection Management",
     "cons.intro": "Preventive conservation and collection management services are built on a structured methodology of phases and work stages, designed to adapt to the specific needs of each entity, company, institution or collector.",
