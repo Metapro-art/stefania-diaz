@@ -16,7 +16,6 @@ window.I18N = {
     "meta.title": "Stefania Díaz · Conservación y Restauración de Bienes Culturales",
     "meta.desc": "Conservadora-restauradora especializada en el mercado del arte. Diagnóstico, conservación preventiva y restauración de pintura y escultura. Bogotá, Colombia.",
 
-    "nav.role": "Conservación · Restauración",
     "nav.profile": "Perfil",
     "nav.expertise": "Especialización",
     "nav.market": "Enfoque",
@@ -112,7 +111,7 @@ window.I18N = {
     "interv.esc.desc": "La intervención comprendió un tratamiento integral de conservación y restauración, abordando tanto los aspectos estructurales como los estéticos de la pieza. Debido a su antigüedad, trayectoria histórica y elevado grado de deterioro, fue necesario realizar la reconstrucción de las pérdidas de soporte para restablecer su estabilidad mecánica y garantizar su adecuada conservación.\n\nAsimismo, se efectuó un proceso de limpieza física y química, previamente sustentado en estudios y pruebas de intervención, con el fin de eliminar repintes, materiales ajenos y capas alteradas que impedían la correcta apreciación de la policromía original de la escultura colonial. Todo el proceso se desarrolló siguiendo los criterios éticos de la conservación-restauración, empleando materiales compatibles, estables y de calidad para asegurar la conservación de la pieza a largo plazo.",
     "interv.gr.p1.t": "FERNANDO BOTERO (1932, Colombia)",
     "interv.gr.p1.sub": "Jornaleros, 1949",
-    "interv.gr.p1.meta": "Acuarela sobre papel\nMedidas: 61 × 45,5 cm\nCatalogada en <em>Fernando Botero — La búsqueda de un estilo: 1949–1963</em>. Christian Padilla. Bogotá: La Bachué, 2012.",
+    "interv.gr.p1.meta": "Acuarela sobre papel\nMedidas: 61 × 45,5 cm\n<span class=\"iv-meta__cite\">Catalogada en <em>Fernando Botero — La búsqueda de un estilo: 1949–1963</em>. Christian Padilla. Bogotá: La Bachué, 2012.</span>",
     "interv.gr.p1.desc": "La intervención se centró en la recuperación estructural del soporte de papel, el cual presentaba múltiples pérdidas, rasgaduras y un avanzado estado de debilitamiento como consecuencia de una enmarcación inadecuada realizada en el pasado. En dicha intervención se emplearon materiales incompatibles, como adhesivos epóxicos, cintas adhesivas y otros elementos que, con el paso del tiempo, provocaron tensiones, alteraciones físico-químicas y un deterioro significativo de las fibras del papel. Adicionalmente, la obra evidenciaba signos de actividad biológica, lo que incrementaba su estado de fragilidad.\n\nComo parte del tratamiento, se realizó una limpieza superficial para eliminar el polvo y las partículas adheridas a las fibras del soporte, seguida de la estabilización estructural mediante un procedimiento de doblaje (refuerzo del soporte), con el objetivo de devolver resistencia mecánica al papel sin comprometer su integridad. Posteriormente, las pérdidas de soporte fueron reconstruidas utilizando materiales compatibles y estables, y se llevó a cabo la reintegración estética de las áreas afectadas mediante técnicas de reintegración mimética, favoreciendo una lectura visual coherente de la obra. Todo el proceso se desarrolló bajo los principios éticos de la conservación-restauración, priorizando la compatibilidad de los materiales, la mínima intervención y el respeto por la técnica pictórica y la autenticidad de la pieza.",
     "interv.gr.p2.t": "ANDY WARHOL (1928, Estados Unidos)",
     "interv.gr.p2.sub": "«Mick Jagger» Red (FS II.139), 1975",
@@ -253,7 +252,6 @@ window.I18N = {
     "meta.title": "Stefania Díaz · Conservation & Restoration of Cultural Heritage",
     "meta.desc": "Conservator-restorer specializing in the art market. Diagnosis, preventive conservation and restoration of paintings and sculpture. Bogotá, Colombia.",
 
-    "nav.role": "Conservation · Restoration",
     "nav.profile": "Profile",
     "nav.expertise": "Expertise",
     "nav.market": "Focus",
@@ -349,7 +347,7 @@ window.I18N = {
     "interv.esc.desc": "The intervention comprised a comprehensive conservation and restoration treatment addressing both the structural and the aesthetic condition of the piece. Given its age, its historical trajectory and its advanced state of deterioration, reconstruction of the losses in the support was necessary to restore mechanical stability and ensure adequate preservation.\n\nA physical and chemical cleaning was also carried out, grounded in prior studies and cleaning tests, in order to remove overpaint, extraneous materials and altered layers that prevented a correct appreciation of the original polychromy of this colonial sculpture. The entire process followed the ethical criteria of conservation-restoration, using compatible, stable, high-quality materials to secure the long-term preservation of the piece.",
     "interv.gr.p1.t": "FERNANDO BOTERO (1932, Colombia)",
     "interv.gr.p1.sub": "Jornaleros, 1949",
-    "interv.gr.p1.meta": "Watercolor on paper\nDimensions: 61 × 45.5 cm\nCatalogued in <em>Fernando Botero — La búsqueda de un estilo: 1949–1963</em>. Christian Padilla. Bogotá: La Bachué, 2012.",
+    "interv.gr.p1.meta": "Watercolor on paper\nDimensions: 61 × 45.5 cm\n<span class=\"iv-meta__cite\">Catalogued in <em>Fernando Botero — La búsqueda de un estilo: 1949–1963</em>. Christian Padilla. Bogotá: La Bachué, 2012.</span>",
     "interv.gr.p1.desc": "Treatment focused on the structural recovery of the paper support, which presented multiple losses, tears and an advanced state of weakening caused by an inadequate framing carried out in the past. That framing used incompatible materials — epoxy adhesives, pressure-sensitive tapes and other elements — which over time produced tensions, physico-chemical alterations and significant deterioration of the paper fibers. The work also showed signs of biological activity, increasing its fragility.\n\nTreatment began with a surface cleaning to remove dust and particulates adhered to the fibers of the support, followed by structural stabilization through lining, in order to return mechanical strength to the paper without compromising its integrity. The losses in the support were then reconstructed with compatible, stable materials, and the affected areas were aesthetically reintegrated using mimetic retouching, favoring a coherent visual reading of the work. The entire process followed the ethical principles of conservation-restoration, prioritizing material compatibility, minimal intervention and respect for the artist's technique and the authenticity of the piece.",
     "interv.gr.p2.t": "ANDY WARHOL (1928, United States)",
     "interv.gr.p2.sub": "\"Mick Jagger\" Red (FS II.139), 1975",
