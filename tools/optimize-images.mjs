@@ -6,7 +6,7 @@
 //
 // To add a new image: add a row to `jobs` and re-run. Originals are never modified.
 import sharp from 'sharp';
-import { mkdir, stat } from 'node:fs/promises';
+import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -64,3 +64,31 @@ for (const [rel, name, format, maxEdge, quality, crop] of jobs) {
 console.log('-'.repeat(72));
 console.log(`TOTAL ${kb(totalIn)} -> ${kb(totalOut)}  (${jobs.length} images, saved ${((1 - totalOut / totalIn) * 100).toFixed(0)}%)`);
 console.log('Assets written to assets/img/');
+
+// --- Pair sync ---------------------------------------------------------------
+// Ambas imágenes de un par antes/después DEBEN medir lo mismo (regla de
+// assets/data/intervenciones.js): con object-fit:cover, proporciones distintas se
+// recortan distinto y la obra "salta" al arrastrar el handle del slider.
+// AQUÍ SOLO van pares diagnosticados como artefacto de exportación (fotos
+// alineadas, offset ≈ 0 tras recorte común centrado). Los pares con desregistro
+// fotográfico real NO se recortan: igualar píxeles sin registro sería maquillaje.
+const pairSync = [
+  // gr/p6b — verso Kraft de Wolff: alineado (offset 0.28%), desfase 1061 vs 1035 de ancho.
+  ['assets/img/intervenciones/grafica/p6/b-antes.jpg', 'assets/img/intervenciones/grafica/p6/b-despues.jpg'],
+];
+for (const pair of pairSync) {
+  const abs = pair.map((p) => path.join(root, p));
+  const metas = await Promise.all(abs.map((p) => sharp(p).metadata()));
+  const cw = Math.min(...metas.map((m) => m.width));
+  const ch = Math.min(...metas.map((m) => m.height));
+  for (let i = 0; i < abs.length; i++) {
+    const m = metas[i];
+    if (m.width === cw && m.height === ch) continue;
+    const buf = await sharp(abs[i])
+      .extract({ left: Math.floor((m.width - cw) / 2), top: Math.floor((m.height - ch) / 2), width: cw, height: ch })
+      .jpeg({ quality: 92, mozjpeg: true, progressive: true })
+      .toBuffer();
+    await writeFile(abs[i], buf);
+    console.log(`pair-sync ${pair[i]}  ${m.width}x${m.height} -> ${cw}x${ch}`);
+  }
+}
