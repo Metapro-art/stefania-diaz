@@ -363,8 +363,62 @@
     var form = document.getElementById("contact-form");
     var statusEl = document.getElementById("cf-status");
     if (!form || !statusEl) return;
+
+    // 'coleccion' es opcional: un segundo clic sobre el mismo radio lo deselecciona.
+    form.querySelectorAll('input[name="coleccion"]').forEach(function (r) {
+      r.addEventListener("click", function () {
+        if (this.dataset.was === "1") { this.checked = false; delete this.dataset.was; }
+        else {
+          form.querySelectorAll('input[name="coleccion"]').forEach(function (o) { delete o.dataset.was; });
+          this.dataset.was = "1";
+        }
+      });
+    });
+    form.addEventListener("reset", function () { // tras enviar, el flag no puede quedar obsoleto
+      form.querySelectorAll('input[name="coleccion"]').forEach(function (o) { delete o.dataset.was; });
+    });
+
+    // Validación propia (el form lleva novalidate para que los errores salgan
+    // inline, estilados y en el idioma del sitio — no burbujas del navegador).
+    // Obligatorios: SOLO nombre, correo y mensaje. Nada del bloque de obra bloquea.
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function setFieldError(input, errId, msgKey) {
+      var errEl = document.getElementById(errId);
+      if (msgKey) {
+        errEl.textContent = t(msgKey);
+        errEl.hidden = false;
+        input.setAttribute("aria-invalid", "true");
+        input.setAttribute("aria-describedby", errId);
+      } else {
+        errEl.textContent = "";
+        errEl.hidden = true;
+        input.removeAttribute("aria-invalid");
+        input.removeAttribute("aria-describedby");
+      }
+    }
+    function validate() {
+      var checks = [
+        { el: document.getElementById("cf-name"), err: "cf-name-err", key: "con.errName",
+          ok: function (v) { return !!v.trim(); } },
+        { el: document.getElementById("cf-email"), err: "cf-email-err", key: "con.errEmail",
+          ok: function (v) { return EMAIL_RE.test(v.trim()); } },
+        { el: document.getElementById("cf-message"), err: "cf-message-err", key: "con.errMessage",
+          ok: function (v) { return !!v.trim(); } }
+      ];
+      var firstBad = null;
+      checks.forEach(function (c) {
+        var good = c.ok(c.el.value);
+        setFieldError(c.el, c.err, good ? null : c.key);
+        if (!good && !firstBad) firstBad = c.el;
+      });
+      if (firstBad) { firstBad.focus(); return false; }
+      return true;
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      if (!validate()) return; // sin envío: errores inline + foco al primer inválido
 
       // hCaptcha token must travel in the POST body for Web3Forms to verify it.
       var token = "";
@@ -383,6 +437,24 @@
       statusEl.textContent = t("con.formSending");
 
       var formData = new FormData(form);
+
+      // Asunto autocompuesto para triage desde la bandeja, en el idioma del visitante:
+      // "Consulta web · {tipologia} · {coleccion} · {nombre}" — los vacíos se omiten.
+      var subj = [t("con.subjectPrefix")];
+      ["tipologia", "coleccion"].forEach(function (k) {
+        var v = String(formData.get(k) || "").trim();
+        if (v) subj.push(v);
+      });
+      var who = String(formData.get("name") || "").trim();
+      if (who) subj.push(who);
+      formData.set("subject", subj.join(" · "));
+
+      // Web3Forms (free) no tiene plantillas de correo: el email lista lo enviado.
+      // Fuera los campos vacíos para que a Stefania le llegue solo lo que llenaron.
+      Array.from(formData.keys()).forEach(function (k) {
+        if (!String(formData.get(k)).trim()) formData.delete(k);
+      });
+
       formData.set("h-captcha-response", token); // ensure the token is included
       formData.delete("g-recaptcha-response");   // avoid Web3Forms treating it as reCaptcha (Pro feature)
 

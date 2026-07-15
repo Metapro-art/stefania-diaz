@@ -275,6 +275,32 @@
   .cform input,.cform textarea{font-family:var(--serif);font-size:1rem;color:var(--bone);background:rgba(236,232,222,.04);border:1px solid var(--line-d);border-radius:2px;padding:.7rem .85rem;width:100%;transition:border-color .25s,background .25s}
   .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gilt);background:rgba(236,232,222,.07)}
   .cform textarea{resize:vertical;min-height:7rem;line-height:1.55}
+  /* Controles nuevos del bloque de admisión de obra — mismos tokens que los inputs */
+  .cform select{font-family:var(--serif);font-size:1rem;color:var(--bone);width:100%;cursor:pointer;
+    background-color:rgba(236,232,222,.04);border:1px solid var(--line-d);border-radius:2px;padding:.7rem 2.6rem .7rem .85rem;
+    appearance:none;-webkit-appearance:none;transition:border-color .25s,background-color .25s;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23ece8de' stroke-width='1.5'/></svg>");
+    background-repeat:no-repeat;background-position:right .9rem center}
+  .cform select:focus{outline:none;border-color:var(--gilt);background-color:rgba(236,232,222,.07)}
+  .cform select option{background:#1b1f23;color:var(--bone)}
+  .cform__details{border:1px solid var(--line-d);border-radius:2px;background:rgba(236,232,222,.02)}
+  .cform__details summary{list-style:none;cursor:pointer;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-d);padding:.9rem 1rem;transition:color .25s}
+  .cform__details summary::-webkit-details-marker{display:none}
+  .cform__details summary::after{content:"+";float:right;color:var(--gilt);font-size:1rem;line-height:1}
+  .cform__details[open] summary::after{content:"–"}
+  .cform__details summary:hover{color:var(--bone)}
+  .cform__details summary:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
+  .cform__obj{display:grid;gap:1.05rem;padding:.3rem 1rem 1.2rem}
+  .cform__radios{border:none;margin:0;padding:0;display:grid;gap:.55rem}
+  .cform__radios legend{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d);padding:0;margin-bottom:.45rem}
+  .cform__radio{display:flex;align-items:center;gap:.65rem;font-family:var(--serif);font-size:.98rem;color:var(--bone);cursor:pointer;min-height:30px}
+  .cform__radio input{appearance:none;-webkit-appearance:none;width:18px;height:18px;flex:none;margin:0;cursor:pointer;
+    border:1px solid var(--line-d);border-radius:50%;background-color:rgba(236,232,222,.04);transition:border-color .25s}
+  .cform__radio input:checked{border-color:var(--gilt);background:radial-gradient(circle,var(--gilt) 0 5px,transparent 5.5px)}
+  .cform__radio input:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(182,144,79,.55)}
+  .cform__help{font-family:var(--mono);font-size:.64rem;letter-spacing:.04em;color:var(--muted-d);line-height:1.6;margin-top:.4rem;max-width:60ch}
+  .cform__err{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;color:var(--oxide);margin-top:.35rem}
+  .cform input[aria-invalid="true"],.cform textarea[aria-invalid="true"]{border-color:var(--oxide)}
   .cform__send{justify-self:start;font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--shadow-3);background:var(--gilt);border:1px solid var(--gilt);border-radius:2px;padding:.75rem 1.5rem;cursor:pointer;transition:background .25s,color .25s}
   .cform__send:hover{background:transparent;color:var(--gilt)}
   .cform__send:focus-visible{outline:none;box-shadow:0 0 0 2px var(--shadow-3),0 0 0 4px var(--lapis)}
@@ -671,21 +697,79 @@
       <input type="hidden" name="access_key" value="a4b49bd6-f1e4-4c80-ad62-a716e0e9474f">
       <input type="hidden" name="from_name" value="Sitio web · stefaniadiaz.art">
       <input type="checkbox" name="botcheck" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <!-- Bloque A — contacto. Obligatorios: solo nombre, correo y mensaje. -->
       <div class="cform__row">
         <label for="cf-name" data-i18n="con.formName">Nombre</label>
         <input id="cf-name" type="text" name="name" autocomplete="name" required>
+        <p class="cform__err" id="cf-name-err" role="alert" hidden></p>
       </div>
       <div class="cform__row">
         <label for="cf-email" data-i18n="con.formEmail">Correo</label>
         <input id="cf-email" type="email" name="email" autocomplete="email" required>
+        <p class="cform__err" id="cf-email-err" role="alert" hidden></p>
       </div>
       <div class="cform__row">
-        <label for="cf-subject" data-i18n="con.formSubject">Asunto</label>
-        <input id="cf-subject" type="text" name="subject">
+        <label for="cf-whatsapp" data-i18n="con.formWhatsapp">WhatsApp (opcional)</label>
+        <input id="cf-whatsapp" type="tel" name="whatsapp" autocomplete="tel" inputmode="tel">
       </div>
+
+      <!-- Bloque B — admisión de obra: TODO opcional; nada de aquí bloquea el envío. -->
+      <details class="cform__details">
+        <summary data-i18n="con.objSummary">¿Consultas por una obra específica?</summary>
+        <div class="cform__obj">
+          <div class="cform__row">
+            <label for="cf-tipologia" data-i18n="con.formTipologia">Tipología</label>
+            <select id="cf-tipologia" name="tipologia">
+              <option value="" data-i18n="con.tipo0">Selecciona una opción</option>
+              <option value="Pintura de caballete sobre lienzo o madera" data-i18n-attr="value:con.tipo1" data-i18n="con.tipo1">Pintura de caballete sobre lienzo o madera</option>
+              <option value="Escultura policromada" data-i18n-attr="value:con.tipo2" data-i18n="con.tipo2">Escultura policromada</option>
+              <option value="Obra gráfica y patrimonio documental" data-i18n-attr="value:con.tipo3" data-i18n="con.tipo3">Obra gráfica y patrimonio documental</option>
+              <option value="Cerámica arqueológica" data-i18n-attr="value:con.tipo4" data-i18n="con.tipo4">Cerámica arqueológica</option>
+              <option value="Otro / No estoy seguro" data-i18n-attr="value:con.tipo5" data-i18n="con.tipo5">Otro / No estoy seguro</option>
+            </select>
+          </div>
+          <fieldset class="cform__radios">
+            <legend data-i18n="con.formColeccion">Tipo de colección</legend>
+            <label class="cform__radio"><input type="radio" name="coleccion" value="Colección privada" data-i18n-attr="value:con.colPriv"><span data-i18n="con.colPriv">Colección privada</span></label>
+            <label class="cform__radio"><input type="radio" name="coleccion" value="Colección institucional" data-i18n-attr="value:con.colInst"><span data-i18n="con.colInst">Colección institucional</span></label>
+          </fieldset>
+          <div class="cform__row">
+            <label for="cf-autor" data-i18n="con.formAutor">Autor</label>
+            <input id="cf-autor" type="text" name="autor">
+          </div>
+          <div class="cform__row">
+            <label for="cf-titulo" data-i18n="con.formTitulo">Título de la obra</label>
+            <input id="cf-titulo" type="text" name="titulo">
+          </div>
+          <div class="cform__row">
+            <label for="cf-anio" data-i18n="con.formAnio">Año o época</label>
+            <input id="cf-anio" type="text" name="anio">
+          </div>
+          <div class="cform__row">
+            <label for="cf-tecnica" data-i18n="con.formTecnica">Técnica o material</label>
+            <input id="cf-tecnica" type="text" name="tecnica">
+          </div>
+          <div class="cform__row">
+            <label for="cf-dimensiones" data-i18n="con.formDimensiones">Dimensiones</label>
+            <input id="cf-dimensiones" type="text" name="dimensiones">
+          </div>
+          <div class="cform__row">
+            <label for="cf-ubicacion" data-i18n="con.formUbicacion">Ubicación de la obra</label>
+            <input id="cf-ubicacion" type="text" name="ubicacion">
+          </div>
+          <div class="cform__row">
+            <label for="cf-fotos" data-i18n="con.formFotos">Enlace a fotos</label>
+            <input id="cf-fotos" type="text" name="fotos" aria-describedby="cf-fotos-help">
+            <p class="cform__help" id="cf-fotos-help" data-i18n="con.fotosHelp">Comparte un enlace (Google Drive, WeTransfer, Dropbox) con dos imágenes: una general de la pieza y otra del detalle del deterioro. Si no tienes dónde subirlas, escríbelo en el mensaje y te digo cómo enviármelas.</p>
+          </div>
+        </div>
+      </details>
+
+      <!-- Bloque C — mensaje (el asunto del correo se compone solo en el handler). -->
       <div class="cform__row">
-        <label for="cf-message" data-i18n="con.formMessage">Mensaje</label>
+        <label for="cf-message" data-i18n="con.formMessage">¿En qué puedo ayudarte?</label>
         <textarea id="cf-message" name="message" rows="5" required></textarea>
+        <p class="cform__err" id="cf-message-err" role="alert" hidden></p>
       </div>
       <div class="h-captcha" data-theme="dark" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
       <button type="submit" class="cform__send" data-i18n="con.formSend">Enviar mensaje</button>
