@@ -101,22 +101,22 @@
      La dueña tunea solo las variables. Para cambiar de variante, sustituir los TRES
      valores marcados con ▼ por los de la fila elegida:
        V1 · Susurro    → --photo-opacity:.20; --photo-blur:28px; mix-blend-mode:multiply;
-       V2 · Atmósfera  → --photo-opacity:.32; --photo-blur:22px; mix-blend-mode:multiply;   ← ACTIVA
-       V3 · Presencia  → --photo-opacity:.42; --photo-blur:16px; mix-blend-mode:luminosity;
+       V2 · Atmósfera  → --photo-opacity:.32; --photo-blur:22px; mix-blend-mode:multiply;
+       V3 · Presencia  → --photo-opacity:.42; --photo-blur:16px; mix-blend-mode:luminosity;   ← ACTIVA
          (V3 aclara los ventanales quemados de la foto: si el blanco se dispara,
-          añadir brightness(.7) al principio del filter.) */
+          añadir brightness(.7) al principio del filter. Con V1/V2 —multiply— quitarlo.) */
   .hero__photo{
-    --photo-opacity:.32;   /* ▼ */
-    --photo-blur:22px;     /* ▼ */
+    --photo-opacity:.42;   /* ▼ */
+    --photo-blur:16px;     /* ▼ */
     --photo-focus-x:72%;   /* centro de la máscara, hacia el sujeto */
     --photo-focus-y:45%;
     position:absolute;inset:0;z-index:0;pointer-events:none;
     background:url("assets/img/hero/hero-taller.jpg") right center/cover no-repeat;
     /* overscan: sin él, blur() samplea fuera del elemento y lava los bordes */
     transform:scale(1.08);transform-origin:72% 45%;
-    filter:blur(var(--photo-blur)) saturate(.55) sepia(.35);
+    filter:brightness(.7) blur(var(--photo-blur)) saturate(.55) sepia(.35);
     opacity:var(--photo-opacity);
-    mix-blend-mode:multiply;  /* ▼ */
+    mix-blend-mode:luminosity;  /* ▼ */
     -webkit-mask-image:radial-gradient(120% 100% at var(--photo-focus-x) var(--photo-focus-y),#000 25%,transparent 72%);
             mask-image:radial-gradient(120% 100% at var(--photo-focus-x) var(--photo-focus-y),#000 25%,transparent 72%);
   }
