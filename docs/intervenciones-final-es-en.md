@@ -288,6 +288,7 @@ Siglo XX
 Lápices de color, lápiz de grafito y tinta de esfero industrial sobre papel industrial tipo Kraft
 Boceto para vitral
 Medidas: 67 × 54,5 cm
+Archivo General de la Nación
 
 > La intervención consistió en un tratamiento integral de conservación y restauración, debido al avanzado estado de deterioro que presentaba la obra. Las alteraciones eran consecuencia tanto del envejecimiento natural y la fragilidad inherente del soporte de papel, como de intervenciones anteriores inadecuadas, evidenciadas por la presencia de adhesivos incompatibles, rasgaduras, pliegues, deformaciones y otros daños que comprometían su estabilidad estructural.
 >
@@ -299,6 +300,7 @@ WALTER WOLFF
 Colored pencil, graphite and ballpoint ink on industrial kraft paper
 Design for a stained-glass window
 Dimensions: 67 × 54.5 cm
+Archivo General de la Nación (National Archive of Colombia)
 
 > Treatment comprised a comprehensive conservation and restoration intervention, prompted by the advanced state of deterioration of the work. The alterations resulted both from natural aging and the inherent fragility of the paper support, and from earlier inadequate interventions, evidenced by incompatible adhesives, tears, folds, distortions and other damage compromising its structural stability.
 >
