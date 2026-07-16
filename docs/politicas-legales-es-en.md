@@ -4,17 +4,19 @@
 
 ---
 
-## ANTES DE PUBLICAR — datos que faltan
+## Registro de publicación
 
-| Campo | Dónde | Nota |
-|---|---|---|
-| `[NOMBRE LEGAL COMPLETO]` | Doc. 1, §1 | Como aparece en la cédula |
-| `[CORREO DE CONTACTO]` | Doc. 1 §1 y §8, Doc. 2 §6 | Puede ser el mismo del formulario |
-| `[FECHA]` | Doc. 1, §10 | Fecha de publicación |
+Publicado el **16 de julio de 2026** en stefaniadiaz.art. Este archivo es el registro de qué se publicó y debe coincidir con el sitio.
 
-**Una tensión que hay que resolver:** el Decreto 1377 art. 13 num. 1 pide *«domicilio, dirección, correo electrónico y teléfono del Responsable»*. En el sitio no aparece su teléfono, por decisión deliberada. Dejé **ciudad + correo** y omití dirección y teléfono. Es lo que hace la mayoría de profesionales independientes en Colombia y el riesgo es bajo, pero **es una desviación de la letra de la norma** y ella debe saberlo. Un abogado decide si la deja así.
+| Dato | Valor publicado |
+|---|---|
+| Responsable | **Stefania Corredor Díaz**, quien ejerce profesionalmente como *Stefania Díaz* (Doc. 1, §1) |
+| Canal de contacto | El **formulario de contacto** del sitio — no se publica ningún correo (Doc. 1 §1 y §8; Doc. 2 §4 y §6) |
+| Fecha de vigencia | 16 de julio de 2026 (Doc. 1, §10; y dentro del valor de la casilla de autorización del formulario) |
 
-**Y una verificación para Claude Code:** el Documento 1 §4 afirma que el sitio no usa cookies ni analítica. **Si el sitio tiene Google Analytics, Meta Pixel, Hotjar o cualquier cosa parecida, esa frase es falsa** y el documento entero pierde credibilidad. Verificar antes.
+**Desviación conocida.** El Decreto 1377 art. 13 num. 1 exige que la política contenga nombre, domicilio, dirección, correo electrónico y teléfono del Responsable. Esta política publica **nombre y ciudad**; omite dirección, correo y teléfono por decisión de la Responsable, y encauza todo el contacto por el formulario del sitio. El §8 acota el tratamiento de las solicitudes de derechos para evitar la circularidad. **Punto a validar con asesoría legal.**
+
+**Servicios de terceros (verificado).** El sitio no usa Google Analytics, Meta Pixel, Hotjar ni analítica alguna. Cargan dos terceros: hCaptcha en el formulario de contacto (instala una cookie técnica de seguridad de su propio dominio, hcaptcha.com) y Google Fonts (hace visible la IP a Google, sin cookies). Ambos se declaran en el §4 del Documento 1. La única preferencia que el sitio guarda localmente es el idioma elegido (sd-lang).
 
 ---
 ---
@@ -25,10 +27,10 @@
 
 ### 1. Responsable del tratamiento
 
-**[NOMBRE LEGAL COMPLETO]**, persona natural, conservadora-restauradora de bienes culturales, con domicilio en Bogotá D.C., Colombia.
-Correo electrónico para asuntos de datos personales: **[CORREO DE CONTACTO]**
+**Stefania Corredor Díaz**, quien ejerce profesionalmente como *Stefania Díaz*, persona natural, conservadora-restauradora de bienes culturales, con domicilio en Bogotá D.C., Colombia.
+Canal de contacto para asuntos de datos personales: el [formulario de contacto](https://stefaniadiaz.art/#contacto) de este sitio.
 
-La atención de peticiones, consultas y reclamos relacionados con datos personales está a cargo directamente de la Responsable, a través del correo indicado.
+La atención de peticiones, consultas y reclamos relacionados con datos personales está a cargo directamente de la Responsable, a través del canal indicado.
 
 ### 2. Marco legal
 
@@ -87,13 +89,15 @@ De conformidad con el artículo 8 de la Ley 1581 de 2012, usted tiene derecho a:
 
 ### 8. Procedimiento para ejercer sus derechos
 
-Escriba a **[CORREO DE CONTACTO]** indicando su nombre, la descripción de su solicitud y un dato de contacto.
+Escriba a través del [formulario de contacto](https://stefaniadiaz.art/#contacto) de este sitio, indicando su nombre, la descripción de su solicitud y un dato de contacto.
 
 **Consultas.** Se atienden en un término máximo de **diez (10) días hábiles** contados desde su recibo. Si no es posible atenderla en ese plazo, se le informará antes del vencimiento y se le indicará la fecha de respuesta, que no superará los **cinco (5) días hábiles** siguientes.
 
 **Reclamos.** Se atienden en un término máximo de **quince (15) días hábiles** contados desde el día siguiente a su recibo. Si no es posible atenderlo en ese plazo, se le informará antes del vencimiento los motivos y la fecha de respuesta, que no superará los **ocho (8) días hábiles** siguientes.
 
 Si el reclamo está incompleto, se le requerirá dentro de los **cinco (5) días** siguientes para que lo complete. Transcurridos **dos (2) meses** sin que presente la información requerida, se entenderá que ha desistido.
+
+Cuando usted use el formulario para ejercer cualquiera de los derechos del numeral 7, los datos que suministre en esa solicitud se tratarán **únicamente** para identificarlo, atenderla y dejar constancia de la respuesta. No se usarán para ninguna otra finalidad de las descritas en el numeral 5, y se conservarán solo durante el tiempo necesario para acreditar que la solicitud fue atendida.
 
 ### 9. Seguridad y conservación
 
@@ -103,7 +107,7 @@ Sus datos se conservan mientras subsista la finalidad que motivó su recolecció
 
 ### 10. Vigencia
 
-Esta política rige desde el **[FECHA]**. Las bases de datos asociadas se mantendrán vigentes mientras subsista la actividad profesional de la Responsable y las finalidades descritas.
+Esta política rige desde el **16 de julio de 2026**. Las bases de datos asociadas se mantendrán vigentes mientras subsista la actividad profesional de la Responsable y las finalidades descritas.
 
 Cualquier cambio sustancial se comunicará en este mismo sitio antes de su entrada en vigor. Se recomienda consultarla periódicamente.
 
@@ -119,10 +123,10 @@ Esta política se publica también en inglés, como traducción de cortesía. En
 
 ### 1. Data Controller
 
-**[NOMBRE LEGAL COMPLETO]**, a natural person, conservator-restorer of cultural property, domiciled in Bogotá D.C., Colombia.
-Email for personal data matters: **[CORREO DE CONTACTO]**
+**Stefania Corredor Díaz**, professionally known as *Stefania Díaz*, a natural person, conservator-restorer of cultural property, domiciled in Bogotá D.C., Colombia.
+Contact channel for personal data matters: the [contact form](https://stefaniadiaz.art/#contacto) on this site.
 
-Requests, inquiries and complaints regarding personal data are handled directly by the Controller at the email above.
+Requests, inquiries and complaints regarding personal data are handled directly by the Controller through the channel indicated.
 
 ### 2. Legal framework
 
@@ -181,13 +185,15 @@ Under Article 8 of Law 1581 of 2012, you have the right to:
 
 ### 8. How to exercise your rights
 
-Write to **[CORREO DE CONTACTO]** stating your name, a description of your request and a contact detail.
+Write through the [contact form](https://stefaniadiaz.art/#contacto) on this site, stating your name, a description of your request and a contact detail.
 
 **Inquiries** are answered within a maximum of **ten (10) business days**. If that is not possible, you will be informed before expiry and given a response date no later than **five (5) business days** thereafter.
 
 **Complaints** are answered within a maximum of **fifteen (15) business days** from the day following receipt. If that is not possible, you will be informed of the reasons and given a response date no later than **eight (8) business days** thereafter.
 
 If a complaint is incomplete, you will be asked within **five (5) days** to complete it. If **two (2) months** pass without the requested information, the complaint is deemed withdrawn.
+
+Where you use the form to exercise any of the rights in section 7, the data you provide in that request will be processed **solely** to identify you, handle the request and record the response. It will not be used for any other purpose described in section 5, and will be retained only for as long as necessary to evidence that the request was handled.
 
 ### 9. Security and retention
 
@@ -197,7 +203,7 @@ Your data is kept for as long as the purpose that motivated its collection subsi
 
 ### 10. Effective date
 
-This policy is effective as of **[FECHA]**. The associated databases remain in force for as long as the Controller's professional activity and the purposes described subsist.
+This policy is effective as of **July 16, 2026**. The associated databases remain in force for as long as the Controller's professional activity and the purposes described subsist.
 
 Any substantial change will be announced on this site before it takes effect.
 
@@ -243,7 +249,7 @@ En consecuencia, **la autorización de Stefania Díaz no basta por sí sola** pa
 
 En Colombia, el plazo general de protección para obras de personas naturales es la **vida del autor y ochenta (80) años más** (Ley 23 de 1982, art. 21).
 
-**Solicitudes de autorización: [CORREO DE CONTACTO].** Indique qué imagen desea usar, con qué fin y en qué medio.
+**Solicitudes de autorización: a través del [formulario de contacto](https://stefaniadiaz.art/#contacto).** Indique qué imagen desea usar, con qué fin y en qué medio.
 
 ### 5. Obras en dominio público
 
@@ -255,7 +261,7 @@ Que una obra esté en dominio público **no libera la fotografía**: la imagen s
 
 Cada obra se publica con **atribución expresa a su autor** y con fines exclusivamente de documentación técnica de la intervención de conservación.
 
-**Si usted es titular de derechos sobre una obra reproducida en este sitio, o su derechohabiente, y desea que la imagen se modifique o se retire, escriba a [CORREO DE CONTACTO] y la solicitud se atenderá de inmediato.**
+**Si usted es titular de derechos sobre una obra reproducida en este sitio, o su derechohabiente, y desea que la imagen se modifique o se retire, escriba a través del [formulario de contacto](https://stefaniadiaz.art/#contacto) y la solicitud se atenderá de inmediato.**
 
 ### 7. Bienes arqueológicos
 
@@ -312,7 +318,7 @@ Accordingly, **authorization from Stefania Díaz is not sufficient on its own** 
 
 In Colombia, the general term of protection for works by natural persons is the **life of the author plus eighty (80) years** (Law 23 of 1982, art. 21).
 
-**Authorization requests: [CORREO DE CONTACTO].** State which image, for what purpose and in what medium.
+**Authorization requests: through the [contact form](https://stefaniadiaz.art/#contacto).** State which image, for what purpose and in what medium.
 
 ### 5. Works in the public domain
 
@@ -324,7 +330,7 @@ A work being in the public domain **does not free the photograph**: the image re
 
 Each work is published with **express attribution to its author** and solely for the purpose of technical documentation of the conservation treatment.
 
-**If you are a rightsholder of a work reproduced on this site, or their successor, and wish an image to be modified or removed, write to [CORREO DE CONTACTO] and the request will be addressed immediately.**
+**If you are a rightsholder of a work reproduced on this site, or their successor, and wish an image to be modified or removed, write through the [contact form](https://stefaniadiaz.art/#contacto) and the request will be addressed immediately.**
 
 ### 7. Archaeological property
 

@@ -339,6 +339,8 @@
   .legal__s li{font-family:var(--serif);font-size:.98rem;line-height:1.6;color:#cfccc2;margin:.3rem 0;max-width:70ch}
   .legal__s strong{color:var(--bone);font-weight:500}
   .legal__s em{font-style:italic}
+  .legal__s a{color:var(--gilt);text-decoration:underline;text-underline-offset:2px}
+  .legal__s a:hover{color:var(--bone)}
 
   /* METODOLOGÍA */
   .method__head{max-width:46rem}
@@ -808,10 +810,10 @@
       <!-- Autorización de tratamiento de datos (Ley 1581/2012, art. 9): previa, expresa e
            informada. Va ANTES del captcha y el botón; arranca SIN marcar; bloquea el envío.
            El valor (autorizacion_datos) viaja en el FormData y ES la prueba de qué versión
-           de la política se aceptó — por eso incluye [FECHA] y el idioma mostrado. -->
+           de la política se aceptó — por eso incluye la fecha de versión y el idioma mostrado. -->
       <div class="cform__consent">
         <label class="cform__check" for="cf-consent">
-          <input id="cf-consent" type="checkbox" name="autorizacion_datos" value="Sí — Política de Tratamiento de Datos Personales, versión del [FECHA]" data-i18n-attr="value:con.consentValue" required>
+          <input id="cf-consent" type="checkbox" name="autorizacion_datos" value="Sí — Política de Tratamiento de Datos Personales, versión del 16 de julio de 2026" data-i18n-attr="value:con.consentValue" required>
           <span data-i18n-html="con.consent">Autorizo el tratamiento de mis datos personales conforme a la <a class='legal-link' data-legal='politica-datos' href='#politica-datos'>Política de Tratamiento de Datos Personales</a>, incluida su transmisión a Web3Forms (Estados Unidos) para el envío de este mensaje.</span>
         </label>
         <p class="cform__err" id="cf-consent-err" role="alert" hidden></p>

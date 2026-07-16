@@ -429,10 +429,25 @@
   }
 
   function wireLegal() {
-    // Delegación: cualquier [data-legal] abre su modal sin navegar ni enviar el
-    // formulario. En la casilla, stopPropagation evita marcar/desmarcar el checkbox.
+    // Delegación de clics para los enlaces legales.
     document.addEventListener("click", function (e) {
-      var a = e.target.closest && e.target.closest("[data-legal]");
+      if (!e.target.closest) return;
+      // Enlaces "formulario de contacto" DENTRO de un modal legal: cierran el modal
+      // (lo que limpia el hash y devuelve el foco), y llevan al formulario sin dejar
+      // la página bloqueada ni un hash colgado.
+      var formLink = e.target.closest(".legal-form-link");
+      if (formLink) {
+        e.preventDefault();
+        closeSdModal();
+        var sec = document.getElementById("contacto");
+        if (sec) sec.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        var name = document.getElementById("cf-name");
+        if (name) { try { name.focus({ preventScroll: true }); } catch (err) { name.focus(); } }
+        return;
+      }
+      // Cualquier [data-legal] abre su modal sin navegar ni enviar el formulario.
+      // En la casilla, stopPropagation evita marcar/desmarcar el checkbox.
+      var a = e.target.closest("[data-legal]");
       if (!a) return;
       e.preventDefault();
       e.stopPropagation();
