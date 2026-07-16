@@ -122,7 +122,7 @@
          caption: 'Tratamiento de ...' }
      With pairs present the modal renders one slider per pair; empty -> a tidy
      "coming soon" state. */
-  var sdModal = null, sdLastFocus = null, sdRender = null;
+  var sdModal = null, sdLastFocus = null, sdRender = null, sdActiveHash = null;
 
   function buildIvSlider(pair) {
     var fig = document.createElement("figure");
@@ -227,6 +227,13 @@
     sdModal.hidden = true;
     sdRender = null;
     document.body.classList.remove("lb-open");
+    // Los modales legales viven en el hash (#politica-datos / #propiedad-intelectual):
+    // al cerrar, se limpia el hash SIN recargar. Los demás modales no tocan la URL.
+    if (sdActiveHash) {
+      sdActiveHash = null;
+      try { history.replaceState(null, "", location.pathname + location.search); }
+      catch (e) { location.hash = ""; }
+    }
     if (sdLastFocus && sdLastFocus.focus) sdLastFocus.focus();
   }
 
@@ -356,6 +363,91 @@
         sdRender(sdModal.querySelector(".ivmodal__title"), sdModal.querySelector(".ivmodal__body"));
       }
     });
+  }
+
+  /* --- Avisos legales: dos modales con enlace profundo -------------------- //
+     Reutilizan el modal compartido (openSdModal → foco atrapado, Esc, backdrop,
+     scroll interno, re-render en caliente al cambiar de idioma vía wireModalI18n).
+     Cada aviso vive en su hash para poder citarse por URL:
+       stefaniadiaz.art/#politica-datos   ·   stefaniadiaz.art/#propiedad-intelectual
+     Los documentos son texto legal por numeral (una clave i18n por sección). */
+  var LEGAL = {
+    "politica-datos": {
+      titleKey: "legal.datos.title",
+      enNoticeKey: "legal.datos.enNotice",
+      sections: ["legal.datos.s1", "legal.datos.s2", "legal.datos.s3", "legal.datos.s4",
+        "legal.datos.s5", "legal.datos.s6", "legal.datos.s7", "legal.datos.s8",
+        "legal.datos.s9", "legal.datos.s10"]
+    },
+    "propiedad-intelectual": {
+      titleKey: "legal.pi.title",
+      enNoticeKey: "legal.pi.enNotice",
+      sections: ["legal.pi.s1", "legal.pi.s2", "legal.pi.s3", "legal.pi.s4",
+        "legal.pi.s5", "legal.pi.s6", "legal.pi.s7", "legal.pi.s8"]
+    }
+  };
+
+  function renderLegal(key) {
+    return function (titleEl, bodyEl) {
+      var doc = LEGAL[key];
+      titleEl.textContent = t(doc.titleKey);
+      bodyEl.innerHTML = "";
+      // El aviso de "traducción de cortesía" solo aplica a la versión en inglés
+      // (el español prevalece); en ES no se muestra.
+      if (lang === "en" && doc.enNoticeKey) {
+        var note = document.createElement("p");
+        note.className = "legal__note";
+        note.textContent = t(doc.enNoticeKey);
+        bodyEl.appendChild(note);
+      }
+      doc.sections.forEach(function (k) {
+        var s = document.createElement("div");
+        s.className = "legal__s";
+        s.innerHTML = t(k);
+        bodyEl.appendChild(s);
+      });
+    };
+  }
+
+  function openLegal(key, fromHash) {
+    if (!LEGAL[key]) return;
+    openSdModal(renderLegal(key), document.activeElement);
+    sdActiveHash = "#" + key;
+    // Al abrir desde un clic, sembramos el hash (sin recargar) para que la URL sea
+    // citable; al abrir desde el hash (carga directa / back-forward) ya está puesto.
+    if (!fromHash) {
+      try { history.pushState(null, "", "#" + key); }
+      catch (e) { location.hash = key; }
+    }
+  }
+
+  function currentLegalHash() {
+    var h = (location.hash || "").replace(/^#/, "");
+    return LEGAL[h] ? h : null;
+  }
+
+  function syncLegalFromHash() {
+    var h = currentLegalHash();
+    if (h) {
+      if (sdActiveHash !== "#" + h) openLegal(h, true);
+    } else if (sdActiveHash) {
+      // El hash se limpió o cambió (p. ej. botón atrás): cerramos el modal legal.
+      closeSdModal();
+    }
+  }
+
+  function wireLegal() {
+    // Delegación: cualquier [data-legal] abre su modal sin navegar ni enviar el
+    // formulario. En la casilla, stopPropagation evita marcar/desmarcar el checkbox.
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("[data-legal]");
+      if (!a) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openLegal(a.getAttribute("data-legal"), false);
+    });
+    window.addEventListener("hashchange", syncLegalFromHash);
+    syncLegalFromHash(); // enlace profundo en carga directa
   }
 
   /* --- Contact form (Web3Forms AJAX + hCaptcha) --------------------------- */
@@ -504,6 +596,7 @@
   wireIntervenciones();
   wireConsultoria();
   wireModalI18n();
+  wireLegal();
   wireContactForm();
   setLang(lang);   // first paint already translated (script runs at end of body)
   wireReveal();

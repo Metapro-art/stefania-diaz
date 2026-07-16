@@ -219,6 +219,10 @@
   /* INTERVENCIONES — carpetas por tipo de obra */
   /* Prosa, no etiqueta: dos oraciones corridas → Spectral a tamaño de lectura */
   .interv__guide{font-family:var(--serif);font-size:.88rem;letter-spacing:0;line-height:1.6;color:var(--muted-d);margin-top:.9rem;max-width:60ch}
+  /* Aviso de propiedad intelectual: nota de pie discreta, no compite con las obras */
+  .interv__legal{font-family:var(--serif);font-size:.8rem;letter-spacing:0;line-height:1.6;color:var(--muted-d);margin-top:2.2rem;max-width:70ch;opacity:.85}
+  .interv__legal a{color:var(--gilt);text-decoration:underline;text-underline-offset:2px}
+  .interv__legal a:hover{color:var(--bone)}
   .folders{list-style:none;margin:2.5rem 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:clamp(.7rem,2vw,1.2rem)}
   .folder{position:relative;display:block;width:100%;min-width:0;aspect-ratio:4/5;padding:0;margin:0;border:1px solid var(--line-d);border-radius:2px;overflow:hidden;cursor:pointer;background:var(--shadow-2);color:var(--bone);font:inherit;text-align:left}
   .folder__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,.84,.3,1)}
@@ -311,6 +315,17 @@
   .cform__status.is-err{color:var(--oxide-d)}
   .h-captcha{margin:.1rem 0;min-height:78px}
 
+  /* Modal legal — documentos de lectura: prosa Spectral, encabezados de numeral en mono */
+  .legal__note{font-family:var(--serif);font-style:italic;font-size:.85rem;line-height:1.6;color:var(--muted-d);border-left:2px solid var(--line-d);padding-left:1rem;margin:0}
+  .legal__s{display:block}
+  .legal__h{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gilt);margin:0 0 .8rem;line-height:1.5}
+  .legal__s p{font-family:var(--serif);font-size:.98rem;line-height:1.7;color:#cfccc2;margin:0 0 .85rem;max-width:72ch}
+  .legal__s p:last-child{margin-bottom:0}
+  .legal__s ul,.legal__s ol{margin:.15rem 0 .85rem;padding-left:1.35rem}
+  .legal__s li{font-family:var(--serif);font-size:.98rem;line-height:1.6;color:#cfccc2;margin:.3rem 0;max-width:70ch}
+  .legal__s strong{color:var(--bone);font-weight:500}
+  .legal__s em{font-style:italic}
+
   /* METODOLOGÍA */
   .method__head{max-width:46rem}
   .method__intro{margin-top:1.4rem;color:#cfccc2;font-weight:300;max-width:50ch}
@@ -342,6 +357,10 @@
   .contact__item a.v:hover{border-color:var(--gilt)}
 
   footer{padding:2rem var(--mx);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;border-top:1px solid var(--line-d);background:var(--shadow-3);font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-d)}
+  .foot__legal{display:inline-flex;flex-wrap:wrap;gap:1.4rem}
+  .foot__legal a{color:var(--muted-d);transition:color .25s}
+  .foot__legal a:hover{color:var(--gilt)}
+  .foot__legal a:focus-visible{outline:none;color:var(--gilt);box-shadow:0 2px 0 0 var(--gilt)}
 
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform .9s cubic-bezier(.16,.84,.3,1)}
   .reveal.in{opacity:1;transform:none}
@@ -614,6 +633,7 @@
       <span class="folder__t" data-i18n="interv.t4">Cerámica Arqueológica</span>
     </button>
   </div>
+  <p class="interv__legal reveal" data-i18n-html="interv.legal">Las fotografías y los textos de esta sección son obra de Stefania Díaz. Las obras documentadas pertenecen a sus autores. Su reproducción requiere autorización. Ver <a class='legal-link' data-legal='propiedad-intelectual' href='#propiedad-intelectual'>Aviso de Propiedad Intelectual</a>.</p>
 </section>
 
 <!-- CONSERVACIÓN PREVENTIVA Y GESTIÓN DE COLECCIONES — carpetas + modal de descripción -->
@@ -781,6 +801,10 @@
 <footer>
   <span>© 2026 Stefania Díaz</span>
   <span data-i18n="foot.tag">Conservación · Restauración · Patrimonio Cultural</span>
+  <nav class="foot__legal" aria-label="Avisos legales">
+    <a class="legal-link" data-legal="politica-datos" href="#politica-datos" data-i18n="legal.datos.link">Política de Datos</a>
+    <a class="legal-link" data-legal="propiedad-intelectual" href="#propiedad-intelectual" data-i18n="legal.pi.link">Propiedad Intelectual</a>
+  </nav>
   <span>stefaniadiaz.art</span>
 </footer>
 
