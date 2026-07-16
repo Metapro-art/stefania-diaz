@@ -50,6 +50,11 @@ A través del formulario de contacto de este sitio se recogen únicamente los da
 
 **No se recogen datos sensibles** en los términos del artículo 5 de la Ley 1581 de 2012. **No se recogen datos de menores de edad.** Este sitio **no utiliza cookies de seguimiento, herramientas de analítica ni tecnologías de rastreo**: no se registra su navegación.
 
+### Servicios de terceros que se cargan en su navegador
+- **hCaptcha**, en el formulario de contacto, para impedir el envío automatizado. Al cargarse instala una cookie técnica de seguridad de su propio dominio (hcaptcha.com), no de este sitio, cuya única función es distinguir a una persona de un programa. No es publicitaria ni de analítica.
+- **Google Fonts**, para las tipografías. La petición hace visible su dirección IP a Google; no instala cookies.
+- Este sitio guarda en su navegador una única preferencia funcional: el idioma que usted elige. No identifica a nadie y no se transmite a ningún servidor.
+
 ### 5. Finalidades del tratamiento
 
 Sus datos se tratan exclusivamente para:
@@ -102,6 +107,10 @@ Esta política rige desde el **[FECHA]**. Las bases de datos asociadas se manten
 
 Cualquier cambio sustancial se comunicará en este mismo sitio antes de su entrada en vigor. Se recomienda consultarla periódicamente.
 
+### 11. Idioma y prevalencia
+
+Esta política se publica también en inglés, como traducción de cortesía. En caso de discrepancia entre ambas versiones, prevalece esta versión en español, que es la que produce efectos jurídicos conforme a la ley colombiana.
+
 ---
 
 ## English version (reference only)
@@ -134,6 +143,11 @@ Through the contact form on this site, only the data you choose to provide is co
 - The message you write
 
 **No sensitive data** is collected within the meaning of Article 5 of Law 1581 of 2012. **No data from minors** is collected. This site **uses no tracking cookies, no analytics tools and no tracking technologies**: your browsing is not recorded.
+
+### Third-party services loaded in your browser
+- **hCaptcha**, on the contact form, to prevent automated submissions. On loading it installs a technical security cookie under its own domain (hcaptcha.com), not this site's, whose sole function is to distinguish a person from a program. It is neither advertising nor analytics.
+- **Google Fonts**, for the typefaces. The request makes your IP address visible to Google; it installs no cookies.
+- This site stores one functional preference in your browser: the language you choose. It identifies no one and is not transmitted to any server.
 
 ### 5. Purposes
 
@@ -252,6 +266,10 @@ Su intervención se realiza bajo la responsabilidad de las instituciones compete
 ### 8. Reserva de acciones
 
 El uso no autorizado de los contenidos de este sitio da lugar a las acciones civiles y penales previstas en la ley colombiana, incluidas las del **artículo 270 y siguientes del Código Penal**.
+
+### 9. Idioma y prevalencia
+
+Este aviso se publica también en inglés, como traducción de cortesía. En caso de discrepancia entre ambas versiones, prevalece esta versión en español, que es la que produce efectos jurídicos conforme a la ley colombiana.
 
 ---
 

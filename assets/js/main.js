@@ -374,16 +374,16 @@
   var LEGAL = {
     "politica-datos": {
       titleKey: "legal.datos.title",
-      enNoticeKey: "legal.datos.enNotice",
+      // El último numeral (s11) es la cláusula de idioma y prevalencia: cada slot
+      // lleva texto real en su idioma (ES: la cláusula; EN: el aviso de traducción).
       sections: ["legal.datos.s1", "legal.datos.s2", "legal.datos.s3", "legal.datos.s4",
         "legal.datos.s5", "legal.datos.s6", "legal.datos.s7", "legal.datos.s8",
-        "legal.datos.s9", "legal.datos.s10"]
+        "legal.datos.s9", "legal.datos.s10", "legal.datos.s11"]
     },
     "propiedad-intelectual": {
       titleKey: "legal.pi.title",
-      enNoticeKey: "legal.pi.enNotice",
       sections: ["legal.pi.s1", "legal.pi.s2", "legal.pi.s3", "legal.pi.s4",
-        "legal.pi.s5", "legal.pi.s6", "legal.pi.s7", "legal.pi.s8"]
+        "legal.pi.s5", "legal.pi.s6", "legal.pi.s7", "legal.pi.s8", "legal.pi.s9"]
     }
   };
 
@@ -392,14 +392,6 @@
       var doc = LEGAL[key];
       titleEl.textContent = t(doc.titleKey);
       bodyEl.innerHTML = "";
-      // El aviso de "traducción de cortesía" solo aplica a la versión en inglés
-      // (el español prevalece); en ES no se muestra.
-      if (lang === "en" && doc.enNoticeKey) {
-        var note = document.createElement("p");
-        note.className = "legal__note";
-        note.textContent = t(doc.enNoticeKey);
-        bodyEl.appendChild(note);
-      }
       doc.sections.forEach(function (k) {
         var s = document.createElement("div");
         s.className = "legal__s";
