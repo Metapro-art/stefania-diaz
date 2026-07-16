@@ -236,6 +236,9 @@ window.I18N = {
     "con.formOk": "¡Gracias! Tu mensaje fue enviado. Stefania te responderá pronto.",
     "con.formErr": "Hubo un problema al enviar. Intenta de nuevo o escríbele por Instagram.",
     "con.formCaptcha": "Por favor completa el captcha.",
+    "con.consent": "Autorizo el tratamiento de mis datos personales conforme a la <a class='legal-link' data-legal='politica-datos' href='#politica-datos'>Política de Tratamiento de Datos Personales</a>, incluida su transmisión a Web3Forms (Estados Unidos) para el envío de este mensaje.",
+    "con.consentValue": "Sí — Política de Tratamiento de Datos Personales, versión del [FECHA]",
+    "con.errConsent": "Marca la casilla para autorizar el tratamiento de tus datos.",
 
     "foot.tag": "Conservación · Restauración · Patrimonio Cultural",
     "legal.datos.link": "Política de Datos",
@@ -499,6 +502,9 @@ window.I18N = {
     "con.formOk": "Thank you! Your message has been sent. Stefania will get back to you soon.",
     "con.formErr": "Something went wrong. Please try again, or reach out via Instagram.",
     "con.formCaptcha": "Please complete the captcha.",
+    "con.consent": "I authorize the processing of my personal data in accordance with the <a class='legal-link' data-legal='politica-datos' href='#politica-datos'>Personal Data Processing Policy</a>, including its transmission to Web3Forms (United States) for the delivery of this message.",
+    "con.consentValue": "Yes — Personal Data Processing Policy, version of [FECHA]",
+    "con.errConsent": "Please check the box to authorize the processing of your data.",
 
     "foot.tag": "Conservation · Restoration · Cultural Heritage",
     "legal.datos.link": "Data Policy",

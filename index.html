@@ -315,6 +315,20 @@
   .cform__status.is-err{color:var(--oxide-d)}
   .h-captcha{margin:.1rem 0;min-height:78px}
 
+  /* Casilla de autorización de datos — prosa Spectral, casilla cuadrada dorada */
+  .cform__consent{display:grid;gap:.35rem}
+  /* Prosa de lectura → Spectral. Especificidad extra para vencer a `.cform label`
+     (mono/mayúsculas), que si no convertiría la casilla en el error que ya arreglamos. */
+  .cform label.cform__check{display:flex;align-items:flex-start;gap:.7rem;font-family:var(--serif);font-size:.9rem;font-weight:400;letter-spacing:0;text-transform:none;line-height:1.55;color:var(--bone);cursor:pointer;text-align:left;-webkit-hyphens:none;hyphens:none}
+  .cform__check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;flex:none;margin:.12rem 0 0;cursor:pointer;position:relative;
+    border:1px solid var(--line-d);border-radius:2px;background-color:rgba(236,232,222,.04);transition:border-color .25s,background-color .25s}
+  .cform__check input:checked{border-color:var(--gilt);background-color:var(--gilt)}
+  .cform__check input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--shadow-3);border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .cform__check input:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(182,144,79,.55)}
+  .cform__check input[aria-invalid="true"]{border-color:var(--oxide-d)}
+  .cform__check a{color:var(--gilt);text-decoration:underline;text-underline-offset:2px}
+  .cform__check a:hover{color:var(--bone)}
+
   /* Modal legal — documentos de lectura: prosa Spectral, encabezados de numeral en mono */
   .legal__note{font-family:var(--serif);font-style:italic;font-size:.85rem;line-height:1.6;color:var(--muted-d);border-left:2px solid var(--line-d);padding-left:1rem;margin:0}
   .legal__s{display:block}
@@ -790,6 +804,17 @@
         <label for="cf-message" data-i18n="con.formMessage">¿En qué puedo ayudarte?</label>
         <textarea id="cf-message" name="message" rows="5" required></textarea>
         <p class="cform__err" id="cf-message-err" role="alert" hidden></p>
+      </div>
+      <!-- Autorización de tratamiento de datos (Ley 1581/2012, art. 9): previa, expresa e
+           informada. Va ANTES del captcha y el botón; arranca SIN marcar; bloquea el envío.
+           El valor (autorizacion_datos) viaja en el FormData y ES la prueba de qué versión
+           de la política se aceptó — por eso incluye [FECHA] y el idioma mostrado. -->
+      <div class="cform__consent">
+        <label class="cform__check" for="cf-consent">
+          <input id="cf-consent" type="checkbox" name="autorizacion_datos" value="Sí — Política de Tratamiento de Datos Personales, versión del [FECHA]" data-i18n-attr="value:con.consentValue" required>
+          <span data-i18n-html="con.consent">Autorizo el tratamiento de mis datos personales conforme a la <a class='legal-link' data-legal='politica-datos' href='#politica-datos'>Política de Tratamiento de Datos Personales</a>, incluida su transmisión a Web3Forms (Estados Unidos) para el envío de este mensaje.</span>
+        </label>
+        <p class="cform__err" id="cf-consent-err" role="alert" hidden></p>
       </div>
       <div class="h-captcha" data-theme="dark" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
       <button type="submit" class="cform__send" data-i18n="con.formSend">Enviar mensaje</button>

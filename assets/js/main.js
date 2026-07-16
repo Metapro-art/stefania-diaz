@@ -488,6 +488,7 @@
         input.removeAttribute("aria-describedby");
       }
     }
+    var consentEl = document.getElementById("cf-consent");
     function validate() {
       var checks = [
         { el: document.getElementById("cf-name"), err: "cf-name-err", key: "con.errName",
@@ -495,7 +496,11 @@
         { el: document.getElementById("cf-email"), err: "cf-email-err", key: "con.errEmail",
           ok: function (v) { return EMAIL_RE.test(v.trim()); } },
         { el: document.getElementById("cf-message"), err: "cf-message-err", key: "con.errMessage",
-          ok: function (v) { return !!v.trim(); } }
+          ok: function (v) { return !!v.trim(); } },
+        // Cuarto obligatorio: la autorización de datos (Ley 1581/2012, art. 9).
+        // Lee .checked, no .value; sin marcar → no se envía, error inline, foco a la casilla.
+        { el: consentEl, err: "cf-consent-err", key: "con.errConsent",
+          ok: function () { return consentEl.checked; } }
       ];
       var firstBad = null;
       checks.forEach(function (c) {
