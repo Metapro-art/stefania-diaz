@@ -56,6 +56,16 @@ const jobs = [
   ['Resources/Intervención/Pintura sobre Lienzo y Madera/7/Antes.jpg',   'intervenciones/lienzoMadera/p7/antes',   'jpeg', [1200, 857], 84, { left: 23, top: 253, width: 1466, height: 1047 }],
   ['Resources/Intervención/Pintura sobre Lienzo y Madera/7/Despúes.jpg', 'intervenciones/lienzoMadera/p7/despues', 'jpeg', [1200, 857], 84, { left: 16, top: 232, width: 1469, height: 1049 }],
 
+  // OG/2a — Warhol, anverso «antes»: mismo artefacto de exportación que el par b
+  // (2560 de alto, 1877 vs 1920 de ancho, hoja centrada en ambas). Aquí NO sirve
+  // pairSync: el «antes» ya es el archivo estrecho (880 vs 900), así que el área
+  // común es 880 y el bucle recortaría el «después». Se regenera el «antes» a
+  // 900×1200 con fit:'cover', que recorta 2.24% de alto (13.7 px por lado, la hoja
+  // empieza en 1.9%: no se toca) y deja el par igualado tocando solo esta imagen.
+  // Es un no-op visual: el contenedor 3/4 con object-fit:cover ya recortaba esa
+  // misma banda de alto al pintar el 880×1200.
+  ['Resources/Intervención/Obra Gráfica/2/Antes1.png', 'intervenciones/grafica/p2/a-antes', 'jpeg', [900, 1200], 84],
+
   // OG/2b — Warhol, reverso «antes»: la toma está a 180° respecto del «después»
   // (la mancha verde y la etiqueta del dorso caían invertidas al arrastrar el
   // handle). Se regenera desde el original con rotate 180; el resto del proyecto
