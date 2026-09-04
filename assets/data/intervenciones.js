@@ -66,7 +66,12 @@ window.INTERVENCIONES = {
       { t_key: "interv.lm.p6.t", sub_key: "interv.lm.p6.sub", meta_key: "interv.lm.p6.meta", desc_key: "interv.lm.p6.desc",
         aspect: "3/2",
         before: "assets/img/intervenciones/lienzoMadera/p6/antes.jpg",
-        after:  "assets/img/intervenciones/lienzoMadera/p6/despues.jpg" }
+        after:  "assets/img/intervenciones/lienzoMadera/p6/despues.jpg" },
+      /* PL&M/7 — Alipio Jaramillo, escena de fiesta (recubrimiento envejecido → limpieza + reintegración) */
+      { t_key: "interv.lm.p7.t", sub_key: "interv.lm.p7.sub", meta_key: "interv.lm.p7.meta", desc_key: "interv.lm.p7.desc",
+        aspect: "7/5",
+        before: "assets/img/intervenciones/lienzoMadera/p7/antes.jpg",
+        after:  "assets/img/intervenciones/lienzoMadera/p7/despues.jpg" }
     ]
   },
   escultura: {
@@ -126,7 +131,12 @@ window.INTERVENCIONES = {
           after:  "assets/img/intervenciones/grafica/p6/a-despues.jpg", cap_key: "interv.cap.anverso" },
         { before: "assets/img/intervenciones/grafica/p6/b-antes.jpg",
           after:  "assets/img/intervenciones/grafica/p6/b-despues.jpg", cap_key: "interv.cap.reverso" }
-      ]}
+      ]},
+      /* OG/7 — Omar Rayo, «Exit» (gofrado; el después está enmarcado, como PL&M/6) */
+      { t_key: "interv.gr.p7.t", sub_key: "interv.gr.p7.sub", meta_key: "interv.gr.p7.meta", desc_key: "interv.gr.p7.desc",
+        aspect: "7/5",
+        before: "assets/img/intervenciones/grafica/p7/antes.jpg",
+        after:  "assets/img/intervenciones/grafica/p7/despues.jpg" }
     ]
   },
   ceramica: {

@@ -16,8 +16,11 @@ await mkdir(outDir, { recursive: true });
 await mkdir(path.join(outDir, 'before-after'), { recursive: true });
 await mkdir(path.join(outDir, 'hero'), { recursive: true });
 
-// [sourceRelPath, outName, format, maxEdge, quality, crop?]
-// crop → sharp.extract({left,top,width,height}) sobre el ORIGINAL, antes del resize.
+// [sourceRelPath, outName, format, size, quality, crop?]
+// size   → número: lado máximo con fit:'inside' (conserva la proporción de la fuente).
+//          [w,h]:  recorte exacto a w×h con fit:'cover'. Obligatorio en los pares
+//          antes/después, que DEBEN medir lo mismo (regla de intervenciones.js).
+// crop   → sharp.extract({left,top,width,height}) sobre el ORIGINAL, antes del resize.
 const jobs = [
   // Portrait — kept as WebP (the source is .webp), square.
   ['Resources/profile pic.webp', 'portrait', 'webp', 1200, 82],
@@ -34,19 +37,38 @@ const jobs = [
   // cabían ambos sin mover la máscara). El horizontal en cover a 390px solo mostraba
   // el 43% del ancho: una tajada no es un taller.
   ['Resources/8.jpeg', 'hero/hero-taller-mobile', 'jpeg', 1200, 72, { left: 870, top: 440, width: 440, height: 760 }],
+
+  // --- Intervenciones ---------------------------------------------------------
+  // Pares antes/después: mismo [w,h] en las dos filas del par, siempre.
+
+  // OG/7 — Omar Rayo, «Exit». El después está enmarcado y el antes no (mismo caso
+  // que PL&M/6): no se recorta el marco, solo se igualan las dimensiones. 7/5 es la
+  // proporción natural de las dos tomas (1.404 / 1.433); 4/3 o 3/2 comerían el marco.
+  ['Resources/Intervención/Obra Gráfica/7/Antes.jpg',   'intervenciones/grafica/p7/antes',   'jpeg', [1200, 857], 84],
+  ['Resources/Intervención/Obra Gráfica/7/Despúes.jpg', 'intervenciones/grafica/p7/despues', 'jpeg', [1200, 857], 84],
+
+  // PL&M/7 — Alipio Jaramillo. Las dos tomas son 1512×1512 con relleno blanco y la
+  // obra descentrada ~19 px en vertical entre una y otra. El crop encuadra la obra
+  // (bbox medido) más un margen mínimo hasta 7/5: elimina el desfase de encuadre y
+  // el blanco sobrante, dejando la pintura registrada en las dos.
+  ['Resources/Intervención/Pintura sobre Lienzo y Madera/7/Antes.jpg',   'intervenciones/lienzoMadera/p7/antes',   'jpeg', [1200, 857], 84, { left: 23, top: 253, width: 1466, height: 1047 }],
+  ['Resources/Intervención/Pintura sobre Lienzo y Madera/7/Despúes.jpg', 'intervenciones/lienzoMadera/p7/despues', 'jpeg', [1200, 857], 84, { left: 16, top: 232, width: 1469, height: 1049 }],
 ];
 
 const kb = (b) => (b / 1024).toFixed(0).padStart(5) + ' KB';
 let totalIn = 0, totalOut = 0;
 
-for (const [rel, name, format, maxEdge, quality, crop] of jobs) {
+for (const [rel, name, format, size, quality, crop] of jobs) {
   const src = path.join(root, rel);
   const out = path.join(outDir, `${name}.${format === 'jpeg' ? 'jpg' : format}`);
+  await mkdir(path.dirname(out), { recursive: true });
   try {
     const meta = await sharp(src).metadata();
     let pipe = sharp(src).rotate(); // bake EXIF orientation
     if (crop) pipe = pipe.extract(crop);
-    pipe = pipe.resize({ width: maxEdge, height: maxEdge, fit: 'inside', withoutEnlargement: true });
+    pipe = Array.isArray(size)
+      ? pipe.resize({ width: size[0], height: size[1], fit: 'cover' })
+      : pipe.resize({ width: size, height: size, fit: 'inside', withoutEnlargement: true });
     pipe = format === 'webp'
       ? pipe.webp({ quality })
       : pipe.jpeg({ quality, mozjpeg: true, progressive: true });

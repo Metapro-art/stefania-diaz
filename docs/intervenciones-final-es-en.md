@@ -130,6 +130,30 @@ Dimensions: 79 × 128 cm
 >
 > Treatment comprised the fixing and consolidation of the paint layer to restore its material stability. Earlier interventions incompatible with conservation-restoration criteria were then removed: in a previous restoration the paint losses had been filled with a colored putty applied directly onto the surface, an inadequate practice that altered the aesthetic reading of the work. Removing these materials recovered the legibility of the painting and the stability of its technique.
 
+### Proyecto 7
+
+**ES**
+ALIPIO JARAMILLO (1913, Colombia – 1999, Colombia)
+Sin título, s. f.
+Óleo sobre tabla
+
+> El tratamiento aplicado a esta pieza tuvo principalmente un carácter estético, orientado a recuperar la lectura cromática y la unidad visual de la obra. La superficie presentaba un recubrimiento aplicado con posterioridad a su ejecución que, debido a su envejecimiento, había adquirido un aspecto opaco y alterado la percepción de los colores originales. Asimismo, este recubrimiento favoreció la retención y adherencia de partículas de polvo y suciedad superficial acumuladas con el paso del tiempo.
+>
+> Adicionalmente, se identificaron pérdidas puntuales de capa pictórica que, de acuerdo con sus características, podrían estar relacionadas con un montaje previo de la obra sobre un marco y con la posterior remoción de este elemento. Se observaron también pequeños faltantes localizados en la superficie pictórica.
+>
+> La intervención contempló una limpieza progresiva y controlada de la capa pictórica, dirigida a reducir los depósitos de suciedad y el recubrimiento alterado, permitiendo recuperar parcialmente la intensidad y luminosidad de los colores originales. Posteriormente, se realizó la reintegración cromática de las áreas con pérdida de materia, utilizando criterios y materiales compatibles con la técnica original, con el propósito de restablecer la continuidad visual de la obra sin intervenir ni modificar los recursos técnicos y expresivos propios de su ejecución.
+
+**EN**
+ALIPIO JARAMILLO (1913, Colombia – 1999, Colombia)
+Untitled, n.d.
+Oil on panel
+
+> The treatment applied to this piece was primarily aesthetic in nature, aimed at recovering the chromatic reading and visual unity of the work. The surface bore a coating applied after its execution which, due to aging, had taken on an opaque appearance and altered the perception of the original colors. This coating also promoted the retention and adhesion of dust and surface grime accumulated over time.
+>
+> In addition, localized losses of the paint layer were identified which, given their characteristics, may be related to a previous mounting of the work on a frame and the subsequent removal of that element. Small localized losses were also observed across the paint surface.
+>
+> The intervention involved a progressive and controlled cleaning of the paint layer, aimed at reducing the deposits of grime and the altered coating, partially recovering the intensity and luminosity of the original colors. Chromatic reintegration of the areas of material loss was then carried out, using criteria and materials compatible with the original technique, in order to restore the visual continuity of the work without intervening in or modifying the technical and expressive resources of its execution.
+
 ---
 
 ## ESCULTURA
@@ -305,6 +329,30 @@ Archivo General de la Nación (National Archive of Colombia)
 > Treatment comprised a comprehensive conservation and restoration intervention, prompted by the advanced state of deterioration of the work. The alterations resulted both from natural aging and the inherent fragility of the paper support, and from earlier inadequate interventions, evidenced by incompatible adhesives, tears, folds, distortions and other damage compromising its structural stability.
 >
 > Given the nature of the support — a very low-weight, highly fragile paper — the treatment aimed above all to restore mechanical stability and ensure long-term preservation. Extraneous materials that did not meet conservation criteria were carefully removed, the weakened areas were stabilized, and the interventions necessary to recover the physical integrity of the piece were carried out using compatible, stable and reversible materials.
+
+### Proyecto 7
+
+**ES**
+OMAR RAYO (1928, Colombia – 2010, Colombia)
+Exit, s. f.
+Intaglio sobre papel
+Medidas: 38 × 56 cm
+Prueba de Artista
+
+> La intervención de la obra se enfocó principalmente en la aplicación de tratamientos de conservación, debido a que la pieza presentaba condiciones de biodeterioro incipiente, evidenciadas por la presencia de pigmentaciones y manchas localizadas en diferentes zonas de la superficie, así como por acumulación general de suciedad.
+>
+> Para el tratamiento se emplearon materiales y productos de uso profesional en conservación, seleccionados de acuerdo con las características y necesidades específicas del soporte. Estas acciones estuvieron orientadas a inhibir y mitigar las alteraciones cromáticas asociadas al desarrollo microbiológico incipiente, procurando estabilizar la superficie del papel y prevenir la progresión del deterioro.
+
+**EN**
+OMAR RAYO (1928, Colombia – 2010, Colombia)
+Exit, n.d.
+Intaglio on paper
+Dimensions: 38 × 56 cm
+Artist's Proof
+
+> The treatment focused primarily on conservation measures, as the piece presented incipient biodeterioration, evidenced by localized staining and discoloration across different areas of the surface, along with a general accumulation of grime.
+>
+> Professional conservation-grade materials and products were used, selected according to the specific characteristics and needs of the support. These actions were aimed at inhibiting and mitigating the chromatic alterations associated with the incipient microbiological growth, stabilizing the paper surface and preventing the progression of the deterioration.
 
 ---
 
