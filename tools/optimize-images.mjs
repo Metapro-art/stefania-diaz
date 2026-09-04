@@ -16,11 +16,13 @@ await mkdir(outDir, { recursive: true });
 await mkdir(path.join(outDir, 'before-after'), { recursive: true });
 await mkdir(path.join(outDir, 'hero'), { recursive: true });
 
-// [sourceRelPath, outName, format, size, quality, crop?]
+// [sourceRelPath, outName, format, size, quality, crop?, rotate?]
 // size   → número: lado máximo con fit:'inside' (conserva la proporción de la fuente).
 //          [w,h]:  recorte exacto a w×h con fit:'cover'. Obligatorio en los pares
 //          antes/después, que DEBEN medir lo mismo (regla de intervenciones.js).
 // crop   → sharp.extract({left,top,width,height}) sobre el ORIGINAL, antes del resize.
+// rotate → grados horarios cuando la toma está mal orientada. Sustituye la
+//          auto-orientación EXIF (semántica de sharp): solo para fuentes sin EXIF.
 const jobs = [
   // Portrait — kept as WebP (the source is .webp), square.
   ['Resources/profile pic.webp', 'portrait', 'webp', 1200, 82],
@@ -53,12 +55,18 @@ const jobs = [
   // el blanco sobrante, dejando la pintura registrada en las dos.
   ['Resources/Intervención/Pintura sobre Lienzo y Madera/7/Antes.jpg',   'intervenciones/lienzoMadera/p7/antes',   'jpeg', [1200, 857], 84, { left: 23, top: 253, width: 1466, height: 1047 }],
   ['Resources/Intervención/Pintura sobre Lienzo y Madera/7/Despúes.jpg', 'intervenciones/lienzoMadera/p7/despues', 'jpeg', [1200, 857], 84, { left: 16, top: 232, width: 1469, height: 1049 }],
+
+  // OG/2b — Warhol, reverso «antes»: la toma está a 180° respecto del «después»
+  // (la mancha verde y la etiqueta del dorso caían invertidas al arrastrar el
+  // handle). Se regenera desde el original con rotate 180; el resto del proyecto
+  // (par a y este «después») se deja como está.
+  ['Resources/Intervención/Obra Gráfica/2/Antes2.png', 'intervenciones/grafica/p2/b-antes', 'jpeg', 1200, 84, null, 180],
 ];
 
 const kb = (b) => (b / 1024).toFixed(0).padStart(5) + ' KB';
 let totalIn = 0, totalOut = 0;
 
-for (const [rel, name, format, size, quality, crop] of jobs) {
+for (const [rel, name, format, size, quality, crop, rotate] of jobs) {
   const src = path.join(root, rel);
   const out = path.join(outDir, `${name}.${format === 'jpeg' ? 'jpg' : format}`);
   await mkdir(path.dirname(out), { recursive: true });
@@ -66,6 +74,7 @@ for (const [rel, name, format, size, quality, crop] of jobs) {
     const meta = await sharp(src).metadata();
     let pipe = sharp(src).rotate(); // bake EXIF orientation
     if (crop) pipe = pipe.extract(crop);
+    if (rotate) pipe = pipe.rotate(rotate);
     pipe = Array.isArray(size)
       ? pipe.resize({ width: size[0], height: size[1], fit: 'cover' })
       : pipe.resize({ width: size, height: size, fit: 'inside', withoutEnlargement: true });
@@ -99,6 +108,12 @@ console.log('Assets written to assets/img/');
 const pairSync = [
   // gr/p6b — verso Kraft de Wolff: alineado (offset 0.28%), desfase 1061 vs 1035 de ancho.
   ['assets/img/intervenciones/grafica/p6/b-antes.jpg', 'assets/img/intervenciones/grafica/p6/b-despues.jpg'],
+  // gr/p2b — verso del Warhol: los dos originales se exportaron a 2560 de alto y
+  // 1960 vs 1920 de ancho, con la hoja centrada en ambos (centros al 49.55% y
+  // 49.65%): artefacto de encuadre, no desregistro. Recorta solo el 'antes'
+  // (919→900); el 'despues' ya mide 900 y el bucle lo salta. Es además un no-op
+  // visual: el contenedor 3/4 con object-fit:cover ya recortaba esos 19 px.
+  ['assets/img/intervenciones/grafica/p2/b-antes.jpg', 'assets/img/intervenciones/grafica/p2/b-despues.jpg'],
 ];
 for (const pair of pairSync) {
   const abs = pair.map((p) => path.join(root, p));
